@@ -7,6 +7,7 @@
         size: root.width, root.height
 
 
+
 #first column from the parent layout
 
         GridLayout:
@@ -15,49 +16,74 @@
 
             Button:
                 text:""
-                background_color:(0/255,0/255,0/255,0/255)
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
  #               background_color: kivy.utils.rgba('#000000', )
-                size_hint_y: None
-                height: 75
+                size_hint: None, None
+                size: 150, 100
 
             Button:
+                id: DB
                 text:"DASHBOARD"
-                background_color:(255/255,120/255,0/255,255/255)
- #               background_color: kivy.utils.rgba('#000000', )
-                size_hint_y: None
-                height: 75
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                on_press: ADD.background_color=(0/255,0/255,0/255,.7)
+                on_press: DB.background_color=kivy.utils.rgba('#8FC31F') # Press state color
+                on_release: DB.background_color=kivy.utils.rgba('#8FC31F') # Normal state color
+ #              width, height
+                size_hint: None, None
+                size: 150, 50
             Button:
+                id: ADD
                 text:"ADD"
-                background_color:(255/255,120/255,0/255,255/255)
-                size_hint_y: None
-                height: 75
+                background_normal: ''
+                background_color: kivy.utils.rgba('#c31f3d')
+                #background_down:'#8FC31F'
+
+                on_press: ADD.background_color=kivy.utils.rgba('#8FC31F') # Press state color
+                on_release: ADD.background_color=kivy.utils.rgba('#8FC31F') # Normal state color
+                on_press: DB.background_color=(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 50
+                on_press: root.btn()
+
             Button:
+                id: DP
                 text:"DISPLAY"
-                background_color:(255/255,120/255,0/255,255/255)
-                size_hint_y: None
-                height: 75
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 50
+
             Button:
+                id: ST
                 text:"SETTING"
-                background_color:(255/255,120/255,0/255,255/255)
-                size_hint_y: None
-                height: 75
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 50
+
             Button:
                 text:""
-                background_color:(0/255,0/255,0/255,0/255)
- #               background_color: kivy.utils.rgba('#000000', )
-                size_hint_y: None
-                height: 75
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+ #              color: 0,0,0,1
+                size_hint: None, None
+                size: 150, 255
             Button:
-                text:""
-                background_color:(0/255,0/255,0/255,0/255)
- #               background_color: kivy.utils.rgba('#000000', )
-                size_hint_y: None
-                height: 75
-            Button:
+                id: LOGOUT
                 text:"LOGOUT"
-                background_color:(255/255,120/255,0/255,255/255)
-                size_hint_y: None
-                height: 75
+                background_normal: ''
+                background_down: ''
+                background_color:(255/255,255/255,0/255,255/255)
+                color: 0,0,0,1
+                size_hint: None, None
+                size: 150, 50
 
 
 #second column from the parent layout
@@ -66,13 +92,5 @@
             cols: 1
 
 
-            Label:
-                text:"Name: "
-                color:  0,0,0,1
 
-
-
-            Label:
-                text:"Quantity"
-                color: 0,0,0,1
 

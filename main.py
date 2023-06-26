@@ -7,7 +7,9 @@ from kivy.core.window import Window
 
 
 class MyGrid(Widget):
-    pass
+
+    def btn(self):
+        print("Name")
 
 class Trylang(Widget):
     pass
