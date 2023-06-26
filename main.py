@@ -25,5 +25,5 @@ class Try(App):
 
 
 
-#MyApp().run()
-Try().run()
+MyApp().run()
+#Try().run()

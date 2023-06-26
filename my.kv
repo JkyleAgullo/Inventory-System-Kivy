@@ -7,25 +7,60 @@
         size: root.width, root.height
 
 
+#first column from the parent layout
 
         GridLayout:
             cols: 1
             size_hint:0.2,1
 
+            Button:
+                text:""
+                background_color:(0/255,0/255,0/255,0/255)
+ #               background_color: kivy.utils.rgba('#000000', )
+                size_hint_y: None
+                height: 75
 
             Button:
                 text:"DASHBOARD"
-                background_color: kivy.utils.rgba('#fcb900')
+                background_color:(255/255,120/255,0/255,255/255)
+ #               background_color: kivy.utils.rgba('#000000', )
+                size_hint_y: None
+                height: 75
             Button:
                 text:"ADD"
+                background_color:(255/255,120/255,0/255,255/255)
+                size_hint_y: None
+                height: 75
             Button:
                 text:"DISPLAY"
+                background_color:(255/255,120/255,0/255,255/255)
+                size_hint_y: None
+                height: 75
             Button:
                 text:"SETTING"
+                background_color:(255/255,120/255,0/255,255/255)
+                size_hint_y: None
+                height: 75
+            Button:
+                text:""
+                background_color:(0/255,0/255,0/255,0/255)
+ #               background_color: kivy.utils.rgba('#000000', )
+                size_hint_y: None
+                height: 75
+            Button:
+                text:""
+                background_color:(0/255,0/255,0/255,0/255)
+ #               background_color: kivy.utils.rgba('#000000', )
+                size_hint_y: None
+                height: 75
             Button:
                 text:"LOGOUT"
+                background_color:(255/255,120/255,0/255,255/255)
+                size_hint_y: None
+                height: 75
 
 
+#second column from the parent layout
 
         GridLayout:
             cols: 1
@@ -33,9 +68,11 @@
 
             Label:
                 text:"Name: "
+                color:  0,0,0,1
 
 
 
             Label:
                 text:"Quantity"
+                color: 0,0,0,1
 
