@@ -5,14 +5,10 @@ from kivy.app import App
 from kivy.core.window import Window
 
 
+kv = Builder.load_file("my.kv")
 
-class MyGrid(Widget):
 
-    def btn(self):
-        print("Name")
 
-class Trylang(Widget):
-    pass
 
 
 
@@ -20,11 +16,8 @@ class MyApp(App):
     def build(self):
         Window.clearcolor = (1,1,1,1)
         self.title='Inventory_Admin'
-        return MyGrid()
+        return kv
 
-class Try(App):
-    def build(self):
-        return MyGrid()
 
 
 
