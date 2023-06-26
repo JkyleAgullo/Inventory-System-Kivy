@@ -19,6 +19,7 @@ class Trylang(Widget):
 class MyApp(App):
     def build(self):
         Window.clearcolor = (1,1,1,1)
+        self.title='Inventory_Admin'
         return MyGrid()
 
 class Try(App):
