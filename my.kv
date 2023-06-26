@@ -29,21 +29,28 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
-                on_press: ADD.background_color=(0/255,0/255,0/255,.7)
-                on_press: DB.background_color=kivy.utils.rgba('#8FC31F') # Press state color
+
                 on_release: DB.background_color=kivy.utils.rgba('#8FC31F') # Normal state color
+                on_press: ST.background_color=(0/255,0/255,0/255,.7)
+                on_press: ADD.background_color=(0/255,0/255,0/255,.7)
+                on_press: DP.background_color=(0/255,0/255,0/255,.7)
+
+
  #              width, height
                 size_hint: None, None
                 size: 150, 50
+
             Button:
                 id: ADD
                 text:"ADD"
                 background_normal: ''
-                background_color: kivy.utils.rgba('#c31f3d')
-                #background_down:'#8FC31F'
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
 
-                on_press: ADD.background_color=kivy.utils.rgba('#8FC31F') # Press state color
+
                 on_release: ADD.background_color=kivy.utils.rgba('#8FC31F') # Normal state color
+                on_press: ST.background_color=(0/255,0/255,0/255,.7)
+                on_press: DP.background_color=(0/255,0/255,0/255,.7)
                 on_press: DB.background_color=(0/255,0/255,0/255,.7)
                 size_hint: None, None
                 size: 150, 50
@@ -55,6 +62,12 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
+
+                on_release: DP.background_color=kivy.utils.rgba('#8FC31F')
+                on_press: ST.background_color=(0/255,0/255,0/255,.7)
+                on_press: ADD.background_color=(0/255,0/255,0/255,.7)
+                on_press: DB.background_color=(0/255,0/255,0/255,.7)
+
                 size_hint: None, None
                 size: 150, 50
 
@@ -64,6 +77,12 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
+
+                on_release: ST.background_color=kivy.utils.rgba('#8FC31F')
+                on_press: DP.background_color=(0/255,0/255,0/255,.7)
+                on_press: ADD.background_color=(0/255,0/255,0/255,.7)
+                on_press: DB.background_color=(0/255,0/255,0/255,.7)
+
                 size_hint: None, None
                 size: 150, 50
 
@@ -75,13 +94,14 @@
  #              color: 0,0,0,1
                 size_hint: None, None
                 size: 150, 255
+
             Button:
                 id: LOGOUT
                 text:"LOGOUT"
                 background_normal: ''
                 background_down: ''
-                background_color:(255/255,255/255,0/255,255/255)
-                color: 0,0,0,1
+                background_color:(0/255,0/255,0/255,.7)
+                #color: 0,0,0,1
                 size_hint: None, None
                 size: 150, 50
 
