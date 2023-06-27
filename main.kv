@@ -1,0 +1,229 @@
+
+WindowManager:
+    MainWindow:
+    SecondWindow:
+
+<MainWindow>:
+    name: "main"
+
+    GridLayout:
+        cols:2
+        size: root.width, root.height
+
+
+    #first column from the parent layout
+        GridLayout:
+            cols: 1
+            size_hint:0.2,1
+
+            Button:
+                text:""
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+     #               background_color: kivy.utils.rgba('#000000', )
+                size_hint: None, None
+                size: 150, 130
+
+            Button:
+                id: DB
+                text:"DASHBOARD"
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+
+                on_release: DB.background_color=kivy.utils.rgba('#8FC31F') # Normal state color
+                on_press: ST.background_color=(0/255,0/255,0/255,.7)
+                on_press: ADD.background_color=(0/255,0/255,0/255,.7)
+                on_press: DP.background_color=(0/255,0/255,0/255,.7)
+     #          width, height
+                size_hint: None, None
+                size: 150, 50
+
+                on_release: app.root.current = "second"
+
+
+
+            Button:
+                id: ADD
+                text:"ADD"
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+
+
+                on_release: ADD.background_color=kivy.utils.rgba('#8FC31F') # Normal state color
+                on_press: ST.background_color=(0/255,0/255,0/255,.7)
+                on_press: DP.background_color=(0/255,0/255,0/255,.7)
+                on_press: DB.background_color=(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 50
+            #    on_press: root.btn()
+
+            Button:
+                id: DP
+                text:"DISPLAY"
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+
+                on_release: DP.background_color=kivy.utils.rgba('#8FC31F')
+                on_press: ST.background_color=(0/255,0/255,0/255,.7)
+                on_press: ADD.background_color=(0/255,0/255,0/255,.7)
+                on_press: DB.background_color=(0/255,0/255,0/255,.7)
+
+                size_hint: None, None
+                size: 150, 50
+
+            Button:
+                id: ST
+                text:"SETTING"
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+
+                on_release: ST.background_color=kivy.utils.rgba('#8FC31F')
+                on_press: DP.background_color=(0/255,0/255,0/255,.7)
+                on_press: ADD.background_color=(0/255,0/255,0/255,.7)
+                on_press: DB.background_color=(0/255,0/255,0/255,.7)
+
+                size_hint: None, None
+                size: 150, 50
+
+            Button:
+                text:""
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+             #              color: 0,0,0,1
+                size_hint: None, None
+                size: 150, 340
+
+            Button:
+                id: LOGOUT
+                text:"LOGOUT"
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                #color: 0,0,0,1
+                size_hint: None, None
+                size: 150, 50
+
+
+    #second column from the parent layout
+
+        GridLayout:
+            cols: 1
+
+
+<SecondWindow>:
+    name: "second"
+    GridLayout:
+        cols:2
+        size: root.width, root.height
+
+
+    #first column from the parent layout
+        GridLayout:
+            cols: 1
+            size_hint:0.2,1
+
+            Button:
+                text:""
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+     #               background_color: kivy.utils.rgba('#000000', )
+                size_hint: None, None
+                size: 150, 130
+
+            Button:
+                id: DB
+                text:"DASHBOARD"
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+
+                on_release: DB.background_color=kivy.utils.rgba('#8FC31F') # Normal state color
+                on_press: ST.background_color=(0/255,0/255,0/255,.7)
+                on_press: ADD.background_color=(0/255,0/255,0/255,.7)
+                on_press: DP.background_color=(0/255,0/255,0/255,.7)
+     #          width, height
+                size_hint: None, None
+                size: 150, 50
+
+                #on_release: app.root.current = "second"
+
+
+
+            Button:
+                id: ADD
+                text:"ADD"
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+
+
+                on_release: ADD.background_color=kivy.utils.rgba('#8FC31F') # Normal state color
+                on_press: ST.background_color=(0/255,0/255,0/255,.7)
+                on_press: DP.background_color=(0/255,0/255,0/255,.7)
+                on_press: DB.background_color=(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 50
+            #    on_press: root.btn()
+
+            Button:
+                id: DP
+                text:"DISPLAY"
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+
+                on_release: DP.background_color=kivy.utils.rgba('#8FC31F')
+                on_press: ST.background_color=(0/255,0/255,0/255,.7)
+                on_press: ADD.background_color=(0/255,0/255,0/255,.7)
+                on_press: DB.background_color=(0/255,0/255,0/255,.7)
+
+                size_hint: None, None
+                size: 150, 50
+
+            Button:
+                id: ST
+                text:"SETTING"
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+
+                on_release: ST.background_color=kivy.utils.rgba('#8FC31F')
+                on_press: DP.background_color=(0/255,0/255,0/255,.7)
+                on_press: ADD.background_color=(0/255,0/255,0/255,.7)
+                on_press: DB.background_color=(0/255,0/255,0/255,.7)
+
+                size_hint: None, None
+                size: 150, 50
+
+            Button:
+                text:""
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+             #              color: 0,0,0,1
+                size_hint: None, None
+                size: 150, 340
+
+            Button:
+                id: LOGOUT
+                text:"LOGOUT"
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                #color: 0,0,0,1
+                size_hint: None, None
+                size: 150, 50
+
+
+    #second column from the parent layout
+
+        GridLayout:
+            cols: 1
+

@@ -1,32 +1,24 @@
 import kivy.utils
+from kivy.clock import Clock
 from kivy.lang import Builder
 from kivy.uix.widget import Widget
 from kivy.app import App
 from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
+from kivymd.app import MDApp
 
 
-kv = Builder.load_file("my.kv")
-
-class MainWindow(Screen):
-    pass
-
-class SecondWindow(Screen):
-    pass
-
-class WindowManager(ScreenManager):
-    pass
 
 
-class MyApp(App):
+class MyApp(MDApp):
     def build(self):
-        Window.clearcolor = (1,1,1,1)
-        Window.size=(1080,720)
-        self.title='Inventory_Admin'
-        return kv
+        Window.clearcolor = (1, 1, 1, 1)
+        Window.size = (1080, 720)
 
+        self.title = 'Inventory_Admin'
 
+        return Builder.load_file("try.kv")
 
 
 MyApp().run()
-#Try().run()
+# Try().run()
