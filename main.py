@@ -6,24 +6,21 @@ from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
 
 
-kv = Builder.load_file("my.kv")
+Builder.load_file("admin.kv")
 
-class MainWindow(Screen):
+class AdminDB(Widget):
     pass
 
-class SecondWindow(Screen):
+class AdminADD(Widget):
     pass
-
-class WindowManager(ScreenManager):
-    pass
-
 
 class MyApp(App):
     def build(self):
         Window.clearcolor = (1,1,1,1)
         Window.size=(1080,720)
         self.title='Inventory_Admin'
-        return kv
+      #  return AdminDB()
+        return AdminADD()
 
 
 
