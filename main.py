@@ -19,8 +19,8 @@ class MyApp(App):
         Window.clearcolor = (1,1,1,1)
         Window.size=(1080,720)
         self.title='Inventory_Admin'
-      #  return AdminDB()
-        return AdminADD()
+        return AdminDB()
+    #    return AdminADD()
 
 
 
