@@ -102,10 +102,35 @@
 
         FloatLayout:
             size: root.width, root.height
-            Button:
-                text: "hi"
-                size_hint: 0.2,.3
+
+            TextInput:
+                id: txt
+                #text: "hi"
+                size_hint: 0.2,.05
                 pos_hint: {"x":.5,"y":.5}
+                multiline: False
+                on_text_validate: root.text_validate(self)
+            TextInput:
+                id: qty
+                #text: "hi"
+                size_hint: 0.2,.05
+                pos_hint: {"x":.5,"y":.6}
+                multiline: False
+                on_text_validate: root.qty_validate(self)
+            Label:
+                text: root.text_input_string
+                color: 0,0,0,1
+            Label:
+                text: root.qty_input_string
+                color: 0,0,0,1
+                size_hint: 0.2,.05
+                pos_hint: {"x":.3,"y":.6}
+            Button:
+                text: 'enter'
+                size_hint: 0.2,.05
+                pos_hint: {"x":.3,"y":.7}
+                on_press: root.qty_validate(qty)
+                on_press: root.text_validate(txt)
 
 
 <AdminADD>:
