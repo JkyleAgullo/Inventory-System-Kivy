@@ -62,7 +62,7 @@ def del_expired_product():
                 writer.write("Quantity: " + str(prod_qty) + "\n")
                 writer.write("Profit Loss: " + str(prod_profit_loss) + "\n\n")
 
-        #os.remove(exp_date_product_dir)
+        os.remove(exp_date_product_dir)
     except FileNotFoundError:
         print("PRODUCT FILE DIRECTORY DOES NOT EXIST")
 
@@ -142,7 +142,7 @@ def record_product(product):
     is_exist = False
     ctr = -1
 
-    record_product_dir = os.path.join(os.getcwd(), product_history_folder, (product.date + ".txt"))
+    record_product_dir = os.path.join(os.getcwd(), product_history_folder, (DateManager.get_date() + ".txt"))
 
     if not os.path.exists(record_product_dir):
         open(record_product_dir, "w").close()
@@ -184,7 +184,7 @@ def record_product(product):
 
         erase_content_file(record_product_dir)
 
-        with open(record_product_dir, "a") as writer:
+        with open(record_product_dir, "w") as writer:
             for item in my_product:
                 writer.write("Product Name: " + item.name + "\n")
                 writer.write("Expiration Date: " + item.exp_date + "\n")
@@ -193,6 +193,61 @@ def record_product(product):
         print(e)
 
     record_expiration_date_product(product)
+
+
+def record_sales(product):
+    my_product = [Inventory() for _ in range(Category.get_category_length())]
+    is_exist = False
+    ctr = -1
+
+    sales_product_dir = os.path.join(os.getcwd(), sales_history_folder, (DateManager.get_date() + ".txt"))
+
+    if not os.path.exists(sales_product_dir):
+        open(sales_product_dir, "w").close()
+    try:
+        with open(sales_product_dir, "r") as reader:
+            while True:
+                data_line = reader.readline().strip()
+                if not data_line:
+                    break
+
+                if ":" in data_line:
+                    ctr += 1
+                    colon_index = data_line.index(":")
+                    my_product[ctr].name = data_line[colon_index + 1:].strip()
+
+                    data_line = reader.readline().strip()
+                    colon_index = data_line.index(":")
+                    my_product[ctr].sales_qty = int(data_line[colon_index + 1:].strip())
+
+                    data_line = reader.readline().strip()
+                    colon_index = data_line.index(":")
+                    my_product[ctr].total_sales_amount = float(data_line[colon_index + 1:].strip())
+
+                    reader.readline()
+
+                    if my_product[ctr].name.lower() == product.name.lower():
+                        my_product[ctr].qty += product.qty
+                        is_exist = True
+
+            if is_exist is False:
+                ctr += 1
+                my_product[ctr] = product
+
+            # removing all None initialized
+            my_product = [item for item in my_product if item.name is not None]
+            if ctr > 0:
+                my_product = sorted(my_product, key=lambda x: x.name)
+
+            erase_content_file(sales_product_dir)
+
+            with open(sales_product_dir, "w") as writer:
+                for item in my_product:
+                    writer.write("Product Name: " + item.name + "\n")
+                    writer.write("Sales Quantity: " + int(item.sales_qty) + "\n")
+                    writer.write("Total Sales Amount: " + str(item.total_sales_amount) + "\n\n")
+    except Exception as e:
+        print(e)
 
 
 def retrieve():

@@ -25,7 +25,11 @@ cashier_acc = Account()
 
 def main():
     global my_inv
+    global admin_acc
+    global cashier_acc
+
     my_inv = DataManager.retrieve()
+    admin_acc, cashier_acc = Authen.retrieve_account()
     Admin.admin()
     '''my_product = Inventory("CHIPS", "TORTILLOS", DateManager.get_date(), "2024-09-01", 15, 6, 90, 17, 0, 0.0, -90)
     DataManager.record_product(my_product)

@@ -115,4 +115,4 @@ def retrieve_account():
         except IOError as e:
             print("Error occurred during admin account retrieving: ", e)
 
-
+    return main.admin_acc, main.cashier_acc

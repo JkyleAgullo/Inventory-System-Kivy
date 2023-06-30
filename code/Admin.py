@@ -1,15 +1,16 @@
-import DataManager
 import os
+import glob
+import getpass
 from Inventory import Inventory
 from Category import Category
+import DataManager
 import DateManager
 import main
 import Authen
 import Terminal
-username = ""
-password = ""
 global choice
 global status
+
 def admin():
     product = Inventory()
     while True:
@@ -88,6 +89,8 @@ def admin():
                 input()
         elif choice == 2:
             display()
+        elif choice == 3:
+            settings()
 
 def add_product(my_product):
     if main.is_full() == 1:
@@ -125,14 +128,19 @@ def update_product(my_product, index_pos):
 
 
 def display():
-    choice = display_menu()
-    if choice == -1:
-        Terminal.gotoxy(15, 25)
-        print("| PLEASE CHOOSE AMONG THE CHOICES ONLY |")
-    elif choice == 1:
-        display_inventory()
-    elif choice == 2:
-        display_sales_history()
+    while True:
+        choice = display_menu()
+        if choice == -1:
+            Terminal.gotoxy(15, 25)
+            print("| PLEASE CHOOSE AMONG THE CHOICES ONLY |")
+        elif choice == 1:
+            display_inventory()
+        elif choice == 2:
+            display_sales_history()
+        elif choice == 3:
+            display_expired_history()
+        if choice == 0:
+            break
 
 
 def display_menu():
@@ -145,9 +153,11 @@ def display_menu():
     print("(2) Sales History")
     Terminal.gotoxy(15, 17)
     print("(3) Expired Product History")
-    Terminal.gotoxy(15, 20)
+    Terminal.gotoxy(15, 19)
+    print("(0) Back")
+    Terminal.gotoxy(15, 22)
     print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
-    Terminal.gotoxy(15, 23)
+    Terminal.gotoxy(15, 25)
     choice = Authen.input_validation()
     return choice
 
@@ -263,8 +273,302 @@ def display_inventory():
 
 
 def display_sales_history():
-    sales_history_dir = os.path.join(os.getcwd(), DataManager.sales_history_folder)
+    sales_history_folder_path = os.path.join(os.getcwd(), DataManager.sales_history_folder)
+    text_files = glob.glob(sales_history_folder_path + '/*.txt')
+    Terminal.clear_screen()
+    if len(text_files) == 0:
+        print("| SALES HISTORY IS EMPTY |")
+    else:
+        while True:
+            file_date = []
+            i = 0
+            Terminal.clear_screen()
+            Terminal.gotoxy(15, 10)
+            print("=-=-= SALES HISTORY =-=-=")
+            for i, file_path in enumerate(text_files, 1):
+                file_name = os.path.basename(file_path)     # Get the file name from the file path
+                date = os.path.splitext(file_name)[0]       # Remove the file extension to get the date
+                file_date.append(date)
+                Terminal.gotoxy(15, 11+(i*2))
+                print(f"({i}) " + file_date[i-1])
+            Terminal.gotoxy(15, 13+(i*2))
+            print(f"(0) Back")
+            Terminal.gotoxy(15, 16+(i*2))
+            print("=-=-=-=-=-=-=-=-=-=-=-=-=")
+            Terminal.gotoxy(15, 19+(i*2))
+            choice = Authen.input_validation()
+
+            if choice == 0:
+                break
+            elif 1 <= choice <= len(text_files):
+                selected_date = file_date[choice-1]
+                display_file(DataManager.sales_history_folder, selected_date)
+            else:
+                Terminal.gotoxy(15, 18 + (i * 2))
+                print("PLEASE CHOOSE AMONG THE CHOICES ONLY")
+
+
+def display_expired_history():
+    expired_history_folder_path = os.path.join(os.getcwd(), DataManager.exp_product_history_folder)
+    text_files = glob.glob(expired_history_folder_path + '/*.txt')
+    Terminal.clear_screen()
+
+    if len(text_files) == 0:
+        print("| EXPIRED PRODUCT HISTORY IS EMPTY |")
+    else:
+        while True:
+            file_date = []
+            i = 0
+            Terminal.clear_screen()
+            Terminal.gotoxy(15, 10)
+            print("=-=-= EXPIRED PRODUCT HISTORY =-=-=")
+            for i, file_path in enumerate(text_files, 1):
+                file_name = os.path.basename(file_path)     # Get the file name from the file path
+                date = os.path.splitext(file_name)[0]       # Remove the file extension to get the date
+                file_date.append(date)
+                Terminal.gotoxy(15, 11+(i*2))
+                print(f"({i}) " + file_date[i-1])
+            Terminal.gotoxy(15, 13+(i*2))
+            print(f"(0) Back")
+            Terminal.gotoxy(15, 16+(i*2))
+            print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+            Terminal.gotoxy(15, 19+(i*2))
+            choice = Authen.input_validation()
+
+            if choice == 0:
+                break
+            elif 1 <= choice <= len(text_files):
+                selected_date = file_date[choice-1]
+                display_file(DataManager.exp_product_history_folder, selected_date)
+            else:
+                Terminal.gotoxy(15, 18 + (i * 2))
+                print("PLEASE CHOOSE AMONG THE CHOICES ONLY")
+
+
+def display_file(file_folder, date):
+    data_line = None
+    colon_index = 0
+    my_product = [Inventory() for _ in range(Category.get_category_length())]
+    is_exist = False
+    ctr = -1
+    combined_data = {}
+
+    sales_file = os.path.join(os.getcwd(), file_folder, (date + ".txt"))
+    try:
+        if not os.path.exists(sales_file):
+            raise FileNotFoundError
+        else:
+            try:
+                with open(sales_file, "r") as reader:
+                    while True:
+                        data_line = reader.readline().strip()
+                        if not data_line:
+                            break
+
+                        if ":" in data_line:
+                            ctr += 1
+                            colon_index = data_line.index(":")
+                            my_product[ctr].name = data_line[colon_index + 1:].strip()
+
+                            data_line = reader.readline().strip()
+                            colon_index = data_line.index(":")
+                            my_product[ctr].sales_qty = int(data_line[colon_index + 1:].strip())
+
+                            data_line = reader.readline().strip()
+                            colon_index = data_line.index(":")
+                            my_product[ctr].profit = float(data_line[colon_index + 1:].strip())
+
+                            reader.readline()
+
+                    # combining the redundant product name
+                    my_product = [item for item in my_product if item.name is not None]
+
+                    for item in my_product:
+                        name = item.name
+                        sales_qty = item.sales_qty
+                        profit_loss = item.profit
+
+                        if name in combined_data:
+                            combined_data[name][0] += sales_qty
+                            combined_data[name][1] += profit_loss
+                        else:
+                            combined_data[name] = [sales_qty, profit_loss]
+
+                    if ctr != -1:
+                        # removing NoneType values
+                        if ctr > 0:
+                            combined_data = dict(combined_data)
+                        Terminal.clear_screen()
+                        for name, item in combined_data.items():
+                            print(name.upper())
+                            print(item[0])
+                            print(item[1], end="\n\n")
+                    else:
+                        print(f"SALES FILE ({date}) IS EMPTY")
+
+
+
+                    '''if ctr != -1:
+                        # removing NoneType values
+                        my_product = [item for item in my_product if item.name is not None]
+                        if ctr > 0:
+                            my_product = sorted(my_product, key=lambda x: x.name)
+                        Terminal.clear_screen()
+                        for item in my_product:
+                            print(item.name.upper())
+                            print(item.sales_qty)
+                            print(item.total_sales_amount, end="\n\n")
+                    else:
+                        print(f"SALES FILE ({date}) IS EMPTY")'''
+            except Exception as e:
+                print(e)
+    except FileNotFoundError:
+        print("SALES FILE NOT FOUND: ", date)
 
 
 def settings_menu():
-    ...
+    Terminal.clear_screen()
+    Terminal.gotoxy(15, 10)
+    print("=-=-= SETTINGS =-=-=")
+    Terminal.gotoxy(15, 13)
+    print("(1) Cashier")
+    Terminal.gotoxy(15, 15)
+    print("(2) Admin")
+    Terminal.gotoxy(15, 17)
+    print("(3) Change Encryption Key")
+    Terminal.gotoxy(15, 19)
+    print("(0) Back")
+    Terminal.gotoxy(15, 22)
+    print("=-=-=-=-=-=-=-=-=-=-")
+    Terminal.gotoxy(15, 25)
+    choice = Authen.input_validation()
+    return choice
+
+
+def settings():
+    is_change = False
+
+    while True:
+        choice = settings_menu()
+        if choice == -1:
+            Terminal.gotoxy(15, 25)
+            print("| PLEASE CHOOSE AMONG THE CHOICES ONLY |")
+        elif choice == 0:
+            break
+        elif choice == 1 or choice == 2:
+            Terminal.clear_screen()
+            Terminal.gotoxy(15, 10)
+            while True:
+                is_change = False
+                Terminal.clear_screen()
+                if choice == 1:
+                    print("=-=-= CASHIER SETTINGS =-=-=")
+                elif choice == 2:
+                    print("=-=-= ADMIN SETTINGS =-=-=")
+                Terminal.gotoxy(15, 13)
+                print("(1) Change Username")
+                Terminal.gotoxy(15, 15)
+                print("(2) Change Password")
+                Terminal.gotoxy(15, 17)
+                print("(0) Exit")
+                Terminal.gotoxy(15, 20)
+                print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-")
+                Terminal.gotoxy(15, 23)
+                settings_choice = Authen.input_validation()
+
+                if settings_choice == 0:
+                    break
+                else:
+                    if choice == 1:
+                        if settings_choice == 1:
+                            Terminal.clear_screen()
+                            Terminal.gotoxy(15, 10)
+                            print("Current username: " + main.cashier_acc.get_username())
+                            Terminal.gotoxy(15, 12)
+                            username = input("Enter new name: ")
+                            if username == main.cashier_acc.get_username():
+                                Terminal.gotoxy(15, 15)
+                                print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                                Terminal.gotoxy(15, 17)
+                                print("NEW USERNAME MUST NOT BE THE SAME AS CURRENT USERNAME")
+                                input()
+                            else:
+                                is_change = True
+                                main.cashier_acc.set_username(username)
+                        elif settings_choice == 2:
+                            Terminal.clear_screen()
+                            Terminal.gotoxy(15, 10)
+                            print("Current password: " + main.cashier_acc.get_password())
+                            Terminal.gotoxy(15, 12)
+                            password = getpass.getpass("Enter new password: ")
+                            Terminal.gotoxy(15, 14)
+                            re_password = getpass.getpass("Re-enter new password: ")
+                            if password == main.cashier_acc.get_password():
+                                Terminal.gotoxy(15, 17)
+                                print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                                Terminal.gotoxy(15, 19)
+                                print("NEW PASSWORD MUST NOT BE THE SAME AS CURRENT PASSWORD")
+                                input()
+                            else:
+                                if password == re_password:
+                                    is_change = True
+                                    main.cashier_acc.set_password(password)
+                                else:
+                                    Terminal.gotoxy(15, 17)
+                                    print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                                    Terminal.gotoxy(15, 19)
+                                    print("PASSWORD DOES NOT MATCHED")
+                                    input()
+                    elif choice == 2:
+                        if settings_choice == 1:
+                            Terminal.clear_screen()
+                            Terminal.gotoxy(15, 10)
+                            print("Current username: " + main.admin_acc.get_username())
+                            Terminal.gotoxy(15, 12)
+                            username = input("Enter new name: ")
+                            if username == main.admin_acc.get_username():
+                                Terminal.gotoxy(15, 15)
+                                print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                                Terminal.gotoxy(15, 17)
+                                print("NEW USERNAME MUST NOT BE THE SAME AS CURRENT USERNAME")
+                                input()
+                            else:
+                                is_change = True
+                                main.admin_acc.set_username(username)
+                        elif settings_choice == 2:
+                            Terminal.clear_screen()
+                            Terminal.gotoxy(15, 10)
+                            print("Current password: " + main.admin_acc.get_password())
+                            Terminal.gotoxy(15, 12)
+                            password = getpass.getpass("Enter new password: ")
+                            Terminal.gotoxy(15, 14)
+                            re_password = getpass.getpass("Re-enter new password: ")
+                            if password == main.admin_acc.get_password():
+                                Terminal.gotoxy(15, 17)
+                                print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                                Terminal.gotoxy(15, 19)
+                                print("NEW PASSWORD MUST NOT BE THE SAME AS CURRENT PASSWORD")
+                                input()
+                            else:
+                                if password == re_password:
+                                    is_change = True
+                                    main.admin_acc.set_password(password)
+                                else:
+                                    Terminal.gotoxy(15, 17)
+                                    print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                                    Terminal.gotoxy(15, 19)
+                                    print("PASSWORD DOES NOT MATCHED")
+                                    input()
+
+                # if changed happens
+                if settings_choice != 0 and is_change is True:
+                    Terminal.gotoxy(15, 17)
+                    print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                    Terminal.gotoxy(15, 19)
+                    print("CHANGED SUCCESSFULLY")
+                    Authen.save_account()
+                    input()
+
+        elif choice == 3:
+            ... # encryption
+
