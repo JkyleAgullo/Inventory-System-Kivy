@@ -11,8 +11,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 
 
 class AdminDB(Screen):
-    pass
-    """
+
     text_input_string = StringProperty("try")
     qty_input_string = StringProperty("1")
     #insert the string property of the price of the product for printing
@@ -21,7 +20,7 @@ class AdminDB(Screen):
         self.text_input_string = widget.text
     def qty_validate(self, widget):
         self.qty_input_string = widget.text
-        """
+
 
 class AdminADD(Screen):
     pass
