@@ -7,27 +7,34 @@ from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen
 
 
-
-
-
 class AdminDB(Screen):
-
     text_input_string = StringProperty("try")
     qty_input_string = StringProperty("1")
-    #insert the string property of the price of the product for printing
-    
+
+    # insert the string property of the price of the product for printing
+
     def text_validate(self, widget):
         self.text_input_string = widget.text
+
     def qty_validate(self, widget):
         self.qty_input_string = widget.text
 
 
+class SplashWindow(Screen):
+    pass
+
+
 class AdminADD(Screen):
     pass
+
+
 class WindowManager(ScreenManager):
     pass
 
+
 Builder.load_file('screen.kv')
+
+
 class MyApp(App):
     def build(self):
         Window.clearcolor = (1, 1, 1, 1)
@@ -37,7 +44,5 @@ class MyApp(App):
     #    return AdminADD()
 
 
-
-
 MyApp().run()
-#Try().run()
+# Try().run()
