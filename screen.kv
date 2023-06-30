@@ -1,0 +1,38 @@
+#:import NoTransition kivy.uix.screenmanager.NoTransition
+
+<WindowManager>:
+    AdminDB:
+    AdminADD:
+
+
+<AdminDB>:
+    name:"first"
+    FloatLayout:
+        size:root.width, root.height
+        Button:
+            text:'next'
+            on_release:
+                root.manager.transition = NoTransition()
+                root.manager.current = "second"
+
+
+<AdminADD>:
+    name:"second"
+    FloatLayout:
+        size:root.width, root.height
+
+        Button:
+
+            text: 'back'
+            size_hint: 0.2,.05
+            pos_hint: {"x":.3,"y":.7}
+            #on_press: root.qty_validate(qty)
+            #on_press: root.text_validate(txt)Button:
+            text: 'enter'
+            size_hint: 0.2,.05
+            pos_hint: {"x":.3,"y":.7}
+            #on_press: root.qty_validate(qty)
+            #on_press: root.text_validate(txt)
+            on_press:
+                root.manager.transition = NoTransition()
+                root.manager.current = "first"
