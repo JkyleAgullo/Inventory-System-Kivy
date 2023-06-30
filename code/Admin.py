@@ -3,6 +3,7 @@ import glob
 import getpass
 from Inventory import Inventory
 from Category import Category
+from Security import Security
 import DataManager
 import DateManager
 import main
@@ -500,9 +501,9 @@ def settings():
                             Terminal.gotoxy(15, 10)
                             print("Current password: " + main.cashier_acc.get_password())
                             Terminal.gotoxy(15, 12)
-                            password = getpass.getpass("Enter new password: ")
+                            password = input("Enter new password: ")
                             Terminal.gotoxy(15, 14)
-                            re_password = getpass.getpass("Re-enter new password: ")
+                            re_password = input("Re-enter new password: ")
                             if password == main.cashier_acc.get_password():
                                 Terminal.gotoxy(15, 17)
                                 print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
@@ -540,9 +541,9 @@ def settings():
                             Terminal.gotoxy(15, 10)
                             print("Current password: " + main.admin_acc.get_password())
                             Terminal.gotoxy(15, 12)
-                            password = getpass.getpass("Enter new password: ")
+                            password = input("Enter new password: ")
                             Terminal.gotoxy(15, 14)
-                            re_password = getpass.getpass("Re-enter new password: ")
+                            re_password = input("Re-enter new password: ")
                             if password == main.admin_acc.get_password():
                                 Terminal.gotoxy(15, 17)
                                 print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
@@ -570,5 +571,31 @@ def settings():
                     input()
 
         elif choice == 3:
-            ... # encryption
+            is_change = False
+            security_obj = Security()
+            Terminal.clear_screen()
+            Terminal.gotoxy(15, 10)
+            print("Current encryption key: " + str(Security.get_secret_key()))
+            Terminal.gotoxy(15, 12)
+            new_key = int(input("Enter new key: "))
+
+            if new_key == Security.get_secret_key():
+                Terminal.gotoxy(15, 15)
+                print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                Terminal.gotoxy(15, 17)
+                print("NEW KEY MUST NOT BE THE SAME AS CURRENT KEY")
+                input()
+            else:
+                is_change = True
+                security_obj.change_secret_key(new_key)
+                Authen.save_account()
+
+            if is_change is True:
+                Terminal.gotoxy(15, 17)
+                print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                Terminal.gotoxy(15, 19)
+                print("CHANGED SUCCESSFULLY")
+                Authen.save_account()
+                input()
+
 
