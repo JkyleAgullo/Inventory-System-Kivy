@@ -1,0 +1,8 @@
+Product Name: OISHI
+Quantity: 3
+Profit Loss: 45.0
+
+Product Name: OISHI
+Quantity: 3
+Profit Loss: 45.0
+
