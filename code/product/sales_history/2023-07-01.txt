@@ -1,0 +1,7 @@
+Product Name: Piattos
+Sales Quantity: 15
+Total Sales Amount: 105
+
+Product Name: CRACKLINGS
+Sales Quantity: 8
+Total Sales Amount: 120

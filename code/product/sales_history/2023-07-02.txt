@@ -1,0 +1,15 @@
+Product Name: Piattos
+Sales Quantity: 15
+Total Sales Amount: 105
+
+Product Name: CRACKLINGS
+Sales Quantity: 8
+Total Sales Amount: 120
+
+Product Name: HELLO
+Sales Quantity: 12
+Total Sales Amount: 128
+
+Product Name: TORTILLOS
+Sales Quantity: 12
+Total Sales Amount: 110
