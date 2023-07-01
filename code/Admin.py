@@ -74,6 +74,7 @@ def admin():
                 status = update_product(product, pos)
 
             # status check
+            Terminal.clear_screen()
             if status == 1:
                 Terminal.gotoxy(15, 24)
                 print("=-=-=-=-=-=-=-=-=-=-=-=-=-")
@@ -81,13 +82,15 @@ def admin():
                 print("ADDED SUCCESSFULLY")
                 DataManager.record_product(product)
                 DataManager.save()
-                input()
+                Terminal.gotoxy(15, 28)
+                input("Press enter to continue...")
             else:
                 Terminal.gotoxy(15, 24)
                 print("=-=-=-=-=-=-=-=-=-=-=-=-=-")
                 Terminal.gotoxy(15, 26)
                 print("ADD FAILED")
-                input()
+                Terminal.gotoxy(15, 28)
+                input("Press enter to continue...")
         elif choice == 2:
             display()
         elif choice == 3:
@@ -95,7 +98,8 @@ def admin():
 
 def add_product(my_product):
     if main.is_full() == 1:
-        print("ARRAY IS FULL")
+        print("\nARRAY IS FULL", end="\n\n")
+        input("Press enter to continue...")
     else:
         if my_product.qty <= main.MAX_PROD_STOCK:
             main.marker += 1
@@ -108,7 +112,8 @@ def add_product(my_product):
             main.my_inv[main.marker] = inventory_data
             return 1
         else:
-            print("QUANTITY LIMIT EXCEEDED")
+            print("\nQUANTITY LIMIT EXCEEDED", end="\n\n")
+            input("Press enter to continue...")
             return -1
     return -1
 
@@ -134,6 +139,8 @@ def display():
         if choice == -1:
             Terminal.gotoxy(15, 25)
             print("| PLEASE CHOOSE AMONG THE CHOICES ONLY |")
+            Terminal.gotoxy(15, 27)
+            input("Press enter to continue...")
         elif choice == 1:
             display_inventory()
         elif choice == 2:
@@ -175,8 +182,7 @@ def display_inventory():
         print("| NOTHING IS IN THE INVENTORY | ")
         Terminal.design_box(48, 11, 5, 35)
         Terminal.gotoxy(50, 17)
-        print("Press any key to continue...")
-        input()
+        input("Press enter to continue...")
     else:
         Terminal.gotoxy(17, 13)
         print("MAX PRODUCT: ", str(main.MAX_INV))
@@ -269,8 +275,7 @@ def display_inventory():
             print(formatted_profit)
 
         Terminal.gotoxy(20, 23 + i)
-        print("Press Enter to continue...")
-        input()
+        input("Press enter to continue...")
 
 
 def display_sales_history():
@@ -315,7 +320,10 @@ def display_expired_history():
     Terminal.clear_screen()
 
     if len(text_files) == 0:
+        Terminal.gotoxy(15, 10)
         print("| EXPIRED PRODUCT HISTORY IS EMPTY |")
+        Terminal.gotoxy(15, 12)
+        input("Press enter to continue...")
     else:
         while True:
             file_date = []
@@ -344,6 +352,8 @@ def display_expired_history():
             else:
                 Terminal.gotoxy(15, 18 + (i * 2))
                 print("PLEASE CHOOSE AMONG THE CHOICES ONLY")
+                Terminal.gotoxy(15, 20 + (i * 2))
+                input("Press enter to continue...")
 
 
 def display_file(file_folder, date):
@@ -405,22 +415,11 @@ def display_file(file_folder, date):
                             print(item[0])
                             print(item[1], end="\n\n")
                     else:
-                        print(f"SALES FILE ({date}) IS EMPTY")
-
-
-
-                    '''if ctr != -1:
-                        # removing NoneType values
-                        my_product = [item for item in my_product if item.name is not None]
-                        if ctr > 0:
-                            my_product = sorted(my_product, key=lambda x: x.name)
                         Terminal.clear_screen()
-                        for item in my_product:
-                            print(item.name.upper())
-                            print(item.sales_qty)
-                            print(item.total_sales_amount, end="\n\n")
-                    else:
-                        print(f"SALES FILE ({date}) IS EMPTY")'''
+                        Terminal.gotoxy(15, 10)
+                        print(f"SALES FILE ({date}) IS EMPTY")
+                        Terminal.gotoxy(15, 12)
+                        input("Press enter to continue...")
             except Exception as e:
                 print(e)
     except FileNotFoundError:
@@ -596,6 +595,7 @@ def settings():
                 Terminal.gotoxy(15, 19)
                 print("CHANGED SUCCESSFULLY")
                 Authen.save_account()
-                input()
+                Terminal.gotoxy(15, 21)
+                input("Press enter to continue...")
 
 
