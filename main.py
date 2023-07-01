@@ -13,14 +13,15 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 
 
 class Cashier(Widget):
+    product_name= StringProperty("try")
 
-    text_input_string = StringProperty("try")
-    qty_input_string = StringProperty("1")
 
     # insert the string property of the price of the product for printing
     Builder.load_file('cashier.kv')
-    def text_validate(self, widget):
-        self.text_input_string = widget.text
+    def name_validate(self,widget):
+        self.product_name = widget.text
+
+
     def qty_validate(self, widget):
         self.qty_input_string = widget.text
 

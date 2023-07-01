@@ -1,11 +1,13 @@
 
 <Cashier>:
+    #anchor : id
 
 
     canvas:
         Color:
             rgba: 0,0,0,.8
         Rectangle:
+            #width, height
             pos:350,540
             size:730,180
         Color:
@@ -17,16 +19,47 @@
 
     Button:
         text: 'hello'
-        pos: 450,50
+        pos: 580,50
         size: 150,150
+        on_press: root.name_validate(txt)
+        #on_press: header_label.text = ''
+
     Button:
-        text: 'hello'
-        pos: 598,50
+        text: 'heh'
+        pos: 728,50
         size: 150,150
 
     Label:
-        text: 'putangina niyo'
+        id: header_label
+        text: root.product_name
         pos: 500,600
-        #color: 0,0,0,1
+        color: 0,0,0,1
         font_size: 24
+        bold: True
+
+    TextInput:
+        id: qty
+        #text: "hi"
+        size:200,40
+        #x,y
+        pos: 650,300
+        multiline: False
+        on_text_validate: root.name_validate(self)
+    TextInput:
+        id: txt
+        size:200,40
+        #x,y
+        pos: 650,370
+        multiline: False
+    Label:
+        text: 'PRODUCT NAME'
+        pos: 520,340
+        color: 0,0,0,1
+        font_size: 16
+        bold: True
+    Label:
+        text: 'QUANTITY'
+        pos: 520,270
+        color: 0,0,0,1
+        font_size: 16
         bold: True
