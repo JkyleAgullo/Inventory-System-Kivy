@@ -28,7 +28,7 @@ class MyApp(App):
     def build(self):
         Window.clearcolor = (1, 1, 1, 1)
         Window.size = (1080, 720)
-        self.title = 'Inventory Admin'
+        self.title = 'Inventory Cashier'
         return AdminDB()
     #    return AdminADD()
 
