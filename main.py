@@ -1,3 +1,5 @@
+from kivy.config import Config
+Config.set('graphics', 'resizable', False)
 import kivy.utils
 from kivy.lang import Builder
 from kivy.properties import StringProperty
@@ -10,7 +12,7 @@ from kivy.uix.screenmanager import ScreenManager, Screen
 
 
 
-class AdminDB(Widget):
+class Cashier(Widget):
 
     text_input_string = StringProperty("try")
     qty_input_string = StringProperty("1")
@@ -29,7 +31,7 @@ class MyApp(App):
         Window.clearcolor = (1, 1, 1, 1)
         Window.size = (1080, 720)
         self.title = 'Inventory Cashier'
-        return AdminDB()
+        return Cashier()
     #    return AdminADD()
 
 
