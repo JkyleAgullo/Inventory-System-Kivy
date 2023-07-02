@@ -27,9 +27,10 @@ class Cashier(Widget):
         self.qty_input_string = widget.text
 
     my_array = ['Item','two']
-
+    my_array2 = ['price1', 'price2']
     def btn(self):
         Cashier.my_array.append(self.name.text)
+        Cashier.my_array2.append(self.qty.text)
         print(self.name.text)
     def Array_display(self, array):
         i=10
@@ -39,7 +40,13 @@ class Cashier(Widget):
         for element in array:
             i=i+30
             self.add_widget(Label(text=str(element), font_size='28',pos=(100,300+i)))
-
+    def Array_display2(self, array):
+        i=10
+        self.cols = len(array[0])
+        #for row in array:
+        for element in array:
+            i=i+30
+            self.add_widget(Label(text=str(element), font_size='28',pos=(200,300+i)))
 
 
 
