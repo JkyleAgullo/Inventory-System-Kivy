@@ -1,7 +1,7 @@
 
 <Cashier>:
     #anchor : id
-
+    name: txt
 
     canvas:
         Color:
@@ -22,7 +22,7 @@
         pos: 580,50
         size: 150,150
         on_press: root.name_validate(txt)
-        #on_press: header_label.text = ''
+        on_press: root.btn()
         on_press: root.Array_display(root.my_array)
 
     Button:
