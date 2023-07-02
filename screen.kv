@@ -99,6 +99,9 @@
                 #color: 0,0,0,1
                 size_hint: None, None
                 size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "login"
 
         FloatLayout:
             id:dashboard
@@ -224,6 +227,9 @@
                 #color: 0,0,0,1
                 size_hint: None, None
                 size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "login"
 
         FloatLayout:
             id:add
@@ -327,6 +333,9 @@
                 #color: 0,0,0,1
                 size_hint: None, None
                 size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "login"
 
         FloatLayout:
             id:add
@@ -431,6 +440,10 @@
                 #color: 0,0,0,1
                 size_hint: None, None
                 size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "login"
+
 
         FloatLayout:
             id:add
