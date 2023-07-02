@@ -39,8 +39,8 @@ class AdminSettings(Screen):
 class WindowManager(ScreenManager):
     pass
 
-Builder.load_file('screen.kv')
-
+Builder.load_file('sidePanel.kv')
+#Builder.load_file('Mainpanel.kv')
 
 class MyApp(App):
     def build(self):
