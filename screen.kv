@@ -11,7 +11,7 @@
 
 
 <AdminDB>:
-    name: "adminDash"
+    name: "first"
     on_leave:
         root.ids.txt.text = ''
         root.ids.qty.text = ''
@@ -542,6 +542,6 @@
                 size_hint_y: None
                 height: 40
                 #background_color: (0, 0, 1, 1)
-                on_release: app.root.current = "adminDash"
+                on_release: root.manager.current = "first"
             Label:
                 id: sp2
