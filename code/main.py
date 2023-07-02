@@ -34,8 +34,12 @@ def main():
     my_inv = DataManager.retrieve()
     admin_acc, cashier_acc = Authen.retrieve_account()
 
+    # checker
+    Authen.login()
+    # checker
     Cashier.cashier()
-    #Admin.admin()
+    # checker
+    Admin.admin()
     '''my_product = Inventory("CHIPS", "TORTILLOS", DateManager.get_date(), "2024-09-01", 15, 6, 90, 17, 0, 0.0, -90)
     DataManager.record_product(my_product)
     DataManager.save()'''

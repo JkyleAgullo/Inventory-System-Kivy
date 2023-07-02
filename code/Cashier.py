@@ -182,5 +182,5 @@ def display_receipt():
     Terminal.gotoxy(35, 24 + i)
     print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
     Terminal.gotoxy(35, 27 + i)
-    input("Press Enter to continue...")
+    input("Press enter to continue...")
 

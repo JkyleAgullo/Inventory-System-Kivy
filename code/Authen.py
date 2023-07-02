@@ -1,8 +1,8 @@
-import getpass
 import os
 import main
 from Security import Security
 from Account import Account
+import Terminal
 
 # Global Variables
 account_dir = "accounts"
@@ -24,19 +24,31 @@ def input_validation():
 
 def login():
     while True:
+        Terminal.clear_screen()
+        Terminal.gotoxy(15, 10)
         print("=-=-= INVENTORY LOGIN =-=-=")
+        Terminal.gotoxy(15, 13)
         print("(1) Cashier")
+        Terminal.gotoxy(15, 15)
         print("(2) Admin")
+        Terminal.gotoxy(15, 17)
         print("(0) Exit")
+        Terminal.gotoxy(15, 20)
+        print("=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+        Terminal.gotoxy(15, 22)
         choice = input_validation()
 
         if choice == 0:
             main.back_to_login = False
             return 0
 
+        Terminal.clear_screen()
+        Terminal.gotoxy(15, 10)
         print("=-=-=-= LOG IN =-=-=-=")
+        Terminal.gotoxy(15, 13)
         username = input("Enter username: ")
-        password = getpass.getpass("Enter password: ")
+        Terminal.gotoxy(15, 15)
+        password = input("Enter password: ")
 
         if choice == 1:
             if username == main.cashier_acc.get_username():
@@ -46,8 +58,13 @@ def login():
             if username == main.admin_acc.get_username():
                 if password == main.admin_acc.get_password():
                     return 2    # if found
-        else:
-            print("Invalid username or password. Please try again.")
+        # if not found
+        Terminal.gotoxy(15, 18)
+        print("=-=-=-=-=-=-=-=-=-=-=-")
+        Terminal.gotoxy(15, 20)
+        print("INVALID USERNAME OR PASSWORD")
+        Terminal.gotoxy(15, 22)
+        input("Press enter to continue...")
 
 def save_account():
     admin_fp = Security.encrypt(Security.get_admin_filename(), Security.get_secret_key())
