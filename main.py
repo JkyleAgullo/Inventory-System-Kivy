@@ -17,6 +17,7 @@ from kivy.uix.label import Label
 class Cashier(Widget):
     product_name= StringProperty("try")
     name = ObjectProperty(None)
+    qty = ObjectProperty(None)
     # insert the string property of the price of the product for printing
     Builder.load_file('cashier.kv')
     def name_validate(self,widget):
@@ -26,28 +27,37 @@ class Cashier(Widget):
     def qty_validate(self, widget):
         self.qty_input_string = widget.text
 
-    my_array = ['Item','two']
-    my_array2 = ['price1', 'price2']
+    #change the first element into a label
+    my_array = ['Product Name']
+    my_array2 = ['Quantity']
+    price_array = ['Price','10.0']
     def btn(self):
         Cashier.my_array.append(self.name.text)
         Cashier.my_array2.append(self.qty.text)
-        print(self.name.text)
+        print(self.qty.text)
+
     def Array_display(self, array):
         i=10
         self.cols = len(array[0])
-        print(Cashier.my_array[0]) #try lang
+        print(Cashier.my_array[1]) #try lang
         #for row in array:
         for element in array:
-            i=i+30
-            self.add_widget(Label(text=str(element), font_size='28',pos=(100,300+i)))
+            i=i-30
+            self.add_widget(Label(text=str(element), font_size='20',pos=(20,640+i),color=(0, 0, 0, 1)))
     def Array_display2(self, array):
         i=10
         self.cols = len(array[0])
         #for row in array:
         for element in array:
-            i=i+30
-            self.add_widget(Label(text=str(element), font_size='28',pos=(200,300+i)))
-
+            i=i-30
+            self.add_widget(Label(text=str(element), font_size='20',pos=(150,640+i),color=(0, 0, 0, 1)))
+    def Array_price(self, array):
+        i=10
+        self.cols = len(array[0])
+        #for row in array:
+        for element in array:
+            i=i-30
+            self.add_widget(Label(text=str(element), font_size='20',pos=(240,640+i),color=(0, 0, 0, 1)))
 
 
 class MyApp(App):

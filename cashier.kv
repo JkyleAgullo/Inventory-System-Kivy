@@ -19,19 +19,22 @@
 
 
     Button:
-        text: 'add'
+        text: 'punch'
         pos: 580,50
         size: 150,150
         on_press: root.name_validate(txt)
         on_press: root.btn()
+    #add a label where it will display the price after this on_press
+
 
 
     Button:
-        text: 'display'
+        text: 'add to receipt'
         pos: 728,50
         size: 150,150
         on_press: root.Array_display(root.my_array)
         on_press: root.Array_display2(root.my_array2)
+        on_press: root.Array_price(root.price_array)
 
     Label:
         id: header_label
