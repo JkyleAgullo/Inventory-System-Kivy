@@ -1,22 +1,11 @@
-#:import NoTransition kivy.uix.screenmanager.NoTransition
-
-<WindowManager>:
+WindowManager:
     SplashWindow:
     LoginWindow:
     AdminDB:
     AdminADD:
-    AdminDisplay:
-    AdminSettings:
-
-
 
 <AdminDB>:
-    name: "first"
-    on_leave:
-        root.ids.txt.text = ''
-        root.ids.qty.text = ''
-        #you also need to clear the object where the input is stored, refer to your bookmarked link
-    name:"first"
+    name:"adminDash"
     GridLayout:
         cols:2
         size: root.width, root.height
@@ -30,6 +19,7 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
+     #               background_color: kivy.utils.rgba('#000000', )
                 size_hint: None, None
                 size: 150, 130
 
@@ -38,10 +28,19 @@
                 text:"DASHBOARD"
                 background_normal: ''
                 background_down: ''
-                background_color:(143/255,195/255,31/255,1)
-     #          width, height
+                background_color:(0/255,0/255,0/255,.7)
+
+                on_release: DB.background_color=kivy.utils.rgba('#8FC31F') # Normal state color
+                on_press: ST.background_color=(0/255,0/255,0/255,.7)
+                on_press: ADD.background_color=(0/255,0/255,0/255,.7)
+                on_press: DP.background_color=(0/255,0/255,0/255,.7)
+
+
+     #              width, height
                 size_hint: None, None
                 size: 150, 50
+
+
 
             Button:
                 id: ADD
@@ -49,11 +48,18 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
+
+
+                on_release: ADD.background_color=kivy.utils.rgba('#8FC31F') # Normal state color
+                on_press: ST.background_color=(0/255,0/255,0/255,.7)
+                on_press: DP.background_color=(0/255,0/255,0/255,.7)
+                on_press: DB.background_color=(0/255,0/255,0/255,.7)
                 size_hint: None, None
                 size: 150, 50
+            #    on_press: root.btn()
                 on_press:
                     root.manager.transition = NoTransition()
-                    root.manager.current = "second"
+                    root.manager.current = "adminAdd"
 
 
             Button:
@@ -63,11 +69,13 @@
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
 
+                on_release: DP.background_color=kivy.utils.rgba('#8FC31F')
+                on_press: ST.background_color=(0/255,0/255,0/255,.7)
+                on_press: ADD.background_color=(0/255,0/255,0/255,.7)
+                on_press: DB.background_color=(0/255,0/255,0/255,.7)
+
                 size_hint: None, None
                 size: 150, 50
-                on_press:
-                    root.manager.transition = NoTransition()
-                    root.manager.current = "third"
 
             Button:
                 id: ST
@@ -76,17 +84,20 @@
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
 
+                on_release: ST.background_color=kivy.utils.rgba('#8FC31F')
+                on_press: DP.background_color=(0/255,0/255,0/255,.7)
+                on_press: ADD.background_color=(0/255,0/255,0/255,.7)
+                on_press: DB.background_color=(0/255,0/255,0/255,.7)
+
                 size_hint: None, None
                 size: 150, 50
-                on_press:
-                    root.manager.transition = NoTransition()
-                    root.manager.current = "fourth"
 
             Button:
                 text:""
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
+             #              color: 0,0,0,1
                 size_hint: None, None
                 size: 150, 340
 
@@ -99,9 +110,6 @@
                 #color: 0,0,0,1
                 size_hint: None, None
                 size: 150, 50
-                on_press:
-                    root.manager.transition = NoTransition()
-                    root.manager.current = "login"
 
         FloatLayout:
             id:dashboard
@@ -129,12 +137,6 @@
                 color: 0,0,0,1
                 size_hint: 0.2,.05
                 pos_hint: {"x":.3,"y":.6}
-            Label:
-                text: 'Dashboard'
-                color: 0,0,0,1
-                size_hint: 0.2,.05
-                pos: 300,200
-
             Button:
                 text: 'enter'
                 size_hint: 0.2,.05
@@ -145,7 +147,7 @@
 
 
 <AdminADD>:
-    name:"second"
+    name:"adminAdd"
     GridLayout:
         cols:2
         size: root.width, root.height
@@ -159,6 +161,7 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
+     #               background_color: kivy.utils.rgba('#000000', )
                 size_hint: None, None
                 size: 150, 130
 
@@ -168,140 +171,19 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
+
+                on_release: DB.background_color=kivy.utils.rgba('#8FC31F') # Normal state color
+                on_press: ST.background_color=(0/255,0/255,0/255,.7)
+                on_press: ADD.background_color=(0/255,0/255,0/255,.7)
+                on_press: DP.background_color=(0/255,0/255,0/255,.7)
+
+
      #              width, height
                 size_hint: None, None
                 size: 150, 50
                 on_press:
                     root.manager.transition = NoTransition()
-                    root.manager.current = "first"
-
-            Button:
-                id: ADD
-                text:"ADD"
-                background_normal: ''
-                background_down: ''
-                background_color:(143/255,195/255,31/255,1)
-                size_hint: None, None
-                size: 150, 50
-
-            Button:
-                id: DP
-                text:"DISPLAY"
-                background_normal: ''
-                background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-
-                size_hint: None, None
-                size: 150, 50
-                on_press:
-                    root.manager.transition = NoTransition()
-                    root.manager.current = "third"
-
-            Button:
-                id: ST
-                text:"SETTING"
-                background_normal: ''
-                background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-
-                size_hint: None, None
-                size: 150, 50
-                on_press:
-                    root.manager.transition = NoTransition()
-                    root.manager.current = "fourth"
-
-            Button:
-                text:""
-                background_normal: ''
-                background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-                size_hint: None, None
-                size: 150, 340
-
-            Button:
-                id: LOGOUT
-                text:"LOGOUT"
-                background_normal: ''
-                background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-                #color: 0,0,0,1
-                size_hint: None, None
-                size: 150, 50
-                on_press:
-                    root.manager.transition = NoTransition()
-                    root.manager.current = "login"
-
-        FloatLayout:
-            id:add
-            size: root.width, root.height
-
-            Button:
-                text: 'ADD'
-                size_hint: 0.2,.05
-                pos: 400, 200
-            Label:
-                text: 'ADD PRODUCT'
-                color: 0,0,0,1
-                size_hint: 0.2,.05
-                pos: 400,600
-                font_size: 24
-            TextInput:
-                id: product_name
-                size_hint: 0.2,.05
-                #x,y
-                pos: 500,500
-                multiline: False
-
-            TextInput:
-                id: product_quantity
-                size_hint: 0.2,.05
-                #x,y
-                pos: 500,450
-                multiline: False
-            TextInput:
-                id: product_price
-                size_hint: 0.2,.05
-                #x,y
-                pos: 500,400
-                multiline: False
-            TextInput:
-                id: product_retail
-                size_hint: 0.2,.05
-                #x,y
-                pos: 500,350
-                multiline: False
-
-
-<AdminDisplay>:
-    name:"third"
-    GridLayout:
-        cols:2
-        size: root.width, root.height
-
-        GridLayout:
-            cols: 1
-            size_hint: 0.2,1
-
-            Button:
-                text:""
-                background_normal: ''
-                background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-                size_hint: None, None
-                size: 150, 130
-
-            Button:
-                id: DB
-                text:"DASHBOARD"
-                background_normal: ''
-                background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-     #              width, height
-                size_hint: None, None
-                size: 150, 50
-                on_press:
-                    root.manager.transition = NoTransition()
-                    root.manager.current = "first"
+                    root.manager.current = "adminDash"
 
 
 
@@ -311,23 +193,32 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
+
+
+                on_release: ADD.background_color=kivy.utils.rgba('#8FC31F') # Normal state color
+                on_press: ST.background_color=(0/255,0/255,0/255,.7)
+                on_press: DP.background_color=(0/255,0/255,0/255,.7)
+                on_press: DB.background_color=(0/255,0/255,0/255,.7)
                 size_hint: None, None
                 size: 150, 50
-                on_press:
-                    root.manager.transition = NoTransition()
-                    root.manager.current = "second"
+            #    on_press: root.btn()
+
+
 
             Button:
                 id: DP
                 text:"DISPLAY"
                 background_normal: ''
                 background_down: ''
-                background_color:(143/255,195/255,31/255,1)
+                background_color:(0/255,0/255,0/255,.7)
+
+                on_release: DP.background_color=kivy.utils.rgba('#8FC31F')
+                on_press: ST.background_color=(0/255,0/255,0/255,.7)
+                on_press: ADD.background_color=(0/255,0/255,0/255,.7)
+                on_press: DB.background_color=(0/255,0/255,0/255,.7)
+
                 size_hint: None, None
                 size: 150, 50
-                on_press:
-                    root.manager.transition = NoTransition()
-                    root.manager.current = "third"
 
             Button:
                 id: ST
@@ -336,11 +227,13 @@
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
 
+                on_release: ST.background_color=kivy.utils.rgba('#8FC31F')
+                on_press: DP.background_color=(0/255,0/255,0/255,.7)
+                on_press: ADD.background_color=(0/255,0/255,0/255,.7)
+                on_press: DB.background_color=(0/255,0/255,0/255,.7)
+
                 size_hint: None, None
                 size: 150, 50
-                on_press:
-                    root.manager.transition = NoTransition()
-                    root.manager.current = "fourth"
 
             Button:
                 text:""
@@ -360,9 +253,6 @@
                 #color: 0,0,0,1
                 size_hint: None, None
                 size: 150, 50
-                on_press:
-                    root.manager.transition = NoTransition()
-                    root.manager.current = "login"
 
         FloatLayout:
             id:add
@@ -372,116 +262,8 @@
                 text: 'weh'
                 size_hint: 0.2,.05
                 pos_hint: {"x":.3,"y":.7}
-            Label:
-                text: 'Display'
-                color: 0,0,0,1
-                size_hint: 0.2,.05
-                pos: 300,200
 
-<AdminSettings>:
-    name:"fourth"
-    GridLayout:
-        cols:2
-        size: root.width, root.height
-
-        GridLayout:
-            cols: 1
-            size_hint: 0.2,1
-
-            Button:
-                text:""
-                background_normal: ''
-                background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-                size_hint: None, None
-                size: 150, 130
-
-            Button:
-                id: DB
-                text:"DASHBOARD"
-                background_normal: ''
-                background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-     #              width, height
-                size_hint: None, None
-                size: 150, 50
-                on_press:
-                    root.manager.transition = NoTransition()
-                    root.manager.current = "first"
-
-
-
-            Button:
-                id: ADD
-                text:"ADD"
-                background_normal: ''
-                background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-                size_hint: None, None
-                size: 150, 50
-                on_press:
-                    root.manager.transition = NoTransition()
-                    root.manager.current = "second"
-
-            Button:
-                id: DP
-                text:"DISPLAY"
-                background_normal: ''
-                background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-
-                size_hint: None, None
-                size: 150, 50
-                on_press:
-                    root.manager.transition = NoTransition()
-                    root.manager.current = "third"
-
-            Button:
-                id: ST
-                text:"SETTING"
-                background_normal: ''
-                background_down: ''
-                background_color:(143/255,195/255,31/255,1)
-
-                size_hint: None, None
-                size: 150, 50
-                on_press:
-                    root.manager.transition = NoTransition()
-                    root.manager.current = "fourth"
-
-            Button:
-                text:""
-                background_normal: ''
-                background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-             #              color: 0,0,0,1
-                size_hint: None, None
-                size: 150, 340
-
-            Button:
-                id: LOGOUT
-                text:"LOGOUT"
-                background_normal: ''
-                background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-                #color: 0,0,0,1
-                size_hint: None, None
-                size: 150, 50
-                on_press:
-                    root.manager.transition = NoTransition()
-                    root.manager.current = "login"
-
-
-        FloatLayout:
-            id:add
-            size: root.width, root.height
-
-            Label:
-                text: 'Settings'
-                color: 0,0,0,1
-                size_hint: 0.2,.05
-                pos: 300,200
-
+# DESIGN FOR SPLASH WINDOW
 <SplashWindow>:
     name: "splash"
 
@@ -505,6 +287,8 @@
                 width: self.parent.width * 1
                 height: dp(10)
                 background_color: 0, 0, 0, 1
+
+# DESIGN FOR LOGIN WINDOW
 
 <LoginWindow>:
     name: "login"
@@ -560,6 +344,6 @@
                 size_hint_y: None
                 height: 40
                 #background_color: (0, 0, 1, 1)
-                on_release: root.manager.current = "first"
+                on_release: app.root.current = "adminDash"
             Label:
                 id: sp2
