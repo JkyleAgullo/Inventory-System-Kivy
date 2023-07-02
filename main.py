@@ -30,11 +30,13 @@ class Cashier(Widget):
     #change the first element into a label
     my_array = ['Product Name']
     my_array2 = ['Quantity']
-    price_array = ['Price','10.0']
+    price_array = ['Price']
     def btn(self):
         Cashier.my_array.append(self.name.text)
         Cashier.my_array2.append(self.qty.text)
-        print(self.qty.text)
+        prod_name = self.name.text
+
+        print(prod_name)
 
     def Array_display(self, array):
         i=10
