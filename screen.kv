@@ -236,27 +236,39 @@
             size: root.width, root.height
 
             Button:
-                text: 'weh'
+                text: 'ADD'
                 size_hint: 0.2,.05
-                pos_hint: {"x":.3,"y":.7}
+                pos: 400, 200
             Label:
-                text: 'Add'
+                text: 'ADD PRODUCT'
                 color: 0,0,0,1
                 size_hint: 0.2,.05
-                pos: 300,200
+                pos: 400,600
+                font_size: 24
             TextInput:
-                id: qty
-                #text: "hi"
-                size:200,40
+                id: product_name
+                size_hint: 0.2,.05
                 #x,y
-                pos: 650,300
+                pos: 500,500
                 multiline: False
-                #on_text_validate: root.name_validate(self)
+
             TextInput:
-                id: txt
-                size:200,40
+                id: product_quantity
+                size_hint: 0.2,.05
                 #x,y
-                pos: 650,370
+                pos: 500,450
+                multiline: False
+            TextInput:
+                id: product_price
+                size_hint: 0.2,.05
+                #x,y
+                pos: 500,400
+                multiline: False
+            TextInput:
+                id: product_retail
+                size_hint: 0.2,.05
+                #x,y
+                pos: 500,350
                 multiline: False
 
 
