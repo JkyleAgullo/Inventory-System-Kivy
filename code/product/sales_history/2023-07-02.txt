@@ -1,15 +1,12 @@
-Product Name: Piattos
-Sales Quantity: 15
-Total Sales Amount: 105
+Product Name: ARGENTINA
+Sales Quantity: 1
+Total Sales Amount: 58.0
 
-Product Name: CRACKLINGS
-Sales Quantity: 8
-Total Sales Amount: 120
-
-Product Name: HELLO
-Sales Quantity: 12
-Total Sales Amount: 128
+Product Name: COCA
+Sales Quantity: 5
+Total Sales Amount: 90.0
 
 Product Name: TORTILLOS
-Sales Quantity: 12
-Total Sales Amount: 110
+Sales Quantity: 3
+Total Sales Amount: 51.0
+

@@ -12,10 +12,10 @@ class Receipt:
         self.__price = price
 
     def set_qty(self, qty):
-        self.__qty += qty
+        self.__qty = qty
 
     def set_total_price(self, total_price):
-        self.__total_price += total_price
+        self.__total_price = total_price
 
     def get_product_name(self):
         return self.__product_name

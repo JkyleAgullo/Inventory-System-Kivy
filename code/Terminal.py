@@ -1,4 +1,3 @@
-import os
 import sys
 
 def clear_screen():

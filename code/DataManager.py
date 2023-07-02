@@ -2,6 +2,7 @@ import os
 from datetime import date
 from Inventory import Inventory
 from Category import Category
+from Receipt import Receipt
 import DateManager
 import Admin
 import main
@@ -196,58 +197,60 @@ def record_product(product):
 
 
 def record_sales(product):
-    my_product = [Inventory() for _ in range(Category.get_category_length())]
+    my_product = [Receipt() for _ in range(Category.get_category_length())]
     is_exist = False
     ctr = -1
 
     sales_product_dir = os.path.join(os.getcwd(), sales_history_folder, (DateManager.get_date() + ".txt"))
-
     if not os.path.exists(sales_product_dir):
         open(sales_product_dir, "w").close()
-    try:
-        with open(sales_product_dir, "r") as reader:
-            while True:
-                data_line = reader.readline().strip()
-                if not data_line:
-                    break
 
-                if ":" in data_line:
-                    ctr += 1
-                    colon_index = data_line.index(":")
-                    my_product[ctr].name = data_line[colon_index + 1:].strip()
+    with open(sales_product_dir, "r") as reader:
+        while True:
+            data_line = reader.readline().strip()
+            if not data_line:
+                break
 
-                    data_line = reader.readline().strip()
-                    colon_index = data_line.index(":")
-                    my_product[ctr].sales_qty = int(data_line[colon_index + 1:].strip())
-
-                    data_line = reader.readline().strip()
-                    colon_index = data_line.index(":")
-                    my_product[ctr].total_sales_amount = float(data_line[colon_index + 1:].strip())
-
-                    reader.readline()
-
-                    if my_product[ctr].name.lower() == product.name.lower():
-                        my_product[ctr].qty += product.qty
-                        is_exist = True
-
-            if is_exist is False:
+            if ":" in data_line:
                 ctr += 1
-                my_product[ctr] = product
+                colon_index = data_line.index(":")
+                product_name = data_line[colon_index + 1:].strip()
+                my_product[ctr].set_product_name(product_name)
 
-            # removing all None initialized
-            my_product = [item for item in my_product if item.name is not None]
-            if ctr > 0:
-                my_product = sorted(my_product, key=lambda x: x.name)
+                data_line = reader.readline().strip()
+                colon_index = data_line.index(":")
+                sales_qty = int(data_line[colon_index + 1:].strip())
+                my_product[ctr].set_qty(sales_qty)
 
-            erase_content_file(sales_product_dir)
+                data_line = reader.readline().strip()
+                colon_index = data_line.index(":")
+                total_sales_amount = float(data_line[colon_index + 1:].strip())
+                my_product[ctr].set_total_price(total_sales_amount)
 
-            with open(sales_product_dir, "w") as writer:
-                for item in my_product:
-                    writer.write("Product Name: " + item.name + "\n")
-                    writer.write("Sales Quantity: " + int(item.sales_qty) + "\n")
-                    writer.write("Total Sales Amount: " + str(item.total_sales_amount) + "\n\n")
-    except Exception as e:
-        print(e)
+                reader.readline()
+
+                if my_product[ctr].get_product_name().lower() == product.get_product_name().lower():
+                    my_product[ctr].set_qty(my_product[ctr].get_qty() + product.get_qty())
+                    my_product[ctr].set_total_price(my_product[ctr].get_total_price() + product.get_total_price())
+                    is_exist = True
+
+        if is_exist is False:
+            ctr += 1
+            my_product[ctr] = product
+
+        # removing all None initialized
+        my_product = [item for item in my_product if item.get_product_name() is not None]
+        if ctr > 0:
+            my_product = sorted(my_product, key=lambda x: x.get_product_name())
+
+        erase_content_file(sales_product_dir)
+
+        with open(sales_product_dir, "w") as writer:
+            for item in my_product:
+                writer.write("Product Name: " + item.get_product_name() + "\n")
+                writer.write("Sales Quantity: " + str(item.get_qty()) + "\n")
+                writer.write("Total Sales Amount: " + str(item.get_total_price()) + "\n\n")
+
 
 
 def retrieve():

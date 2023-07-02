@@ -24,7 +24,7 @@ valid_input = False
 back_to_login = False
 admin_acc = Account()
 cashier_acc = Account()
-
+import Terminal
 
 def main():
     global my_inv
@@ -33,6 +33,7 @@ def main():
 
     my_inv = DataManager.retrieve()
     admin_acc, cashier_acc = Authen.retrieve_account()
+
     Cashier.cashier()
     #Admin.admin()
     '''my_product = Inventory("CHIPS", "TORTILLOS", DateManager.get_date(), "2024-09-01", 15, 6, 90, 17, 0, 0.0, -90)
