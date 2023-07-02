@@ -35,10 +35,10 @@ class Cashier(Widget):
         i=10
         self.cols = len(array[0])
         print(Cashier.my_array[0]) #try lang
-        for row in array:
-            for element in row:
-                i=i+30
-                self.add_widget(Label(text=str(element), font_size='28',pos=(100,300+i)))
+        #for row in array:
+        for element in array:
+            i=i+30
+            self.add_widget(Label(text=str(element), font_size='28',pos=(100,300+i)))
 
 
 
