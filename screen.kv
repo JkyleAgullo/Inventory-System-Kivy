@@ -39,13 +39,9 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(143/255,195/255,31/255,1)
-
-
      #          width, height
                 size_hint: None, None
                 size: 150, 50
-
-
 
             Button:
                 id: ADD
@@ -53,12 +49,8 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
-
-
-
                 size_hint: None, None
                 size: 150, 50
-            #    on_press: root.btn()
                 on_press:
                     root.manager.transition = NoTransition()
                     root.manager.current = "second"
@@ -95,7 +87,6 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
-             #              color: 0,0,0,1
                 size_hint: None, None
                 size: 150, 340
 
@@ -165,7 +156,6 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
-     #               background_color: kivy.utils.rgba('#000000', )
                 size_hint: None, None
                 size: 150, 130
 
@@ -182,8 +172,6 @@
                     root.manager.transition = NoTransition()
                     root.manager.current = "first"
 
-
-
             Button:
                 id: ADD
                 text:"ADD"
@@ -192,9 +180,6 @@
                 background_color:(143/255,195/255,31/255,1)
                 size_hint: None, None
                 size: 150, 50
-            #    on_press: root.btn()
-
-
 
             Button:
                 id: DP
@@ -227,7 +212,6 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
-             #              color: 0,0,0,1
                 size_hint: None, None
                 size: 150, 340
 
@@ -270,7 +254,6 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
-     #               background_color: kivy.utils.rgba('#000000', )
                 size_hint: None, None
                 size: 150, 130
 
@@ -297,7 +280,6 @@
                 background_color:(0/255,0/255,0/255,.7)
                 size_hint: None, None
                 size: 150, 50
-            #    on_press: root.btn()
                 on_press:
                     root.manager.transition = NoTransition()
                     root.manager.current = "second"
@@ -308,7 +290,6 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(143/255,195/255,31/255,1)
-
                 size_hint: None, None
                 size: 150, 50
                 on_press:
@@ -376,7 +357,6 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
-     #               background_color: kivy.utils.rgba('#000000', )
                 size_hint: None, None
                 size: 150, 130
 
@@ -403,7 +383,6 @@
                 background_color:(0/255,0/255,0/255,.7)
                 size_hint: None, None
                 size: 150, 50
-            #    on_press: root.btn()
                 on_press:
                     root.manager.transition = NoTransition()
                     root.manager.current = "second"
@@ -456,7 +435,6 @@
         FloatLayout:
             id:add
             size: root.width, root.height
-
 
             Label:
                 text: 'Settings'
