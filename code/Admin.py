@@ -17,7 +17,7 @@ def admin():
     while True:
         while True:
             Terminal.clear_screen()
-            Terminal.gotoxy(19, 10)
+            Terminal.gotoxy(15, 10)
             print("=-=-= ADMIN INVENTORY =-=-=")
             Terminal.gotoxy(19, 13)
             print("(1) Add Product")
@@ -29,7 +29,7 @@ def admin():
             print("(0) Log out")
             Terminal.gotoxy(15, 22)
             print("=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-            Terminal.gotoxy(19, 25)
+            Terminal.gotoxy(15, 25)
             choice = Authen.input_validation()
             if choice != -1 or 0 <= choice <= 3:
                 break
@@ -74,7 +74,6 @@ def admin():
                 status = update_product(product, pos)
 
             # status check
-            Terminal.clear_screen()
             if status == 1:
                 Terminal.gotoxy(15, 24)
                 print("=-=-=-=-=-=-=-=-=-=-=-=-=-")
@@ -350,9 +349,9 @@ def display_expired_history():
                 selected_date = file_date[choice-1]
                 display_file(DataManager.exp_product_history_folder, selected_date)
             else:
-                Terminal.gotoxy(15, 18 + (i * 2))
+                Terminal.gotoxy(15, 22 + (i * 2))
                 print("PLEASE CHOOSE AMONG THE CHOICES ONLY")
-                Terminal.gotoxy(15, 20 + (i * 2))
+                Terminal.gotoxy(15, 24 + (i * 2))
                 input("Press enter to continue...")
 
 
@@ -364,13 +363,13 @@ def display_file(file_folder, date):
     ctr = -1
     combined_data = {}
 
-    sales_file = os.path.join(os.getcwd(), file_folder, (date + ".txt"))
+    file = os.path.join(os.getcwd(), file_folder, (date + ".txt"))
     try:
-        if not os.path.exists(sales_file):
+        if not os.path.exists(file):
             raise FileNotFoundError
         else:
             try:
-                with open(sales_file, "r") as reader:
+                with open(file, "r") as reader:
                     while True:
                         data_line = reader.readline().strip()
                         if not data_line:
@@ -391,7 +390,7 @@ def display_file(file_folder, date):
 
                             reader.readline()
 
-                    # combining the redundant product name
+                    # removing NoneType values
                     my_product = [item for item in my_product if item.name is not None]
 
                     for item in my_product:
@@ -406,24 +405,63 @@ def display_file(file_folder, date):
                             combined_data[name] = [sales_qty, profit_loss]
 
                     if ctr != -1:
-                        # removing NoneType values
                         if ctr > 0:
+                            # combining the redundant product name
                             combined_data = dict(combined_data)
                         Terminal.clear_screen()
-                        for name, item in combined_data.items():
+                        Terminal.gotoxy(15, 10)
+                        print("Product Name")
+                        Terminal.gotoxy(35, 10)
+                        print("Expired Quantity")
+                        Terminal.gotoxy(60, 10)
+                        print("Profit Loss")
+
+                        last_iteration = (len(combined_data)*2) + 5
+                        for i in range((len(combined_data)*2) + 5):
+                            i += 9
+                            if i in {9, 11, last_iteration-1+9}:
+                                for j in range(64):
+                                    Terminal.gotoxy(12+j, i)
+                                    print("-")
+                            else:
+                                Terminal.gotoxy(12, i)
+                                print("|")
+                                Terminal.gotoxy(31, i)
+                                print("|")
+                                Terminal.gotoxy(55, i)
+                                print("|")
+                                Terminal.gotoxy(75, i)
+                                print("|")
+
+                        for i, (name, item) in enumerate(combined_data.items(), start=1):
+                            Terminal.gotoxy(15, 11 + (i*2))
                             print(name.upper())
+                            Terminal.gotoxy(35, 11 + (i*2))
                             print(item[0])
-                            print(item[1], end="\n\n")
+                            Terminal.gotoxy(60, 11 + (i*2))
+                            print(item[1])
+                        Terminal.gotoxy(12, 18 + (i*2))
+                        print("-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+                        Terminal.gotoxy(12, 20 + (i*2))
+                        input("Press enter to continue...")
                     else:
                         Terminal.clear_screen()
                         Terminal.gotoxy(15, 10)
-                        print(f"SALES FILE ({date}) IS EMPTY")
-                        Terminal.gotoxy(15, 12)
+                        print("=-=-=-=-=-=-=-=-=-=-=-=-=")
+                        Terminal.gotoxy(15, 13)
+                        print(f"FILE ({file}) IS EMPTY")
+                        Terminal.gotoxy(15, 15)
                         input("Press enter to continue...")
             except Exception as e:
                 print(e)
     except FileNotFoundError:
-        print("SALES FILE NOT FOUND: ", date)
+        Terminal.clear_screen()
+        Terminal.gotoxy(15, 10)
+        print("=-=-=-=-=-=-=-=-=-=-=-=-=")
+        Terminal.gotoxy(15, 13)
+        print(f"FILE {file} NOT FOUND")
+        Terminal.gotoxy(15, 15)
+        input("Press enter to continue...")
 
 
 def settings_menu():
@@ -457,10 +495,10 @@ def settings():
             break
         elif choice == 1 or choice == 2:
             Terminal.clear_screen()
-            Terminal.gotoxy(15, 10)
             while True:
                 is_change = False
                 Terminal.clear_screen()
+                Terminal.gotoxy(15, 10)
                 if choice == 1:
                     print("=-=-= CASHIER SETTINGS =-=-=")
                 elif choice == 2:

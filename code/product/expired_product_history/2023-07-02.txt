@@ -1,0 +1,8 @@
+Product Name: KANG KONG
+Quantity: 3
+Profit Loss: 45.0
+
+Product Name: MANGO
+Quantity: 2
+Profit Loss: 30.0
+

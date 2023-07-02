@@ -1,17 +1,12 @@
-import os
-from datetime import date
 from Inventory import Inventory
 from Receipt import Receipt
 from Account import Account
-from Category import Category
 from Security import Security
-import DateManager
 import Authen
 import DataManager
 import Cashier
 import Admin
-from getpass import getpass
-fp = "D:/TUP SCHOOLWORKS/2nd Year/ACTIVITIES/2ND SEM/PROGRAMMING LANGUAGE/PL-Project-Python/pythonProject/accounts"
+import Terminal
 
 # GLOBAL VARIABLES
 MAX_INV = 100
@@ -24,27 +19,27 @@ valid_input = False
 back_to_login = False
 admin_acc = Account()
 cashier_acc = Account()
-import Terminal
 
 def main():
     global my_inv
     global admin_acc
     global cashier_acc
 
+    # set up / retrieval of data
+    Security.set_encryption_key()
     my_inv = DataManager.retrieve()
+    DataManager.del_expired_product()
     admin_acc, cashier_acc = Authen.retrieve_account()
 
-    # checker
-    Authen.login()
-    # checker
-    Cashier.cashier()
-    # checker
-    Admin.admin()
-    '''my_product = Inventory("CHIPS", "TORTILLOS", DateManager.get_date(), "2024-09-01", 15, 6, 90, 17, 0, 0.0, -90)
-    DataManager.record_product(my_product)
-    DataManager.save()'''
-
-
+    # flow of inventory system
+    while True:
+        input = Authen.login()
+        if input == 0:
+            exit()
+        elif input == 1:
+            Cashier.cashier()
+        elif input == 2:
+            Admin.admin()
 
 
 

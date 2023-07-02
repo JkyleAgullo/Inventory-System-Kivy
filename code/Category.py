@@ -19,7 +19,7 @@ class Category:
         self.fruit = 7
         self.junk_food = 1
         self.sweet = 3
-        self.vegetable = 1
+        self.vegetable = 7
 
     @staticmethod
     def get_category_length():

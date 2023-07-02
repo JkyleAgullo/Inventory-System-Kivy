@@ -41,30 +41,37 @@ def login():
         if choice == 0:
             main.back_to_login = False
             return 0
+        elif choice == -1 or choice > 2 or choice < -1:
+            Terminal.gotoxy(15, 25)
+            print("=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+            Terminal.gotoxy(15, 27)
+            print("PLEASE CHOOSE AMONG THE CHOICES ONLY")
+            Terminal.gotoxy(15, 29)
+            input("Press enter to continue...")
+        else:
+            Terminal.clear_screen()
+            Terminal.gotoxy(15, 10)
+            print("=-=-=-= LOG IN =-=-=-=")
+            Terminal.gotoxy(15, 13)
+            username = input("Enter username: ")
+            Terminal.gotoxy(15, 15)
+            password = input("Enter password: ")
 
-        Terminal.clear_screen()
-        Terminal.gotoxy(15, 10)
-        print("=-=-=-= LOG IN =-=-=-=")
-        Terminal.gotoxy(15, 13)
-        username = input("Enter username: ")
-        Terminal.gotoxy(15, 15)
-        password = input("Enter password: ")
-
-        if choice == 1:
-            if username == main.cashier_acc.get_username():
-                if password == main.cashier_acc.get_password():
-                    return 1    # if found
-        elif choice == 2:
-            if username == main.admin_acc.get_username():
-                if password == main.admin_acc.get_password():
-                    return 2    # if found
-        # if not found
-        Terminal.gotoxy(15, 18)
-        print("=-=-=-=-=-=-=-=-=-=-=-")
-        Terminal.gotoxy(15, 20)
-        print("INVALID USERNAME OR PASSWORD")
-        Terminal.gotoxy(15, 22)
-        input("Press enter to continue...")
+            if choice == 1:
+                if username == main.cashier_acc.get_username():
+                    if password == main.cashier_acc.get_password():
+                        return 1    # if found
+            elif choice == 2:
+                if username == main.admin_acc.get_username():
+                    if password == main.admin_acc.get_password():
+                        return 2    # if found
+            # if not found
+            Terminal.gotoxy(15, 18)
+            print("=-=-=-=-=-=-=-=-=-=-=-")
+            Terminal.gotoxy(15, 20)
+            print("INVALID USERNAME OR PASSWORD")
+            Terminal.gotoxy(15, 22)
+            input("Press enter to continue...")
 
 def save_account():
     admin_fp = Security.encrypt(Security.get_admin_filename(), Security.get_secret_key())

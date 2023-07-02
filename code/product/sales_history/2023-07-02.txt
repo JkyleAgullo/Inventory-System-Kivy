@@ -1,12 +1,12 @@
-Product Name: ARGENTINA
-Sales Quantity: 1
-Total Sales Amount: 58.0
+Product Name: MANGO
+Sales Quantity: 6
+Total Sales Amount: 120.0
 
-Product Name: COCA
-Sales Quantity: 5
-Total Sales Amount: 90.0
+Product Name: PIATTOS
+Sales Quantity: 7
+Total Sales Amount: 119.0
 
-Product Name: TORTILLOS
-Sales Quantity: 3
-Total Sales Amount: 51.0
+Product Name: PUREFOODS
+Sales Quantity: 2
+Total Sales Amount: 160.0
 

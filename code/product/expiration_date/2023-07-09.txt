@@ -1,0 +1,6 @@
+Product Name: KANG KONG
+Quantity: 7
+
+Product Name: MANGO
+Quantity: 5
+

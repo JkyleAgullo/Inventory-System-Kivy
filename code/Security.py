@@ -21,6 +21,7 @@ class Security:
         random_key = random.randint(1, 5)
 
         if not file_exists:
+            os.makedirs("C:/Users/ASUS/Desktop/Key")
             try:
                 with open(Security.__key_dir, "w") as file:
                     file.write(str(random_key))

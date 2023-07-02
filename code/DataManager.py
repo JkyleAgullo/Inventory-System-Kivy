@@ -7,6 +7,11 @@ import DateManager
 import Admin
 import main
 
+class ExpiredProduct:
+    def __init__(self, name=None, qty=0, profit_loss=0.0):
+        self.name = name
+        self.qty = qty
+        self.profit_loss = profit_loss
 
 inventory_dir = os.path.join(os.getcwd(), "product/inventory.txt")
 product_history_folder = "product/product_history"
@@ -21,12 +26,11 @@ ctr = 0
 
 def del_expired_product():
     inventory = [item for item in main.my_inv if item.name is not None]
-    prod_name = ""
-    prod_qty = 0
-    prod_profit_loss = 0.0
+    expired_product = [ExpiredProduct() for _ in range(main.MAX_INV)]
     current_date = DateManager.get_date()
     exp_date_product_dir = os.path.join(os.getcwd(), exp_date_product_folder, (current_date + ".txt"))
     exp_product_dir = os.path.join(os.getcwd(), exp_product_history_folder, (current_date + ".txt"))
+    ctr = -1
 
     try:
         if os.path.exists(exp_date_product_dir):
@@ -37,33 +41,40 @@ def del_expired_product():
                         break
 
                     if ":" in data_line:
+                        ctr += 1
                         colon_index = data_line.index(":")
-                        prod_name = data_line[colon_index + 1:].strip()
+                        expired_product[ctr].name = data_line[colon_index + 1:].strip()
 
                         data_line = reader.readline().strip()
                         colon_index = data_line.index(":")
-                        prod_qty = int(data_line[colon_index + 1:].strip())
+                        expired_product[ctr].qty = int(data_line[colon_index + 1:].strip())
 
                         reader.readline()
 
-                for i in range(len(inventory)):
-                    if prod_name.lower() == main.my_inv[i].name.lower():
-                        main.my_inv[i].qty -= prod_qty
-                        main.my_inv[i].total_price = main.my_inv[i].qty * main.my_inv[i].orig_price
-                        main.my_inv[i].profit -= prod_qty * main.my_inv[i].orig_price
-                        prod_profit_loss = prod_qty * main.my_inv[i].orig_price
-                        if main.my_inv[i].qty == 0:
-                            del_product(i)
-                            break
+                    # reduce data or delete if zero qty
+                    for i in range(len(inventory)):
+                        if expired_product[ctr].name.lower() == main.my_inv[i].name.lower():
+                            main.my_inv[i].qty -= expired_product[ctr].qty
+                            main.my_inv[i].total_price = main.my_inv[i].qty * main.my_inv[i].orig_price
+                            main.my_inv[i].profit -= expired_product[ctr].qty * main.my_inv[i].orig_price
+                            expired_product[ctr].profit_loss = expired_product[ctr].qty * main.my_inv[i].orig_price
+                            if main.my_inv[i].qty == 0:
+                                del_product(i)
+                                break
 
-                save()
+                # clear NoneType values
+                if ctr > -1:
+                    expired_product = [item for item in expired_product if item.name is not None]
+                    expired_product = sorted(expired_product, key=lambda x: x.name)
+                    with open(exp_product_dir, "a") as writer:
+                        for item in expired_product:
+                            writer.write("Product Name: " + item.name.upper() + "\n")
+                            writer.write("Quantity: " + str(item.qty) + "\n")
+                            writer.write("Profit Loss: " + str(item.profit_loss) + "\n\n")
+                    # save
+                    save()
 
-            with open(exp_product_dir, "a") as writer:
-                writer.write("Product Name: " + prod_name.upper() + "\n")
-                writer.write("Quantity: " + str(prod_qty) + "\n")
-                writer.write("Profit Loss: " + str(prod_profit_loss) + "\n\n")
-
-        os.remove(exp_date_product_dir)
+            #os.remove(exp_date_product_dir)
     except FileNotFoundError:
         print("PRODUCT FILE DIRECTORY DOES NOT EXIST")
 

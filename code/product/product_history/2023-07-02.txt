@@ -1,0 +1,16 @@
+Product Name: KANG KONG
+Expiration Date: 2023-07-03
+Quantity: 10
+
+Product Name: MANGO
+Expiration Date: 2023-07-09
+Quantity: 7
+
+Product Name: PIATTOS
+Expiration Date: 2024-07-02
+Quantity: 16
+
+Product Name: PUREFOODS
+Expiration Date: 2024-01-02
+Quantity: 5
+

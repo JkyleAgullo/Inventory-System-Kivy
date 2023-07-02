@@ -4,13 +4,8 @@ import Terminal
 import Authen
 import DataManager
 import main
-global total_max
-global receipt_marker
 add_another_product = False
 def cashier():
-    total_max = -1
-    receipt_marker = -1
-
     while True:
         Terminal.clear_screen()
         Terminal.gotoxy(15, 10)
@@ -36,7 +31,9 @@ def cashier():
 
 
 def punch():
+    # reset
     main.receipt_marker = -1
+    main.customer_receipt = [Receipt() for _ in range(main.MAX_INV)]
     global add_another_product
 
     while add_another_product:
@@ -110,12 +107,21 @@ def punch():
                 input("Press enter to continue...")
 
 
-    if main.receipt_marker != -1:
+    if main.receipt_marker == -1:
+        Terminal.clear_screen()
+        Terminal.gotoxy(15, 10)
+        print("=-=-=-=-=-=-=-=-=-=-=-=-=")
+        Terminal.gotoxy(15, 13)
+        print("TRANSACTION CANCELLED")
+        Terminal.gotoxy(15, 15)
+        input("Press enter to continue...")
+    else:
         Terminal.clear_screen()
         Terminal.gotoxy(15, 10)
         print("=-=-=-=-=-=-=-=-=-=-=-=-=")
         Terminal.gotoxy(15, 13)
         print("Continue Transaction?")
+        Terminal.gotoxy(15, 14)
         print("[1] Yes  [0] No")
         Terminal.gotoxy(15, 16)
         choice = Authen.input_validation()
@@ -155,32 +161,32 @@ def display_receipt():
 
     Terminal.clear_screen()
     Terminal.gotoxy(35, 14)
-    print("=-=-=-=-=-=-=-=-=-=-=-=-=-= RECEIPT =-=-=-=-=-=-=-=-=-=-=-=-=-=")
-    Terminal.gotoxy(20, 17)
+    print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-= RECEIPT =-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+    Terminal.gotoxy(35, 17)
     print("Product Name")
-    Terminal.gotoxy(38, 17)
+    Terminal.gotoxy(57, 17)
     print("Price")
-    Terminal.gotoxy(56, 17)
+    Terminal.gotoxy(71, 17)
     print("Quantity")
-    Terminal.gotoxy(74, 17)
+    Terminal.gotoxy(89, 17)
     print("Total Amount")
 
-    for item in my_receipt:
-        Terminal.gotoxy(20, 20 + i)
-        print(item.get_product_name())
-        Terminal.gotoxy(38, 20 + i)
+    for i, item in enumerate(my_receipt, start=1):
+        Terminal.gotoxy(35, 17 + i*2)
+        print(f"({i}) ", item.get_product_name())
+        Terminal.gotoxy(57, 17 + i*2)
         print(item.get_price())
-        Terminal.gotoxy(56, 20 + i)
+        Terminal.gotoxy(74, 17 + i*2)
         print(item.get_qty())
-        Terminal.gotoxy(74, 20 + i)
+        Terminal.gotoxy(91, 17 + i*2)
         print(item.get_total_price())
         overall_price += item.get_total_price()
 
     formatted_overall_price = "{:.2f}".format(round(overall_price, 2))
-    Terminal.gotoxy(20, 21 + i)
+    Terminal.gotoxy(35, 20 + i*2)
     print("Total Price: " + formatted_overall_price)
-    Terminal.gotoxy(35, 24 + i)
-    print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
-    Terminal.gotoxy(35, 27 + i)
+    Terminal.gotoxy(35, 23 + i*2)
+    print("=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=-=")
+    Terminal.gotoxy(35, 25 + i*2)
     input("Press enter to continue...")
 
