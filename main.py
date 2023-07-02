@@ -32,7 +32,7 @@ class Cashier(Widget):
 
     def Array_display(self, array):
         self.cols = len(array[0])
-
+        print(Cashier.my_array[1]) #try lang
         for row in array:
             for element in row:
                 self.add_widget(Label(text=str(element), font_size='28'))
