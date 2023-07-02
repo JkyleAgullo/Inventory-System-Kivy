@@ -1,13 +1,17 @@
 #:import NoTransition kivy.uix.screenmanager.NoTransition
 
 <WindowManager>:
+    SplashWindow:
+    LoginWindow:
     AdminDB:
     AdminADD:
     AdminDisplay:
     AdminSettings:
 
 
+
 <AdminDB>:
+    name: "adminDash"
     on_leave:
         root.ids.txt.text = ''
         root.ids.qty.text = ''
@@ -459,3 +463,85 @@
                 color: 0,0,0,1
                 size_hint: 0.2,.05
                 pos: 300,200
+
+<SplashWindow>:
+    name: "splash"
+
+    BoxLayout:
+        orientation: "vertical"
+
+        Image:
+            padding: 0
+            source: "images/splashfinal.png"
+
+        BoxLayout:
+            orientation: "vertical"
+            size_hint_y: None
+            height: dp(30)
+
+            ProgressBar:
+                id: progress_bar
+                max: 100
+                value: 0
+                size_hint_x: None
+                width: self.parent.width * 1
+                height: dp(10)
+                background_color: 0, 0, 0, 1
+
+<LoginWindow>:
+    name: "login"
+
+    BoxLayout:
+        orientation: "vertical"
+        spacing: 10
+        space_x: self.size[0]/3
+        id: main_win
+
+        BoxLayout:
+            pos_hint: {"center_x": 0.45, "center_y":0.5}
+            size_hint_y: None
+            height: 70
+            size_hint_x: None
+            canvas.before:
+                Color:
+                    rgba: 1, 1, 1, 1
+                Rectangle:
+                    pos: self.pos
+                    size: self.size
+            Image:
+                source: "images/logo.png"
+                size_hint_x: None
+                width: self.height
+            Label:
+                text: "inventrix"
+                bold: True
+                size_hint_x: None
+                color: 0, 0, 0, 1
+                font_size: 25
+        BoxLayout:
+            orientation: "vertical"
+            padding: main_win.space_x, 10
+            #spacing: 20
+            BoxLayout:
+                orientation: "vertical"
+                spacing: 10
+                size_hint_y: None
+                height: 80
+                TextInput:
+                    hint_text: "Username"
+                    multiline: False
+                TextInput:
+                    hint_text: "Password"
+                    multiline: False
+            Label:
+                id: sp
+                size_hint_y: None
+                height: 40
+            Button:
+                text: "Login"
+                size_hint_y: None
+                height: 40
+                #background_color: (0, 0, 1, 1)
+                on_release: app.root.current = "adminDash"
+            Label:
+                id: sp2
