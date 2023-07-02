@@ -30,6 +30,11 @@ class SplashWindow(Screen):
 class AdminADD(Screen):
     pass
 
+class AdminDisplay(Screen):
+    pass
+
+class AdminSettings(Screen):
+    pass
 
 class WindowManager(ScreenManager):
     pass
