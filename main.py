@@ -7,6 +7,9 @@ from kivy.core.window import Window
 from kivy.uix.screenmanager import ScreenManager, Screen, NoTransition
 from kivy.clock import Clock
 from kivy.uix.progressbar import ProgressBar
+from kivymd.app import MDApp
+from kivymd.uix.textfield import MDTextField
+from kivymd.icon_definitions import md_icons
 
 
 class AdminDB(Screen):
@@ -28,7 +31,7 @@ class SplashWindow(Screen):
         if value >= 100:
             app = App.get_running_app()
             app.root.transition = NoTransition()
-            app.root.current = "login"
+            app.root.current = "mdcard"
 
 
 class LoginWindow(Screen):
@@ -39,18 +42,40 @@ class AdminADD(Screen):
     pass
 
 
+class AdminDisplay(Screen):
+    pass
+
+
+class AdminSettings(Screen):
+    pass
+
+
 class WindowManager(ScreenManager):
     pass
 
 
-kv = Builder.load_file("screen.kv")
+class AdminLoginTry(Screen):
+    def clear(self):
+        self.ids.user.text = ""
+        self.ids.password.text = ""
 
 
-class MyApp(App):
+
+Builder.load_file('screen.kv')
+
+
+# Builder.load_file('Mainpanel.kv')
+
+class MyApp(MDApp):
     def build(self):
         Window.clearcolor = (1, 1, 1, 1)
         Window.size = (1080, 720)
-        return kv
+        self.title = 'Inventory Admin'
+        self.theme_cls.theme_style = "Dark"
+        self.theme_cls.primary_palette = "Cyan"
+        return WindowManager()
+
+    #    return AdminADD()
 
     def on_start(self):
         # Schedule the progress bar updates
@@ -59,7 +84,7 @@ class MyApp(App):
     def update_progress_bar(self, dt):
         # Increment the progress bar value
         current_value = self.root.get_screen('splash').ids.progress_bar.value
-        new_value = current_value + 1
+        new_value = current_value + 50
         self.root.get_screen('splash').update_progress(new_value)
         if new_value >= 100:
             # Stop the progress bar updates when the value reaches 100
