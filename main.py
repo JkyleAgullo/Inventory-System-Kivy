@@ -24,9 +24,6 @@ my_inv = [Inventory() for _ in range(MAX_INV)]
 customer_receipt = [Receipt() for _ in range(MAX_INV)]
 
 class Cashier(Widget):
-
-    price = my_inv[1].retail_price
-    print(price)
     product_name= StringProperty("try")
     name = ObjectProperty(None)
     qty = ObjectProperty(None)
@@ -104,10 +101,10 @@ def is_full():
     else:
         return 0
 
-def locate_product(product):
+def locate_product(name):
     inventory = [item for item in my_inv if item.name is not None]
     for i in range(len(inventory)):
-        if inventory[i].name.lower() == product.name.lower():
+        if inventory[i].name.lower() == name.lower():
             return i
     return -1
 
