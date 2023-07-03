@@ -1,3 +1,6 @@
+import DataManager
+from Receipt import Receipt
+from Inventory import Inventory
 from kivy.config import Config
 Config.set('graphics', 'resizable', False)
 import kivy.utils
@@ -12,9 +15,18 @@ from kivymd.uix.datatables import MDDataTable
 from kivy.uix.label import Label
 
 
-
+# GLOBAL VARIABLES
+MAX_INV = 100
+MAX_PROD_STOCK = 50
+marker = -1
+receipt_marker = -1
+my_inv = [Inventory() for _ in range(MAX_INV)]
+customer_receipt = [Receipt() for _ in range(MAX_INV)]
 
 class Cashier(Widget):
+
+    price = my_inv[1].retail_price
+    print(price)
     product_name= StringProperty("try")
     name = ObjectProperty(None)
     qty = ObjectProperty(None)
@@ -22,7 +34,7 @@ class Cashier(Widget):
     Builder.load_file('cashier.kv')
     def name_validate(self,widget):
         self.product_name = widget.text
-
+        self.add_widget(Label(text=str(my_inv[1].orig_price), font_size='20',pos=(50,4000),color=(0, 0, 0, 1)))
 
     def qty_validate(self, widget):
         self.qty_input_string = widget.text
@@ -70,8 +82,33 @@ class MyApp(App):
         return Cashier()
     #    return AdminADD()
 
+def main():
+    global my_inv
+    my_inv = DataManager.retrieve()
+    print("done main")
+
+def is_full():
+    inventory = [item for item in my_inv if item is not None]
+    if len(inventory) == MAX_INV - 1:
+        return 1
+    else:
+        return 0
+
+def locate_product(product):
+    inventory = [item for item in my_inv if item.name is not None]
+    for i in range(len(inventory)):
+        if inventory[i].name.lower() == product.name.lower():
+            return i
+    return -1
+
+def locate_product_receipt(product):
+    receipt = [item for item in customer_receipt if item.get_product_name() is not None]
+    for i in range(len(receipt)):
+        if receipt[i].get_product_name().lower() == product.get_product_name().lower():
+            return i
+    return -1
 
 
-
-MyApp().run()
-#Try().run()
+if __name__ == "__main__":
+    main()
+    MyApp().run()
