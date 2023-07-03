@@ -34,7 +34,10 @@ class Cashier(Widget):
     Builder.load_file('cashier.kv')
     def name_validate(self,widget):
         self.product_name = widget.text
-        self.add_widget(Label(text=str(my_inv[1].orig_price), font_size='20',pos=(50,4000),color=(0, 0, 0, 1)))
+        name = self.name.text
+        inventory_pos = locate_product(name) #product dapat ung ipapasa, if nme palitn mo ung nsa locate function to name
+        self.add_widget(
+            Label(text=str(my_inv[inventory_pos].orig_price), font_size='20', pos=(50, 400), color=(0, 0, 1, 1)))
 
     def qty_validate(self, widget):
         self.qty_input_string = widget.text
@@ -43,12 +46,13 @@ class Cashier(Widget):
     my_array = ['Product Name']
     my_array2 = ['Quantity']
     price_array = ['Price']
-    def btn(self):
+    def btn(self): #punch button
         Cashier.my_array.append(self.name.text)
         Cashier.my_array2.append(self.qty.text)
-        prod_name = self.name.text
+        name = self.name.text
+        #locate the prodname
 
-        print(prod_name)
+        print(name)
 
     def Array_display(self, array):
         i=10
@@ -86,6 +90,8 @@ def main():
     global my_inv
     my_inv = DataManager.retrieve()
     print("done main")
+    price = my_inv[1].retail_price
+    print(price)
 
 def is_full():
     inventory = [item for item in my_inv if item is not None]
