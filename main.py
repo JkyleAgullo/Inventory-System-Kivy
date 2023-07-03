@@ -10,6 +10,7 @@ from kivy.uix.progressbar import ProgressBar
 
 
 class AdminDB(Screen):
+
     text_input_string = StringProperty("try")
     qty_input_string = StringProperty("1")
 
@@ -38,19 +39,25 @@ class LoginWindow(Screen):
 class AdminADD(Screen):
     pass
 
+class AdminDisplay(Screen):
+    pass
+
+class AdminSettings(Screen):
+    pass
 
 class WindowManager(ScreenManager):
     pass
 
-
-kv = Builder.load_file("screen.kv")
-
+Builder.load_file('screen.kv')
+#Builder.load_file('Mainpanel.kv')
 
 class MyApp(App):
     def build(self):
         Window.clearcolor = (1, 1, 1, 1)
         Window.size = (1080, 720)
-        return kv
+        self.title = 'Inventory Admin'
+        return WindowManager()
+    #    return AdminADD()
 
     def on_start(self):
         # Schedule the progress bar updates
