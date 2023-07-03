@@ -9,7 +9,8 @@ admin - settings
 admin - dashboard
 """
 
-
+from kivy.config import Config
+Config.set('graphics', 'resizable', False)
 import kivy.utils
 from kivy.lang import Builder
 from kivy.properties import StringProperty
@@ -77,7 +78,7 @@ class MyApp(App):
     def update_progress_bar(self, dt):
         # Increment the progress bar value
         current_value = self.root.get_screen('splash').ids.progress_bar.value
-        new_value = current_value + 50
+        new_value = current_value + 2
         self.root.get_screen('splash').update_progress(new_value)
         if new_value >= 100:
             # Stop the progress bar updates when the value reaches 100
