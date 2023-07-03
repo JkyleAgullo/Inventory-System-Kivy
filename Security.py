@@ -1,8 +1,9 @@
 import os
 import random
 
+
 class Security:
-    __key_dir = "C:/Users/ASUS/Desktop/Key/key.txt"
+    __key_dir = "C:/Users/Jkyle Agullo/Desktop/key.txt"
     __admin_fp = "adminacc"
     __cashier_fp = "cashieracc"
     previous_key = None
@@ -27,7 +28,6 @@ class Security:
             except Exception as e:
                 print("Exception occurred during file creating: ", e)
 
-
     def change_secret_key(self, my_secret_key):
         old_admin_fp = self.encrypt(Security.get_admin_filename(), self.get_secret_key())
         old_cashier_fp = self.encrypt(Security.get_cashier_filename(), self.get_secret_key())
@@ -39,8 +39,10 @@ class Security:
         new_admin_fp = self.encrypt(Security.get_admin_filename(), self.get_secret_key())
         new_cashier_fp = self.encrypt(Security.get_cashier_filename(), self.get_secret_key())
 
-        self.rename_file(os.path.join(os.getcwd(), "accounts", (old_admin_fp + ".txt")), os.path.join(os.getcwd(), "accounts", (new_admin_fp + ".txt")))
-        self.rename_file(os.path.join(os.getcwd(), "accounts", (old_cashier_fp + ".txt")), os.path.join(os.getcwd(), "accounts", (new_cashier_fp + ".txt")))
+        self.rename_file(os.path.join(os.getcwd(), "accounts", (old_admin_fp + ".txt")),
+                         os.path.join(os.getcwd(), "accounts", (new_admin_fp + ".txt")))
+        self.rename_file(os.path.join(os.getcwd(), "accounts", (old_cashier_fp + ".txt")),
+                         os.path.join(os.getcwd(), "accounts", (new_cashier_fp + ".txt")))
 
     @staticmethod
     def get_secret_key():
@@ -83,6 +85,3 @@ class Security:
             print("File Not Found")
         except Exception as e:
             print("Exception occurred during file renaming: ", e)
-
-
-
