@@ -1,0 +1,16 @@
+Product Name: OISHI
+Quantity: 3
+Profit Loss: 45.0
+
+Product Name: OISHI
+Quantity: 3
+Profit Loss: 45.0
+
+Product Name: PIATTOS
+Quantity: 5
+Profit Loss: 75.0
+
+Product Name: OISHI
+Quantity: 3
+Profit Loss: 45.0
+
