@@ -9,18 +9,12 @@
     AdminLoginTry:
 
 <AdminDB>:
-    name: "adminDB"
-    on_leave:
-        root.ids.txt.text = ''
-        root.ids.qty.text = ''
-        #you also need to clear the object where the input is stored, refer to your bookmarked link
     name:"first"
     GridLayout:
         cols:2
         size: root.width, root.height
 
         GridLayout:
-            spacing: 10
             cols: 1
             size_hint: 0.2,1
 
@@ -35,6 +29,7 @@
             Button:
                 id: DB
                 text:"DASHBOARD"
+                bold: True
                 background_normal: ''
                 background_down: ''
                 color: 1,1,1,1
@@ -45,10 +40,12 @@
             Button:
                 id: ADD
                 text:"ADD"
+                bold: True
                 color: 1,1,1,1
                 background_normal: ''
                 background_down: ''
-                background_color:(143/255,195/255,31/255,1)
+                #background_color:(143/255,195/255,31/255,1)
+                background_color: 0,0,0,1
                 size_hint: None, None
                 size: 150, 50
                 on_press:
@@ -59,10 +56,12 @@
             Button:
                 id: DP
                 text:"DISPLAY"
+                bold: True
                 color: 1,1,1,1
                 background_normal: ''
                 background_down: ''
-                background_color:(143/255,195/255,31/255,1)
+                #background_color:(143/255,195/255,31/255,1)
+                background_color: 0,0,0,1
                 size_hint: None, None
                 size: 150, 50
                 on_press:
@@ -72,10 +71,12 @@
             Button:
                 id: ST
                 text:"SETTING"
+                bold: True
                 color: 1,1,1,1
                 background_normal: ''
                 background_down: ''
-                background_color:(143/255,195/255,31/255,1)
+                #background_color:(143/255,195/255,31/255,1)
+                background_color: 0,0,0,1
                 size_hint: None, None
                 size: 150, 50
                 on_press:
@@ -87,36 +88,105 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
-             #              color: 0,0,0,1
                 size_hint: None, None
-                size: 150, 340
+                size: 150, 520
 
             Button:
                 id: LOGOUT
                 text:"LOGOUT"
+                bold: True
                 color: 1,1,1,1
                 background_normal: ''
                 background_down: ''
-                background_color:(143/255,195/255,31/255,1)
+                #background_color:(143/255,195/255,31/255,1)
+                background_color: 0,0,0,1
                 size_hint: None, None
                 size: 150, 50
 
         FloatLayout:
-            id:dashboard
+            id: adminDashboard
+            size: root.width, root.height
 
             Label:
-                text: "Add Product"
-
-            Label:
-                text: "Product Name"
-
-            Label:
-                text: "Product "
-            Button:
-                text: "Add Product"
-                pos_hint: {"x": 0.2, "y": 0.4}
-                size: 150, 80
+                text:"Welcome, Admin"
+                font_size: 35
                 size_hint: None, None
+                pos_hint: {"x": 0.0220, "y": 0.88}
+                bold: True
+
+            Label:
+                text: root.current_datetime
+                font_size: 20
+                size_hint: None, None
+                pos_hint: {"x": 0.88, "y": 0.88}
+
+            # todo: largest stock, best selling, lowest stock,
+
+            Label:
+                text: "Largest Stock"
+                font_size: 30
+                size_hint: None, None
+                pos_hint: {"x": 0.050, "y": 0.5}
+                bold: True
+
+            MDIcon:
+                icon: "food-apple"
+                size_hint: None, None
+                size: "150dp", "150dp"
+                pos_hint: {"x": 0.07, "y": 0.47}
+                font_size: 50
+
+            Label:
+                text: "Vegetables"
+                font_size: 50
+                size_hint: None, None
+                pos_hint: {"x": 0.050, "y": 0.6}
+                bold: True
+
+            Label:
+                text: "Best Selling"
+                font_size: 30
+                size_hint: None, None
+                pos_hint: {"x": 0.4, "y": 0.5}
+                bold: True
+
+            MDIcon:
+                icon: "cash"
+                size_hint: None, None
+                size: "150dp", "150dp"
+                pos_hint: {"x": 0.425, "y": 0.47}
+                font_size: 50
+
+            Label:
+                text: "Junk Foods"
+                font_size: 50
+                size_hint: None, None
+                pos_hint: {"x": 0.4, "y": 0.6}
+                bold: True
+
+            Label:
+                text: "Lowest Stock"
+                font_size: 30
+                size_hint: None, None
+                pos_hint: {"x": 0.75, "y": 0.5}
+                bold: True
+
+            MDIcon:
+                icon: "hamburger"
+                size_hint: None, None
+                size: "150dp", "150dp"
+                pos_hint: {"x": 0.770, "y": 0.47}
+                font_size: 50
+
+            Label:
+                text: "Drinks"
+                font_size: 50
+                size_hint: None, None
+                pos_hint: {"x": 0.75, "y": 0.6}
+                bold: True
+
+
+
 <AdminADD>:
     name:"second"
     GridLayout:
@@ -132,40 +202,36 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
-     #               background_color: kivy.utils.rgba('#000000', )
                 size_hint: None, None
                 size: 150, 130
 
             Button:
                 id: DB
                 text:"DASHBOARD"
+                bold: True
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
-     #              width, height
                 size_hint: None, None
                 size: 150, 50
                 on_press:
                     root.manager.transition = NoTransition()
                     root.manager.current = "first"
 
-
-
             Button:
                 id: ADD
                 text:"ADD"
+                bold: True
                 background_normal: ''
                 background_down: ''
                 background_color:(143/255,195/255,31/255,1)
                 size_hint: None, None
                 size: 150, 50
-            #    on_press: root.btn()
-
-
 
             Button:
                 id: DP
                 text:"DISPLAY"
+                bold: True
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
@@ -179,6 +245,7 @@
             Button:
                 id: ST
                 text:"SETTING"
+                bold: True
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
@@ -194,13 +261,13 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
-             #              color: 0,0,0,1
                 size_hint: None, None
-                size: 150, 340
+                size: 150, 520
 
             Button:
                 id: LOGOUT
                 text:"LOGOUT"
+                bold: True
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
@@ -212,15 +279,39 @@
             id:add
             size: root.width, root.height
 
-            Button:
-                text: 'weh'
-                size_hint: 0.2,.05
-                pos_hint: {"x":.3,"y":.7}
             Label:
-                text: 'Add'
-                color: 1,1,1,1
-                size_hint: 0.2,.05
-                pos: 300,200
+                text: root.current_datetime
+                font_size: 20
+                size_hint: None, None
+                pos_hint: {"x": 0.88, "y": 0.88}
+
+            Label:
+                text:"Add Product"
+                font_size: 35
+                size_hint: None, None
+                pos_hint: {"x": 0.0220, "y": 0.88}
+                bold: True
+
+            Label:
+                text: "Product Category"
+                pos_hint: {"x": 0.013, "y": 0.770}
+                font_size: 24
+                size_hint: None, None
+
+            Label:
+                text: "Product Name"
+                pos_hint: {"x": 0.013, "y": 0.720}
+                font_size: 24
+                size_hint: None, None
+
+            Label:
+                text: "Price"
+
+            Label:
+                text: "Quantity"
+
+            Label:
+                text: "Retail Price"
 
 
 <AdminDisplay>:
@@ -238,34 +329,31 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
-     #               background_color: kivy.utils.rgba('#000000', )
                 size_hint: None, None
                 size: 150, 130
 
             Button:
                 id: DB
                 text:"DASHBOARD"
+                bold: True
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
-     #              width, height
                 size_hint: None, None
                 size: 150, 50
                 on_press:
                     root.manager.transition = NoTransition()
                     root.manager.current = "first"
 
-
-
             Button:
                 id: ADD
                 text:"ADD"
+                bold: True
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
                 size_hint: None, None
                 size: 150, 50
-            #    on_press: root.btn()
                 on_press:
                     root.manager.transition = NoTransition()
                     root.manager.current = "second"
@@ -273,6 +361,7 @@
             Button:
                 id: DP
                 text:"DISPLAY"
+                bold: True
                 background_normal: ''
                 background_down: ''
                 background_color:(143/255,195/255,31/255,1)
@@ -286,6 +375,7 @@
             Button:
                 id: ST
                 text:"SETTING"
+                bold: True
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
@@ -301,13 +391,13 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
-             #              color: 0,0,0,1
                 size_hint: None, None
-                size: 150, 340
+                size: 150, 520
 
             Button:
                 id: LOGOUT
                 text:"LOGOUT"
+                bold: True
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
@@ -318,6 +408,18 @@
         FloatLayout:
             id:add
             size: root.width, root.height
+
+            Label:
+                text: root.current_datetime
+                font_size: 20
+                size_hint: None, None
+                pos_hint: {"x": 0.88, "y": 0.88}
+
+            Label:
+                text: root.current_datetime
+                font_size: 20
+                size_hint: None, None
+                pos_hint: {"x": 0.88, "y": 0.88}
 
             Button:
                 text: 'weh'
@@ -344,17 +446,16 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
-     #               background_color: kivy.utils.rgba('#000000', )
                 size_hint: None, None
                 size: 150, 130
 
             Button:
                 id: DB
                 text:"DASHBOARD"
+                bold: True
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
-     #              width, height
                 size_hint: None, None
                 size: 150, 50
                 on_press:
@@ -366,12 +467,12 @@
             Button:
                 id: ADD
                 text:"ADD"
+                bold: True
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
                 size_hint: None, None
                 size: 150, 50
-            #    on_press: root.btn()
                 on_press:
                     root.manager.transition = NoTransition()
                     root.manager.current = "second"
@@ -379,6 +480,7 @@
             Button:
                 id: DP
                 text:"DISPLAY"
+                bold: True
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
@@ -392,6 +494,7 @@
             Button:
                 id: ST
                 text:"SETTING"
+                bold: True
                 background_normal: ''
                 background_down: ''
                 background_color:(143/255,195/255,31/255,1)
@@ -407,13 +510,13 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
-             #              color: 0,0,0,1
                 size_hint: None, None
-                size: 150, 340
+                size: 150, 520
 
             Button:
                 id: LOGOUT
                 text:"LOGOUT"
+                bold: True
                 background_normal: ''
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
@@ -424,6 +527,12 @@
         FloatLayout:
             id:add
             size: root.width, root.height
+
+            Label:
+                text: root.current_datetime
+                font_size: 20
+                size_hint: None, None
+                pos_hint: {"x": 0.88, "y": 0.88}
 
 
             Label:

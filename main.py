@@ -1,3 +1,4 @@
+from datetime import datetime
 import kivy.utils
 from kivy.lang import Builder
 from kivy.properties import StringProperty
@@ -13,17 +14,11 @@ from kivymd.icon_definitions import md_icons
 
 
 class AdminDB(Screen):
-    #todo: design admin dashboard
-    text_input_string = StringProperty("try")
-    qty_input_string = StringProperty("1")
+    # todo: design admin dashboard
+    current_datetime = StringProperty("")
 
-    # insert the string property of the price of the product for printing
-
-    def text_validate(self, widget):
-        self.text_input_string = widget.text
-
-    def qty_validate(self, widget):
-        self.qty_input_string = widget.text
+    def update_datetime(self):
+        self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
 
 
 class SplashWindow(Screen):
@@ -36,18 +31,27 @@ class SplashWindow(Screen):
 
 
 class AdminADD(Screen):
-    #todo: add design to admin add
-    pass
+    # todo: add design to admin add
+    current_datetime = StringProperty("")
+
+    def update_datetime(self):
+        self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
 
 
 class AdminDisplay(Screen):
-    #todo: add design to display
-    pass
+    # todo: add design to display
+    current_datetime = StringProperty("")
+
+    def update_datetime(self):
+        self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
 
 
 class AdminSettings(Screen):
-    #todo: add design to settings
-    pass
+    # todo: add design to settings
+    current_datetime = StringProperty("")
+
+    def update_datetime(self):
+        self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
 
 
 class WindowManager(ScreenManager):
@@ -79,6 +83,14 @@ class MyApp(MDApp):
     def on_start(self):
         # Schedule the progress bar updates
         Clock.schedule_interval(self.update_progress_bar, 0.1)
+
+        Clock.schedule_interval(self.update_datetime, 1)
+
+    def update_datetime(self, dt):
+        self.root.get_screen('first').update_datetime()
+        self.root.get_screen('second').update_datetime()
+        self.root.get_screen('third').update_datetime()
+        self.root.get_screen('fourth').update_datetime()
 
     def update_progress_bar(self, dt):
         # Increment the progress bar value
