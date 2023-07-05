@@ -13,6 +13,7 @@ from kivymd.icon_definitions import md_icons
 
 
 class AdminDB(Screen):
+    #todo: design admin dashboard
     text_input_string = StringProperty("try")
     qty_input_string = StringProperty("1")
 
@@ -31,22 +32,21 @@ class SplashWindow(Screen):
         if value >= 100:
             app = App.get_running_app()
             app.root.transition = NoTransition()
-            app.root.current = "mdcard"
-
-
-class LoginWindow(Screen):
-    pass
+            app.root.current = "login"
 
 
 class AdminADD(Screen):
+    #todo: add design to admin add
     pass
 
 
 class AdminDisplay(Screen):
+    #todo: add design to display
     pass
 
 
 class AdminSettings(Screen):
+    #todo: add design to settings
     pass
 
 
@@ -58,7 +58,6 @@ class AdminLoginTry(Screen):
     def clear(self):
         self.ids.user.text = ""
         self.ids.password.text = ""
-
 
 
 Builder.load_file('screen.kv')
