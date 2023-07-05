@@ -2,17 +2,14 @@
 
 <WindowManager>:
     SplashWindow:
-    LoginWindow:
     AdminDB:
     AdminADD:
     AdminDisplay:
     AdminSettings:
     AdminLoginTry:
 
-
-
 <AdminDB>:
-    name: "first"
+    name: "adminDB"
     on_leave:
         root.ids.txt.text = ''
         root.ids.qty.text = ''
@@ -23,10 +20,11 @@
         size: root.width, root.height
 
         GridLayout:
+            spacing: 10
             cols: 1
             size_hint: 0.2,1
 
-            Button:
+            Button: # Empty Button
                 text:""
                 background_normal: ''
                 background_down: ''
@@ -39,27 +37,20 @@
                 text:"DASHBOARD"
                 background_normal: ''
                 background_down: ''
+                color: 1,1,1,1
                 background_color:(143/255,195/255,31/255,1)
-
-
-     #          width, height
                 size_hint: None, None
                 size: 150, 50
-
-
 
             Button:
                 id: ADD
                 text:"ADD"
+                color: 1,1,1,1
                 background_normal: ''
                 background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-
-
-
+                background_color:(143/255,195/255,31/255,1)
                 size_hint: None, None
                 size: 150, 50
-            #    on_press: root.btn()
                 on_press:
                     root.manager.transition = NoTransition()
                     root.manager.current = "second"
@@ -68,10 +59,10 @@
             Button:
                 id: DP
                 text:"DISPLAY"
+                color: 1,1,1,1
                 background_normal: ''
                 background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-
+                background_color:(143/255,195/255,31/255,1)
                 size_hint: None, None
                 size: 150, 50
                 on_press:
@@ -81,10 +72,10 @@
             Button:
                 id: ST
                 text:"SETTING"
+                color: 1,1,1,1
                 background_normal: ''
                 background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-
+                background_color:(143/255,195/255,31/255,1)
                 size_hint: None, None
                 size: 150, 50
                 on_press:
@@ -103,10 +94,10 @@
             Button:
                 id: LOGOUT
                 text:"LOGOUT"
+                color: 1,1,1,1
                 background_normal: ''
                 background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-                #color: 0,0,0,1
+                background_color:(143/255,195/255,31/255,1)
                 size_hint: None, None
                 size: 150, 50
 
@@ -118,7 +109,7 @@
                 id: txt
                 #text: "hi"
                 size_hint: 0.2,.05
-                pos_hint: {"x":.5,"y":.5}
+                pos_hint: {"x":.2,"y":.5}
                 multiline: False
                 on_text_validate: root.text_validate(self)
             TextInput:
@@ -130,15 +121,15 @@
                 on_text_validate: root.qty_validate(self)
             Label:
                 text: root.text_input_string
-                color: 0,0,0,1
+                color: 1,1,1,1
             Label:
                 text: root.qty_input_string
-                color: 0,0,0,1
+                color: 1,1,1,1
                 size_hint: 0.2,.05
                 pos_hint: {"x":.3,"y":.6}
             Label:
                 text: 'Dashboard'
-                color: 0,0,0,1
+                color: 1,1,1,1
                 size_hint: 0.2,.05
                 pos: 300,200
 
@@ -252,9 +243,10 @@
                 pos_hint: {"x":.3,"y":.7}
             Label:
                 text: 'Add'
-                color: 0,0,0,1
+                color: 1,1,1,1
                 size_hint: 0.2,.05
                 pos: 300,200
+
 
 <AdminDisplay>:
     name:"third"
@@ -498,67 +490,8 @@
                 width: self.parent.width * 1
                 height: dp(10)
 
-
-<LoginWindow>:
-    name: "login"
-
-    BoxLayout:
-        orientation: "vertical"
-        spacing: 10
-        space_x: self.size[0]/3
-        id: main_win
-
-        BoxLayout:
-            pos_hint: {"center_x": 0.45, "center_y":0.5}
-            size_hint_y: None
-            height: 70
-            size_hint_x: None
-            canvas.before:
-                Color:
-                    rgba: 1, 1, 1, 1
-                Rectangle:
-                    pos: self.pos
-                    size: self.size
-            Image:
-                source: "images/logo.png"
-                size_hint_x: None
-                width: self.height
-            Label:
-                text: "inventrix"
-                bold: True
-                size_hint_x: None
-                color: 0, 0, 0, 1
-                font_size: 25
-        BoxLayout:
-            orientation: "vertical"
-            padding: main_win.space_x, 10
-            #spacing: 20
-            BoxLayout:
-                orientation: "vertical"
-                spacing: 10
-                size_hint_y: None
-                height: 80
-                TextInput:
-                    hint_text: "Username"
-                    multiline: False
-                TextInput:
-                    hint_text: "Password"
-                    multiline: False
-            Label:
-                id: sp
-                size_hint_y: None
-                height: 40
-            Button:
-                text: "Login"
-                size_hint_y: None
-                height: 40
-                #background_color: (0, 0, 1, 1)
-                on_release: root.manager.current = "first"
-            Label:
-                id: sp2
-
 <AdminLoginTry>:
-    name: "mdcard"
+    name: "login"
 
     MDCard:
         size_hint: None, None

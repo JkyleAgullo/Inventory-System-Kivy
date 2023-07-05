@@ -11,8 +11,9 @@ import DataManager
 import Cashier
 import Admin
 from getpass import getpass
-#fp = "D:/TUP SCHOOLWORKS/2nd Year/ACTIVITIES/2ND SEM/PROGRAMMING LANGUAGE/PL-Project-Python/pythonProject/accounts"
-fp ="C:/Users/Matthew/PycharmProjects/Inventory_kivy/code/accounts"
+
+# fp = "D:/TUP SCHOOLWORKS/2nd Year/ACTIVITIES/2ND SEM/PROGRAMMING LANGUAGE/PL-Project-Python/pythonProject/accounts"
+fp = "D:/SCHOOL/1 TUP FILES/2ND YEAR/2ND SEM/PL Python/PYTHON/Inventory-System-Kivy/accounts"
 
 # GLOBAL VARIABLES
 MAX_INV = 100
@@ -26,6 +27,7 @@ back_to_login = False
 admin_acc = Account()
 cashier_acc = Account()
 import Terminal
+
 
 def main():
     global my_inv
@@ -46,9 +48,6 @@ def main():
     DataManager.save()'''
 
 
-
-
-
 def is_full():
     inventory = [item for item in my_inv if item is not None]
     if len(inventory) == MAX_INV - 1:
@@ -56,12 +55,14 @@ def is_full():
     else:
         return 0
 
+
 def locate_product(product):
     inventory = [item for item in my_inv if item.name is not None]
     for i in range(len(inventory)):
         if inventory[i].name.lower() == product.name.lower():
             return i
     return -1
+
 
 def locate_product_receipt(product):
     receipt = [item for item in customer_receipt if item.get_product_name() is not None]
@@ -73,4 +74,3 @@ def locate_product_receipt(product):
 
 if __name__ == '__main__':
     main()
-
