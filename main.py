@@ -51,6 +51,7 @@ class SplashWindow(Screen):
 
 class AdminADD(Screen):
     product = Inventory()
+    global marker
     # todo: add design to admin add
 
     current_datetime = StringProperty("")
@@ -78,7 +79,7 @@ class AdminADD(Screen):
         AdminADD.product.exp_date = DateManager.set_get_expiration_date(AdminADD.product.category)
         AdminADD.product.total_price = AdminADD.product.qty * AdminADD.product.orig_price
 
-        pos = main.locate_product(AdminADD.product)
+        pos = locate_product(AdminADD.product)
         if pos == -1:
             AdminADD.product.sales_qty = 0
             AdminADD.product.total_sales_amount = 0
@@ -105,21 +106,22 @@ class AdminADD(Screen):
         self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
 
     def add_product(product):
-        if main.is_full() == 1:
+        global marker
+        if is_full() == 1:
             popup_content = Label(text="INVENTORY FULL")
             popup = Popup(title='WARNING', content=popup_content, size_hint=(None, None), size=(400, 200))
             popup.open()
 
         else:
-            if product.qty <= main.MAX_PROD_STOCK:
-                main.marker += 1
+            if product.qty <= MAX_PROD_STOCK:
+                marker += 1
                 inventory_data = Inventory(
                     product.category, product.name, product.date,
                     product.exp_date, product.orig_price, product.qty,
                     product.total_price, product.retail_price, product.sales_qty,
                     product.total_sales_amount, product.profit
                 )
-                main.my_inv[main.marker] = inventory_data
+                my_inv[marker] = inventory_data
                 return 1
             else:
                 popup_content = Label(text="QUANTITY EXCEEDED")
@@ -129,17 +131,17 @@ class AdminADD(Screen):
         return -1
 
     def update_product(product, index_pos):
-        if (main.my_inv[index_pos].qty + product.qty) > main.MAX_PROD_STOCK:
-            print("QUANTITY LIMIT EXCEEDED FOR: " + main.my_inv[index_pos].name)
+        if (my_inv[index_pos].qty + product.qty) > MAX_PROD_STOCK:
+            print("QUANTITY LIMIT EXCEEDED FOR: " + my_inv[index_pos].name)
             return -1
         else:
-            main.my_inv[index_pos].date = product.date
-            main.my_inv[index_pos].exp_date = product.exp_date
-            main.my_inv[index_pos].orig_price = product.orig_price
-            main.my_inv[index_pos].qty += product.qty
-            main.my_inv[index_pos].total_price = product.orig_price * main.my_inv[index_pos].qty
-            main.my_inv[index_pos].retail_price = product.retail_price
-            main.my_inv[index_pos].profit -= product.qty * product.orig_price
+            my_inv[index_pos].date = product.date
+            my_inv[index_pos].exp_date = product.exp_date
+            my_inv[index_pos].orig_price = product.orig_price
+            my_inv[index_pos].qty += product.qty
+            my_inv[index_pos].total_price = product.orig_price * my_inv[index_pos].qty
+            my_inv[index_pos].retail_price = product.retail_price
+            my_inv[index_pos].profit -= product.qty * product.orig_price
             return 1
 
 
@@ -227,6 +229,12 @@ def locate_product_receipt(product):
         if receipt[i].get_product_name().lower() == product.get_product_name().lower():
             return i
     return -1
+def main():
+    global my_inv
+    my_inv = DataManager.retrieve()
+    #print("done main")
+
+
 
 
 if __name__ == "__main__":
