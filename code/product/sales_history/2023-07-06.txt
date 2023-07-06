@@ -1,0 +1,16 @@
+Product Name: ARGENTINA
+Sales Quantity: 4
+Total Sales Amount: 220.0
+
+Product Name: COCA COLA
+Sales Quantity: 4
+Total Sales Amount: 52.0
+
+Product Name: KANG KONG
+Sales Quantity: 4
+Total Sales Amount: 80.0
+
+Product Name: MANGO
+Sales Quantity: 1
+Total Sales Amount: 20.0
+

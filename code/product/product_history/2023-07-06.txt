@@ -1,0 +1,12 @@
+Product Name: ARGENTINA
+Expiration Date: 2024-01-06
+Quantity: 88
+
+Product Name: COCA
+Expiration Date: 2024-01-06
+Quantity: 3
+
+Product Name: COCA COLA
+Expiration Date: 2024-01-06
+Quantity: 32
+

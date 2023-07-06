@@ -2,6 +2,7 @@ import os
 from datetime import date
 from Inventory import Inventory
 from Category import Category
+from Security import Security
 from Receipt import Receipt
 import DateManager
 import Admin
@@ -13,7 +14,7 @@ class ExpiredProduct:
         self.qty = qty
         self.profit_loss = profit_loss
 
-inventory_dir = os.path.join(os.getcwd(), "product/inventory.txt")
+inventory_folder = "product"
 product_history_folder = "product/product_history"
 exp_product_history_folder = "product/expired_product_history"
 exp_date_product_folder = "product/expiration_date"
@@ -266,6 +267,7 @@ def record_sales(product):
 
 def retrieve():
     my_product = Inventory()
+    inventory_dir = os.path.join(os.getcwd(), inventory_folder, (Security.encrypt(Security.get_inventory_filename(), Security.get_secret_key()) + ".txt"))
 
     try:
         if os.path.exists(inventory_dir):
@@ -276,21 +278,32 @@ def retrieve():
                         break
 
                     my_product.category = data_line
+                    my_product.category = Security.decrypt(my_product.category, Security.get_secret_key())
                     my_product.name = reader.readline().strip()
+                    my_product.name = Security.decrypt(my_product.name, Security.get_secret_key())
                     my_product.date = reader.readline().strip()
+                    my_product.date = Security.decrypt(my_product.date, Security.get_secret_key())
                     my_product.exp_date = reader.readline().strip()
+                    my_product.exp_date = Security.decrypt(my_product.exp_date, Security.get_secret_key())
 
                     data_line = reader.readline().strip()
                     if data_line:
                         try:
                             data_line = data_line.split(" ")
-                            my_product.orig_price = float(data_line[0])
-                            my_product.qty = int(data_line[1])
-                            my_product.total_price = float(data_line[2])
-                            my_product.retail_price = float(data_line[3])
-                            my_product.sales_qty = int(data_line[4])
-                            my_product.total_sales_amount = float(data_line[5])
-                            my_product.profit = float(data_line[6])
+                            my_product.orig_price = data_line[0]
+                            my_product.orig_price = float(Security.decrypt(my_product.orig_price, Security.get_secret_key()))
+                            my_product.qty = data_line[1]
+                            my_product.qty = int(Security.decrypt(my_product.qty, Security.get_secret_key()))
+                            my_product.total_price = data_line[2]
+                            my_product.total_price = float(Security.decrypt(my_product.total_price, Security.get_secret_key()))
+                            my_product.retail_price = data_line[3]
+                            my_product.retail_price = float(Security.decrypt(my_product.retail_price, Security.get_secret_key()))
+                            my_product.sales_qty = data_line[4]
+                            my_product.sales_qty = int(Security.decrypt(my_product.sales_qty, Security.get_secret_key()))
+                            my_product.total_sales_amount = data_line[5]
+                            my_product.total_sales_amount = float(Security.decrypt(my_product.total_sales_amount, Security.get_secret_key()))
+                            my_product.profit = data_line[6]
+                            my_product.profit = float(Security.decrypt(my_product.profit, Security.get_secret_key()))
                             reader.readline()
 
                             Admin.add_product(my_product)
@@ -300,12 +313,14 @@ def retrieve():
         else:
             raise FileNotFoundError
     except FileNotFoundError:
-        print("INVENTORY FILE NOT FOUND")
+        pass
 
 
 def save():
     my_inventory = [item for item in main.my_inv if item.name is not None]
     my_inventory = sorted(my_inventory, key=lambda x: x.name)
+    inventory_dir = os.path.join(os.getcwd(), inventory_folder, (Security.encrypt(Security.get_inventory_filename(), Security.get_secret_key()) + ".txt"))
+
     try:
         with open(inventory_dir, "w") as writer:
             if len(my_inventory) == 0:
@@ -313,16 +328,27 @@ def save():
             else:
                 for product in my_inventory:
                     if product.name is not None:
-                        writer.write(product.category + "\n")
-                        writer.write(product.name + "\n")
-                        writer.write(product.date + "\n")
-                        writer.write(product.exp_date + "\n")
-                        writer.write(str(product.orig_price) + ' ')
-                        writer.write(str(product.qty) + ' ')
-                        writer.write(str(product.total_price) + ' ')
-                        writer.write(str(product.retail_price) + ' ')
-                        writer.write(str(product.sales_qty) + ' ')
-                        writer.write(str(product.total_sales_amount) + ' ')
-                        writer.write(str(product.profit) + "\n\n")
+                        category = Security.encrypt(product.category, Security.get_secret_key())
+                        writer.write(category + "\n")
+                        name = Security.encrypt(product.name, Security.get_secret_key())
+                        writer.write(name + "\n")
+                        date = Security.encrypt(product.date, Security.get_secret_key())
+                        writer.write(date + "\n")
+                        exp_date = Security.encrypt(product.exp_date, Security.get_secret_key())
+                        writer.write(exp_date + "\n")
+                        orig_price = Security.encrypt(str(product.orig_price), Security.get_secret_key())
+                        writer.write(str(orig_price) + ' ')
+                        qty = Security.encrypt(str(product.qty), Security.get_secret_key())
+                        writer.write(str(qty) + ' ')
+                        total_price = Security.encrypt(str(product.total_price), Security.get_secret_key())
+                        writer.write(str(total_price) + ' ')
+                        retail_price = Security.encrypt(str(product.retail_price), Security.get_secret_key())
+                        writer.write(str(retail_price) + ' ')
+                        sales_qty = Security.encrypt(str(product.sales_qty), Security.get_secret_key())
+                        writer.write(str(sales_qty) + ' ')
+                        total_sales_amount = Security.encrypt(str(product.total_sales_amount), Security.get_secret_key())
+                        writer.write(str(total_sales_amount) + ' ')
+                        profit = Security.encrypt(str(product.profit), Security.get_secret_key())
+                        writer.write(str(profit) + "\n\n")
     except Exception as e:
         print("ERROR OCCURRED DURING INVENTORY SAVING:", e)

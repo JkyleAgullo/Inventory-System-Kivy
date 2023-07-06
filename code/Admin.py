@@ -626,6 +626,7 @@ def settings():
                 is_change = True
                 security_obj.change_secret_key(new_key)
                 Authen.save_account()
+                DataManager.save()
 
             if is_change is True:
                 Terminal.gotoxy(15, 17)
