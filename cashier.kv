@@ -26,13 +26,13 @@
         background_color:(0/255,0/255,0/255,.5)
 
 
+
     #add a label where it will display the price after this on_press
     Button:
         text: 'punch'
         pos: 580,50
         size: 150,150
-        on_press: root.name_validate(txt)
-        on_press: root.btn()
+        on_press: root.btn(txt)
     #add a label where it will display the price after this on_press
 
     Button:
@@ -42,6 +42,7 @@
         on_press: root.Array_display(root.my_array)
         on_press: root.Array_display2(root.my_array2)
         on_press: root.Array_price(root.price_array)
+        on_press: root.save()
 
     Label:
         id: header_label

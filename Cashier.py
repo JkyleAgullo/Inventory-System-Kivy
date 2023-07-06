@@ -123,24 +123,25 @@ def punch():
         if choice == 1:
             display_receipt()
 
-            customer_receipt = [item for item in main.customer_receipt if item.get_product_name() is not None]
+            customer_receipt = [item for item in main.customer_receiptt if item.get_product_name() is not None]
             inventory = [item for item in main.my_inv if item.name is not None]
 
             for i in range(len(customer_receipt)):
                 for j in range(len(inventory)):
                     if customer_receipt[i].get_product_name() == inventory[j].name:
-                        main.my_inv[j].qty -= main.customer_receipt[i].get_qty()
-                        main.my_inv[j].sales_qty += main.customer_receipt[i].get_qty()
+                        main.my_inv[j].qty -= main.customer_receiptt[i].get_qty()
+                        main.my_inv[j].sales_qty += main.customer_receiptt[i].get_qty()
                         main.my_inv[j].total_price = main.my_inv[j].qty * main.my_inv[j].orig_price
-                        main.my_inv[j].total_sales_amount += main.my_inv[j].retail_price * main.customer_receipt[i].get_qty()
-                        main.my_inv[j].profit += main.my_inv[j].retail_price * main.customer_receipt[i].get_qty()
+                        main.my_inv[j].total_sales_amount += main.my_inv[j].retail_price * main.customer_receiptt[i].get_qty()
+                        main.my_inv[j].profit += main.my_inv[j].retail_price * main.customer_receiptt[i].get_qty()
                         DataManager.record_sales(customer_receipt[i])
             DataManager.save()
 
 
 def add_to_receipt(receipt):
+    print("pasok sa cashier add")
     main.receipt_marker += 1
-    main.customer_receipt[main.receipt_marker] = Receipt(
+    main.customer_receiptt[main.receipt_marker] = Receipt(
         receipt.get_product_name(),
         receipt.get_price(),
         receipt.get_qty(),
@@ -151,7 +152,7 @@ def add_to_receipt(receipt):
 def display_receipt():
     i = 0
     overall_price = 0.0
-    my_receipt = [item for item in main.customer_receipt if item.get_product_name() is not None]
+    my_receipt = [item for item in main.customer_receiptt if item.get_product_name() is not None]
 
     Terminal.clear_screen()
     Terminal.gotoxy(35, 14)

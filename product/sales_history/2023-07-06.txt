@@ -1,0 +1,8 @@
+Product Name: COCA
+Sales Quantity: 67
+Total Sales Amount: 1062.0
+
+Product Name: PIATTOS
+Sales Quantity: 16
+Total Sales Amount: 272.0
+
