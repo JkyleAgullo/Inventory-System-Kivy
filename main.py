@@ -1,3 +1,5 @@
+from kivy.config import Config
+Config.set('graphics', 'resizable', False)
 from datetime import datetime
 import kivy.utils
 from kivy.lang import Builder
