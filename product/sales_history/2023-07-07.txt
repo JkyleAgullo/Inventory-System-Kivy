@@ -1,4 +1,4 @@
 Product Name: COCA
-Sales Quantity: 1
-Total Sales Amount: 18.0
+Sales Quantity: 12
+Total Sales Amount: 183.0
 

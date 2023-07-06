@@ -13,7 +13,129 @@
     DisplayExpired:
     SettingsAdmin:
     SettingsCashier:
-    SettingsLey:
+    SettingsKey:
+    Cashier:
+        name: 'cashier'
+
+<Cashier>:
+    name: txt
+    qty: qty
+
+    FloatLayout:
+        size: root.width, root.height
+
+        Label:
+            text: "Welcome, Cashier"
+            font_size: 35
+            size_hint: None, None
+            pos_hint: {"x": 0.12, "y": 0.88}
+            bold: True
+
+        Label:
+            text: "Item: "
+            bold: True
+            color: 1,1,1,1
+            font_size: 24
+            size_hint: None, None
+            pos_hint: {"x": 0.05, "y": 0.7}
+
+        Label:
+            id: header_label
+            text: root.product_name
+            color: 1,1,1,1
+            font_size: 24
+            bold: True
+            size_hint: None, None
+            pos_hint: {"x": 0.13, "y": 0.7}
+
+        Label:
+            text: "Price"
+            bold: True
+            color: 1,1,1,1
+            font_size: 24
+            size_hint: None, None
+            pos_hint: {"x": 0.3, "y": 0.7}
+
+        Label:
+            text: "Item: "
+            bold: True
+            color: 1,1,1,1
+            font_size: 24
+            size_hint: None, None
+            pos_hint: {"x": 0.05, "y": 0.7}
+
+
+        Button:
+            text: "LOGOUT"
+            size_hint: None, None
+            pos_hint: {"x": 0.856, "y": 0.0099}
+            size: 150, 50
+            background_normal: ''
+            background_down: ''
+            background_color: 1,1,1,1
+            color: 0,0,0,1
+
+        Label:
+            text: "Product Name"
+            pos_hint: {"x": 0.1, "y": 0.5}
+            font_size: 30
+            size_hint: None, None
+            bold: True
+
+        Label:
+            text: "Quantity"
+            pos_hint: {"x": 0.1, "y": 0.4}
+            font_size: 30
+            size_hint: None, None
+            bold: True
+
+        MDTextField:
+            id: txt
+            multiline: False
+            size_hint: None, None
+            pos_hint: {"x": 0.26, "y": 0.5}
+            font_size: 35
+            width: 325
+            icon_right: "folder-search"
+
+        MDTextField:
+            id: qty
+            multiline: False
+            size_hint: None, None
+            pos_hint: {"x": 0.26, "y": 0.4}
+            font_size: 35
+            width: 325
+            icon_right: "counter"
+
+        MDRoundFlatButton:
+            text: 'Punch'
+            pos_hint: {"x": 0.10, "y": 0.2}
+            size_hint: None, None
+            width: 300
+            font_size: 35
+            on_press: root.btn(txt)
+
+        MDRoundFlatButton:
+            text: 'Add to Receipt'
+            pos_hint: {"x": 0.30, "y": 0.2}
+            width: 300
+            font_size: 35
+            color: 1,1,1,1
+            size_hint: None, None
+            on_press: root.Array_display(root.my_array)
+            on_press: root.Array_display2(root.my_array2)
+            on_press: root.Array_price(root.price_array)
+            on_press: root.save()
+
+
+        #MDRoundFlatButton:
+        #    text: 'New Customer'
+         #   pos_hint: {"x": 0.18, "y": 0.09}
+          #  width: 300
+           # font_size: 35
+         #   color: 1,1,1,1
+          #  on_press: root.reset()
+           # size_hint: None, None
 
 <AdminDB>:
     id: adminDB
@@ -1422,7 +1544,7 @@
                 text: 'Display'
                 color: 0,0,0,1
                 size_hint: 0.2,.05
-                pos: 300,200'
+                pos: 300,200
 
 
 <SettingsCashier>:

@@ -13,7 +13,7 @@ from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 import kivy.utils
 from kivy.lang import Builder
-from kivy.properties import StringProperty
+from kivy.properties import StringProperty, ObjectProperty
 from kivy.uix.widget import Widget
 from kivy.app import App
 from kivy.core.window import Window
@@ -34,6 +34,138 @@ customer_receiptt = [Receipt() for _ in range(MAX_INV)]
 admin_acc = Account()
 cashier_acc = Account()
 
+
+class Cashier(Screen):
+    labels = {}
+    global receipt_marker
+    product_name = StringProperty("try")
+    name = ObjectProperty(None)
+    qty = ObjectProperty(None)
+
+    # change the first element into a label
+    my_array = ['Product Name']
+    my_array2 = ['Quantity']
+    price_array = ['Price']
+
+    def btn(self, widget):  # punch button
+        product = Inventory()
+        receipt = Receipt()
+        product_qty = int(self.ids.qty.text)
+        receipt.set_qty(product_qty)
+
+        productName = self.ids.txt.text
+        product_name = productName.upper()
+        product.name = product_name
+        print(product_qty)
+
+        inventory_pos = locate_product(product)  # product dapat ung ipapasa, if nme palitn mo ung nsa locate function to name
+        # print(inventory_pos)
+
+        if inventory_pos == -1:
+            popup_content = Label(text="PRODUCT DOES NOT EXIST")
+            popup = Popup(title='Warning', content=popup_content, size_hint=(None, None), size=(400, 200))
+            popup.open()
+            self.ids.qty.text = ""
+            self.ids.txt.text = ""
+        else:
+            price = my_inv[inventory_pos].retail_price * int(self.ids.qty.text)
+
+            Cashier.my_array.append(self.ids.txt.text)
+            Cashier.my_array2.append(self.ids.qty.text)
+            Cashier.price_array.append(price)
+            self.product_name = widget.text
+            self.add_widget(
+                Label(text=str(price), font_size='20', pos=(400, 502), color=(1, 1, 1, 1)))
+            if my_inv[inventory_pos].qty == 0 or my_inv[inventory_pos].qty - receipt.get_qty() < 0:
+                if my_inv[inventory_pos].qty == 0 or my_inv[inventory_pos].qty - receipt.get_qty() < 0:
+                    popup_content = Label(text="Insufficient quantity")
+                    popup = Popup(title='Warning', content=popup_content, size_hint=(None, None), size=(400, 200))
+                    popup.open()
+                    self.ids.qty.text = ""
+                    self.ids.txt.text = ""
+
+            else:
+                receipt.set_price(my_inv[inventory_pos].retail_price)
+                receipt.set_total_price(round(receipt.get_price() * receipt.get_qty(), 2))
+                receipt.set_product_name(product_name)
+                receipt.set_qty(product_qty)
+                if customer_receiptt[0].get_product_name() is None:
+                    print("pasok")
+                    Cashier.add_to_receipt(receipt)
+                    # print(receipt.get_product_name())
+
+                else:
+                    receipt_pos = locate_product_receipt(receipt)
+                    if receipt_pos == -1:
+                        Cashier.add_to_receipt(receipt)
+                    else:
+                        # print(receipt_pos)
+                        customer_receiptt[receipt_pos].set_qty(
+                            customer_receiptt[receipt_pos].get_qty() + receipt.get_qty())
+                        customer_receiptt[receipt_pos].set_total_price(
+                            customer_receiptt[receipt_pos].get_total_price() + round(receipt.get_total_price(), 2))
+
+        self.ids.qty.text = ""
+        self.ids.txt.text = ""
+
+    def reset(self):
+        Cashier()
+
+    def save(self):
+        customer_receipt = [item for item in customer_receiptt if item.get_product_name() is not None]
+        print(len(customer_receiptt))
+        inventory = [item for item in my_inv if item.name is not None]
+
+        for i in range(len(customer_receipt)):
+            for j in range(len(inventory)):
+                if customer_receipt[i].get_product_name() == inventory[j].name:
+                    my_inv[j].qty -= customer_receipt[i].get_qty()
+                    my_inv[j].sales_qty += customer_receiptt[i].get_qty()
+                    my_inv[j].total_price = my_inv[j].qty * my_inv[j].orig_price
+                    my_inv[j].total_sales_amount += my_inv[j].retail_price * customer_receiptt[i].get_qty()
+                    my_inv[j].profit += my_inv[j].retail_price * customer_receiptt[i].get_qty()
+                    DataManager.record_sales(customer_receipt[i])
+                    print("recorded")
+        DataManager.save()
+
+    def add_to_receipt(receipt):
+        global receipt_marker
+        print("DITO PUMASOK")
+        receipt_marker += 1
+        customer_receiptt[receipt_marker] = Receipt(
+            receipt.get_product_name(),
+            receipt.get_price(),
+            receipt.get_qty(),
+            receipt.get_total_price()
+        )
+
+    # displaying to receipt
+    def Array_display(self, array):  # prod name
+        i = 10
+        self.cols = len(array[0])
+        # print(Cashier.my_array[1]) #try lang
+        # for row in array:
+        for element in array:
+            i = i - 30
+            self.add_widget(Label(text=str(element), font_size='20', pos=(620, 340 + i), color=(1, 1, 1, 1)))
+
+
+    def Array_display2(self, array):  # prod qty
+        i = 10
+        self.cols = len(array[0])
+         #try lang
+        # for row in array:
+        for element in array:
+            i = i - 30
+            self.add_widget(Label(text=str(element), font_size='20', pos=(750, 340 + i), color=(1, 1, 1, 1)))
+            print(element)
+    def Array_price(self, array):
+        i = 10
+        self.cols = len(array[0])
+        # for row in array:
+        for index, element in enumerate(array):
+            i = i - 30
+            self.add_widget(Label(text=str(element), font_size='20', pos=(840, 340 + i), color=(1, 1, 1, 1)))
 
 
 class AdminDB(Screen):
@@ -185,11 +317,11 @@ class AdminLoginTry(Screen):
         password = (self.ids.password.text)
 
 
-        """if username == main.cashier_acc.get_username():
-            if password == main.cashier_acc.get_password():
+        if username == cashier_acc.get_username():
+            if password == cashier_acc.get_password():
                 acc = 1  # if found"""
 
-        if username == admin_acc.get_username():
+        elif username == admin_acc.get_username():
             if password == admin_acc.get_password():
                 acc = 2
 
@@ -197,7 +329,8 @@ class AdminLoginTry(Screen):
             screen_manager = screen.manager
             screen_manager.current = 'first'
         elif acc == 1:
-            pass
+            screen_manager = screen.manager
+            screen_manager.current = 'cashier'
         else:
             popup_content = Label(text="Wrong username or password")
             popup = Popup(title='Warning', content=popup_content, size_hint=(None, None), size=(400, 200))
