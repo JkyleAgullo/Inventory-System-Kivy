@@ -1,6 +1,7 @@
 #:import NoTransition kivy.uix.screenmanager.NoTransition
 
 <WindowManager>:
+    id: screen_manager
     SplashWindow:
     AdminDB:
     AdminADD:
@@ -12,6 +13,7 @@
     DisplayExpired:
 
 <AdminDB>:
+    id: adminDB
     name:"first"
     GridLayout:
         cols:2
@@ -1158,7 +1160,7 @@
             text: "Login"
             font_size: 12
             pos_hint: {"center_x": 0.5}
-            on_press: root.manager.current = "first"
+            on_press: root.submit(root)
 
         MDRoundFlatButton:
             text: "Clear"

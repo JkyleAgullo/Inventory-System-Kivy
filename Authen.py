@@ -3,6 +3,8 @@ import main
 from Security import Security
 from Account import Account
 import Terminal
+from kivy.uix.popup import Popup
+from kivy.uix.label import Label
 
 # Global Variables
 account_dir = "accounts"
@@ -79,6 +81,9 @@ def save_account():
                 writer.write(eusern + '\n')
                 writer.write(epass + '\n')
             else:
+                popup_content = Label(text="NO ADMIN ACCOUNTS YET")
+                popup = Popup(title='Warning', content=popup_content, size_hint=(None, None), size=(400, 200))
+                popup.open()
                 print("No ADMIN accounts yet")
     except IOError as e:
         print("Error during admin file writing: ", e)
@@ -92,8 +97,14 @@ def save_account():
                 writer.write(eusern + '\n')
                 writer.write(epass + '\n')
             else:
+                popup_content = Label(text="NO CASHIERACCOUNTS YET")
+                popup = Popup(title='Warning', content=popup_content, size_hint=(None, None), size=(400, 200))
+                popup.open()
                 print("No CASHIER accounts yet")
     except IOError as e:
+        popup_content = Label(text="ERROR DURING CASHIER FILE WRITING")
+        popup = Popup(title='Warning', content=popup_content, size_hint=(None, None), size=(400, 200))
+        popup.open()
         print("Error during cashier file writing: ", e)
 
 def retrieve_account():
@@ -115,6 +126,9 @@ def retrieve_account():
                         password = Security.decrypt(epass, Security.get_secret_key())
                         main.admin_acc = Account(username, password)
         except IOError as e:
+            popup_content = Label(text="ERROR DURING ADMIN ACCOUNT RETRIEVING")
+            popup = Popup(title='Warning', content=popup_content, size_hint=(None, None), size=(400, 200))
+            popup.open()
             print("Error occurred during admin account retrieving: ", e)
 
     # CASHIER ACCOUNT
@@ -130,6 +144,9 @@ def retrieve_account():
                         password = Security.decrypt(epass, Security.get_secret_key())
                         main.cashier_acc = Account(username, password)
         except IOError as e:
+            popup_content = Label(text="ERROR DURING ADMIN ACCOUNT RETRIEVING")
+            popup = Popup(title='Warning', content=popup_content, size_hint=(None, None), size=(400, 200))
+            popup.open()
             print("Error occurred during admin account retrieving: ", e)
 
     return main.admin_acc, main.cashier_acc

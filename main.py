@@ -1,6 +1,7 @@
 from kivy.config import Config
 
 import Authen
+from Account import Account
 
 Config.set('graphics', 'resizable', False)
 import DataManager
@@ -30,6 +31,8 @@ marker = -1
 receipt_marker = -1
 my_inv = [Inventory() for _ in range(MAX_INV)]
 customer_receiptt = [Receipt() for _ in range(MAX_INV)]
+admin_acc = Account()
+cashier_acc = Account()
 
 
 
@@ -172,9 +175,40 @@ class WindowManager(ScreenManager):
 
 
 class AdminLoginTry(Screen):
+
+    def submit(self, screen):
+        global admin_acc
+        global cashier_acc
+        acc = 0
+
+        username = (self.ids.user.text)
+        password = (self.ids.password.text)
+
+
+        """if username == main.cashier_acc.get_username():
+            if password == main.cashier_acc.get_password():
+                acc = 1  # if found"""
+
+        if username == admin_acc.get_username():
+            if password == admin_acc.get_password():
+                acc = 2
+
+        if acc == 2:
+            screen_manager = screen.manager
+            screen_manager.current = 'first'
+        elif acc == 1:
+            pass
+        else:
+            popup_content = Label(text="Wrong username or password")
+            popup = Popup(title='Warning', content=popup_content, size_hint=(None, None), size=(400, 200))
+            popup.open()
+            self.ids.user.text = ""
+            self.ids.password.text = ""
+
     def clear(self):
         self.ids.user.text = ""
         self.ids.password.text = ""
+
 
 
 class DisplayInventory(Screen):
@@ -284,6 +318,9 @@ def locate_product_receipt(product):
 
 def main():
     global my_inv
+    global admin_acc
+    global cashier_acc
+
     admin_acc, cashier_acc = Authen.retrieve_account()
     my_inv = DataManager.retrieve()
     #print("done main")
