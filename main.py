@@ -5,6 +5,10 @@ from Cashier import add_to_receipt
 from Receipt import Receipt
 from Inventory import Inventory
 from kivy.config import Config
+from kivy.app import App
+from kivymd.icon_definitions import md_icons
+from kivymd.uix.textfield import MDTextField
+
 
 Config.set('graphics', 'resizable', False)
 import kivy.utils
@@ -168,11 +172,14 @@ class Cashier(Widget):
                 self.add_widget(Label(text=str(element), font_size='20', pos=(240, 640 + i), color=(0, 0, 0, 1)))
 
 
-class MyApp(App):
+class MyApp(MDApp):
     def build(self):
-        Window.clearcolor = (1, 1, 1, 1)
+        #Window.clearcolor = (1, 1, 1, 1)
         Window.size = (1080, 720)
         self.title = 'Inventory Cashier'
+        self.theme_cls.theme_style = "Dark"
+        self.theme_cls.primary_palette = "Cyan"
+
         return Cashier()
     #    return AdminADD()
 

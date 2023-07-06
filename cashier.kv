@@ -1,80 +1,153 @@
-
 <Cashier>:
     #anchor : id
     name: txt
     qty: qty
 
-    canvas:
-        Color:
-            rgba: 0,0,0,.5
-        Rectangle:
-            #width, height
-            pos:350,540
-            size:730,180
-        Color:
-            rgba: 0,0,1,.1
-        Rectangle:
-            pos:0,0
-            size:350,890
+    #canvas:
+        #Color: # Color for product name and price
+            #rgba: 0,0,0,.5
+        #Rectangle:
+            #width, height #
+            #pos:350,540
+            #size:730,180
+        #Color:
+            #rgba: 0,0,1,.1
+        #Rectangle:
+            #pos:0,0
+            #size:350,890
 
-    Button:
-        text: 'LOGOUT'
-        pos: 925,20
-        size: 150,50
-        background_normal: ''
-        background_down: ''
-        background_color:(0/255,0/255,0/255,.5)
+    FloatLayout:
+        size: root.width, root.height
+
+        Button:
+            text: "LOGOUT"
+            size_hint: None, None
+            pos_hint: {"x": 0, "y": 0.1}
+            size: 150, 50
+            background_normal: ''
+            background_down: ''
+            background_color: (0/255,0/255,0/255,.5)
+
+        Button:
+            text: 'punch'
+            pos_hint: {"x": 0.4, "y": 0.20}
+            size_hint: None, None
+            width: 300
+            font_size: 35
+            on_press: root.btn(txt)
+
+        Button:
+            text: 'Add to receipt'
+            pos_hint: {"x": 0.4, "y": 0.30}
+            width: 300
+            font_size: 35
+            on_press: root.Array_display(root.my_array)
+            on_press: root.Array_display2(root.my_array2)
+            on_press: root.Array_price(root.price_array)
+            on_press: root.save()
+            size_hint: None, None
+
+        Label:
+            id: header_label
+            text: root.product_name
+            color: 1,1,1,1
+            font_size: 24
+            bold: True
+            size_hint: None, None
+
+        TextInput:
+            id: qty
+            multiline: False
+            on_text_validate: root.name_validate(self)
+            size_hint: None, None
+            pos_hint: {"x": 0.4, "y": 0.70}
+            font_size: 35
+            width: 300
+
+        TextInput:
+            id: txt
+            multiline: False
+            size_hint: None, None
+            pos_hint: {"x": 0.4, "y": 0.60}
+            font_size: 35
+            width: 300
+
+        Label:
+            text: "product name"
+            pos_hint: {"x": 0.2, "y": 0.30}
+            font_size: 35
+            size_hint: None, None
+
+        Label:
+            text: "quantity"
+            pos_hint: {"x": 0.2, "y": 0.20}
+            font_size: 35
+            size_hint: None, None
+
+
+
+
+
+
+
+    #Button:
+        #text: 'LOGOUT'
+        #pos: 925,20
+        #size: 150,50
+        #background_normal: ''
+        #background_down: ''
+        #background_color:(0/255,0/255,0/255,.5)
 
 
 
     #add a label where it will display the price after this on_press
-    Button:
-        text: 'punch'
-        pos: 580,50
-        size: 150,150
-        on_press: root.btn(txt)
+    #Button:
+        #text: 'punch'
+        #pos: 580,50
+        #size: 150,150
+        #on_press: root.btn(txt)
     #add a label where it will display the price after this on_press
 
-    Button:
-        text: 'add to receipt'
-        pos: 728,50
-        size: 150,150
-        on_press: root.Array_display(root.my_array)
-        on_press: root.Array_display2(root.my_array2)
-        on_press: root.Array_price(root.price_array)
-        on_press: root.save()
+    #Button:
+        #text: 'add to receipt'
+        #pos: 728,50
+        #size: 150,150
+        #on_press: root.Array_display(root.my_array)
+        #on_press: root.Array_display2(root.my_array2)
+        #on_press: root.Array_price(root.price_array)
+        #on_press: root.save()
 
-    Label:
-        id: header_label
-        text: root.product_name
-        pos: 500,600
-        color: 1,1,1,1
-        font_size: 24
-        bold: True
+    #Label:
+        #id: header_label
+        #text: root.product_name
+        #pos: 500,600
+        #color: 1,1,1,1
+        #font_size: 24
+        #bold: True
 
-    TextInput:
-        id: qty
+    #TextInput:
+        #id: qty
         #text: "hi"
-        size:200,40
+       #size:200,40
         #x,y
-        pos: 650,300
-        multiline: False
-        on_text_validate: root.name_validate(self)
-    TextInput:
-        id: txt
-        size:200,40
+        #pos: 650,300
+        #multiline: False
+        #on_text_validate: root.name_validate(self)
+    #TextInput:
+        #id: txt
+        #size:200,40
         #x,y
-        pos: 650,370
-        multiline: False
-    Label:
-        text: 'PRODUCT NAME'
-        pos: 520,340
-        color: 0,0,0,1
-        font_size: 16
-        bold: True
-    Label:
-        text: 'QUANTITY'
-        pos: 520,270
-        color: 0,0,0,1
-        font_size: 16
-        bold: True
+        #pos: 650,370
+        #multiline: False
+    #Label:
+        #text: 'PRODUCT NAME'
+        #pos: 520,340
+        #color: 0,0,0,1
+        #font_size: 16
+        #bold: True
+    #Label:
+        #text: 'QUANTITY'
+        #pos: 520,270
+        #color: 0,0,0,1
+        #font_size: 16
+        #bold: True
