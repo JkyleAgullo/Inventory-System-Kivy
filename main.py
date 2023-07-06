@@ -5,12 +5,11 @@ from Cashier import add_to_receipt
 from Receipt import Receipt
 from Inventory import Inventory
 from kivy.config import Config
+Config.set('graphics', 'resizable', False)
 from kivy.app import App
 from kivymd.icon_definitions import md_icons
 from kivymd.uix.textfield import MDTextField
 
-
-Config.set('graphics', 'resizable', False)
 import kivy.utils
 from kivy.lang import Builder
 from kivy.properties import StringProperty, ObjectProperty
@@ -68,15 +67,16 @@ class Cashier(Widget):
         product_name = productName.upper()
         product.name = product_name
 
-        inventory_pos = locate_product(product)  # product dapat ung ipapasa, if nme palitn mo ung nsa locate function to name
+        inventory_pos = locate_product(
+            product)  # product dapat ung ipapasa, if nme palitn mo ung nsa locate function to name
         # print(inventory_pos)
 
         if inventory_pos == -1:
             popup_content = Label(text="PRODUCT DOES NOT EXIST")
             popup = Popup(title='Warning', content=popup_content, size_hint=(None, None), size=(400, 200))
             popup.open()
-            self.ids.qty.text=""
-            self.ids.txt.text=""
+            self.ids.qty.text = ""
+            self.ids.txt.text = ""
         else:
             price = my_inv[inventory_pos].retail_price * int(self.qty.text)
 
@@ -84,7 +84,8 @@ class Cashier(Widget):
             Cashier.my_array2.append(self.qty.text)
             Cashier.price_array.append(price)
             self.product_name = widget.text
-            self.add_widget(Label(text=str(price), font_size='20', pos=(400, 502), color=(1, 1, 1, 1)))
+            self.add_widget(
+                Label(text=str(price), font_size='20', pos=(400, 502), color=(1, 1, 1, 1)))
             if my_inv[inventory_pos].qty == 0 or my_inv[inventory_pos].qty - receipt.get_qty() < 0:
                 if my_inv[inventory_pos].qty == 0 or my_inv[inventory_pos].qty - receipt.get_qty() < 0:
                     popup_content = Label(text="Insufficient quantity")
@@ -101,7 +102,7 @@ class Cashier(Widget):
                 if customer_receiptt[0].get_product_name() is None:
                     print("pasok")
                     Cashier.add_to_receipt(receipt)
-                    #print(receipt.get_product_name())
+                    # print(receipt.get_product_name())
 
                 else:
                     receipt_pos = locate_product_receipt(receipt)
@@ -109,11 +110,15 @@ class Cashier(Widget):
                         Cashier.add_to_receipt(receipt)
                     else:
                         # print(receipt_pos)
-                        customer_receiptt[receipt_pos].set_qty(customer_receiptt[receipt_pos].get_qty() + receipt.get_qty())
-                        customer_receiptt[receipt_pos].set_total_price(customer_receiptt[receipt_pos].get_total_price() + round(receipt.get_total_price(), 2))
+                        customer_receiptt[receipt_pos].set_qty(
+                            customer_receiptt[receipt_pos].get_qty() + receipt.get_qty())
+                        customer_receiptt[receipt_pos].set_total_price(
+                            customer_receiptt[receipt_pos].get_total_price() + round(receipt.get_total_price(), 2))
 
         self.ids.qty.text = ""
         self.ids.txt.text = ""
+    def reset(self):
+        Cashier()
 
     def save(self):
         customer_receipt = [item for item in customer_receiptt if item.get_product_name() is not None]
@@ -163,25 +168,25 @@ class Cashier(Widget):
             self.labels[index] = label
 
     def Array_price(self, array):
-            i = 10
-            self.cols = len(array[0])
-            # for row in array:
-            for index, element in enumerate(array):
-                i = i - 30
+        i = 10
+        self.cols = len(array[0])
+        # for row in array:
+        for index, element in enumerate(array):
+            i = i - 30
 
-                self.add_widget(Label(text=str(element), font_size='20', pos=(940, 640 + i), color=(1, 1, 1, 1)))
+            self.add_widget(Label(text=str(element), font_size='20', pos=(940, 640 + i), color=(1, 1, 1, 1)))
 
 
 class MyApp(MDApp):
     def build(self):
-        #Window.clearcolor = (1, 1, 1, 1)
+        # Window.clearcolor = (1, 1, 1, 1)
         Window.size = (1080, 720)
         self.title = 'Inventory Cashier'
         self.theme_cls.theme_style = "Dark"
         self.theme_cls.primary_palette = "Cyan"
 
         return Cashier()
-    #    return AdminADD()
+    #   return AdminADD()
 
 
 def main():
