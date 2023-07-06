@@ -1,4 +1,7 @@
 from kivy.config import Config
+
+import Authen
+
 Config.set('graphics', 'resizable', False)
 import DataManager
 import DateManager
@@ -174,6 +177,52 @@ class AdminLoginTry(Screen):
         self.ids.password.text = ""
 
 
+class DisplayInventory(Screen):
+    current_datetime = StringProperty("")
+
+    def update_datetime(self):
+        self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
+
+
+class DisplaySales(Screen):
+    current_datetime = StringProperty("")
+
+    def update_datetime(self):
+        self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
+
+
+class DisplayExpired(Screen):
+    current_datetime = StringProperty("")
+
+    def update_datetime(self):
+        self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
+
+
+class SettingsCashier(Screen):
+    current_datetime = StringProperty("")
+
+    def update_datetime(self):
+        self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
+
+
+class SettingsAdmin(Screen):
+    current_datetime = StringProperty("")
+
+    def update_datetime(self):
+        self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
+
+
+class SettingsKey(Screen):
+    current_datetime = StringProperty("")
+
+    def update_datetime(self):
+        self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
+
+
+
+
+
+
 Builder.load_file('screen.kv')
 
 
@@ -232,8 +281,10 @@ def locate_product_receipt(product):
         if receipt[i].get_product_name().lower() == product.get_product_name().lower():
             return i
     return -1
+
 def main():
     global my_inv
+    admin_acc, cashier_acc = Authen.retrieve_account()
     my_inv = DataManager.retrieve()
     #print("done main")
 
