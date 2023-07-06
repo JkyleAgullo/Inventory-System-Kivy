@@ -1,0 +1,8 @@
+Product Name: BANANA
+Expiration Date: 2023-07-14
+Quantity: 10
+
+Product Name: ORANGE
+Expiration Date: 2024-01-07
+Quantity: 10
+
