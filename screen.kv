@@ -287,31 +287,82 @@
 
             Label:
                 text:"Add Product"
-                font_size: 35
+                font_size: 45
                 size_hint: None, None
                 pos_hint: {"x": 0.0220, "y": 0.88}
                 bold: True
 
             Label:
                 text: "Product Category"
-                pos_hint: {"x": 0.013, "y": 0.770}
-                font_size: 24
+                pos_hint: {"x": 0.2, "y": 0.70}
+                font_size: 35
+                size_hint: None, None
+
+            MDTextField:
+                icon_right: "plus-box"
+                width: 300
+                font_size: 35
+                pos_hint: {"x": 0.4, "y": 0.70}
                 size_hint: None, None
 
             Label:
                 text: "Product Name"
-                pos_hint: {"x": 0.013, "y": 0.720}
-                font_size: 24
+                pos_hint: {"x": 0.2, "y": 0.60}
+                font_size: 35
+                size_hint: None, None
+
+            MDTextField:
+                icon_right: "rename-box"
+                width: 300
+                font_size: 35
+                pos_hint: {"x": 0.4, "y": 0.60}
                 size_hint: None, None
 
             Label:
                 text: "Price"
+                pos_hint: {"x": 0.2, "y": 0.50}
+                font_size: 35
+                size_hint: None, None
+
+            MDTextField:
+                icon_right: "currency-usd"
+                width: 300
+                font_size: 35
+                pos_hint: {"x": 0.4, "y": 0.50}
+                size_hint: None, None
 
             Label:
                 text: "Quantity"
+                pos_hint: {"x": 0.2, "y": 0.40}
+                font_size: 35
+                size_hint: None, None
+
+            MDTextField:
+                icon_right: "chart-bar-stacked"
+                width: 300
+                font_size: 35
+                pos_hint: {"x": 0.4, "y": 0.40}
+                size_hint: None, None
 
             Label:
                 text: "Retail Price"
+                pos_hint: {"x": 0.2, "y": 0.30}
+                font_size: 35
+                size_hint: None, None
+
+            MDTextField:
+                icon_right: "cart"
+                width: 300
+                font_size: 35
+                pos_hint: {"x": 0.4, "y": 0.30}
+                size_hint: None, None
+
+            MDRoundFlatButton:
+                text: "Submit"
+                pos_hint: {"x": 0.4, "y": 0.20}
+                size_hint: None, None
+                width: 300
+                font_size: 35
 
 
 <AdminDisplay>:
