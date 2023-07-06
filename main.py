@@ -108,18 +108,8 @@ class Cashier(Widget):
                         customer_receiptt[receipt_pos].set_qty(customer_receiptt[receipt_pos].get_qty() + receipt.get_qty())
                         customer_receiptt[receipt_pos].set_total_price(customer_receiptt[receipt_pos].get_total_price() + round(receipt.get_total_price(), 2))
 
-                        """label_index = locate_product(product)  # Get the index of the label
-                        if label_index != -1:
-                            label = self.labels.get(label_index)
-                            if label:
-    
-                                new_qty = customer_receiptt[receipt_pos].get_qty() + receipt.get_qty() - 1
-                                print(new_qty)
-                                label.text = " "
-                                label.text = str(new_qty)"""
-                        # dito nangyayari ung edit qty and price, dito iedit ung sa receipt
-                        # print("name: "+customer_receiptt[receipt_pos].get_product_name())
-                # locate the prodname
+        self.ids.qty.text = ""
+        self.ids.txt.text = ""
 
     def save(self):
         customer_receipt = [item for item in customer_receiptt if item.get_product_name() is not None]
