@@ -7,6 +7,9 @@ import DateManager
 import Admin
 import main
 
+from kivy.uix.popup import Popup
+from kivy.uix.label import Label
+
 
 inventory_dir = os.path.join(os.getcwd(), "product/inventory.txt")
 product_history_folder = "product/product_history"
@@ -284,12 +287,17 @@ def retrieve():
 
                             Admin.add_product(my_product)
                         except ValueError as e:
+                            popup_content = Label(text="Insufficient quantity"+str(e))
+                            popup = Popup(title='Warning', content=popup_content, size_hint=(None, None),size=(400, 200))
+                            popup.open()
                             print("INVALID NUMERIC VALUE IN INVENTORY FILE: ", e)
             return main.my_inv
         else:
             raise FileNotFoundError
     except FileNotFoundError:
-        print("INVENTORY FILE NOT FOUND")
+        popup_content = Label(text="INVENTORY FILE NOT FOUND")
+        popup = Popup(title='Warning', content=popup_content, size_hint=(None, None), size=(400, 200))
+        popup.open()
 
 
 def save():
@@ -298,6 +306,9 @@ def save():
     try:
         with open(inventory_dir, "w") as writer:
             if len(my_inventory) == 0:
+                popup_content = Label(text="INVENTORY IS EMPTY")
+                popup = Popup(title='Warning', content=popup_content, size_hint=(None, None), size=(400, 200))
+                popup.open()
                 print("INVENTORY IS EMPTY")
             else:
                 for product in my_inventory:
@@ -314,4 +325,7 @@ def save():
                         writer.write(str(product.total_sales_amount) + ' ')
                         writer.write(str(product.profit) + "\n\n")
     except Exception as e:
+        popup_content = Label(text="ERROR OCCURRED DURING INVENTORY SAVING:"+str(e))
+        popup = Popup(title='Warning', content=popup_content, size_hint=(None, None), size=(400, 200))
+        popup.open()
         print("ERROR OCCURRED DURING INVENTORY SAVING:", e)

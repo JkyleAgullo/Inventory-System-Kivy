@@ -100,6 +100,11 @@ class AdminADD(Screen):
             popup_content = Label(text="FAILED TO ADD")
             popup = Popup(title='WARNING', content=popup_content, size_hint=(None, None), size=(400, 200))
             popup.open()
+        self.ids.prodName.text = ""
+        self.ids.prodPrice.text = ""
+        self.ids.prodQuantity.text = ""
+        self.ids.prodRetail.text = ""
+        self.ids.prodCategory.text = ""
 
 
     def update_datetime(self):
@@ -238,4 +243,5 @@ def main():
 
 
 if __name__ == "__main__":
+    main()
     MyApp().run()
