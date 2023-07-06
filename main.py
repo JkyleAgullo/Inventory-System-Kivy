@@ -84,7 +84,7 @@ class Cashier(Widget):
             Cashier.my_array2.append(self.qty.text)
             Cashier.price_array.append(price)
             self.product_name = widget.text
-            self.add_widget(Label(text=str(price), font_size='20', pos=(50, 400), color=(1, 1, 1, 1)))
+            self.add_widget(Label(text=str(price), font_size='20', pos=(400, 502), color=(1, 1, 1, 1)))
             if my_inv[inventory_pos].qty == 0 or my_inv[inventory_pos].qty - receipt.get_qty() < 0:
                 if my_inv[inventory_pos].qty == 0 or my_inv[inventory_pos].qty - receipt.get_qty() < 0:
                     popup_content = Label(text="Insufficient quantity")
@@ -150,7 +150,7 @@ class Cashier(Widget):
         # for row in array:
         for element in array:
             i = i - 30
-            self.add_widget(Label(text=str(element), font_size='20', pos=(20, 640 + i), color=(1, 1, 1, 1)))
+            self.add_widget(Label(text=str(element), font_size='20', pos=(720, 640 + i), color=(1, 1, 1, 1)))
 
     def Array_display2(self, array):  # prod qty
         i = 10
@@ -158,7 +158,7 @@ class Cashier(Widget):
         self.labels = {}  # Clear existing label references
         for index, element in enumerate(array):
             i = i - 30
-            label = Label(text=str(element), font_size='20', pos=(150, 640 + i), color=(1, 1, 1, 1))
+            label = Label(text=str(element), font_size='20', pos=(850, 640 + i), color=(1, 1, 1, 1))
             self.add_widget(label)
             self.labels[index] = label
 
@@ -169,7 +169,7 @@ class Cashier(Widget):
             for index, element in enumerate(array):
                 i = i - 30
 
-                self.add_widget(Label(text=str(element), font_size='20', pos=(240, 640 + i), color=(1, 1, 1, 1)))
+                self.add_widget(Label(text=str(element), font_size='20', pos=(940, 640 + i), color=(1, 1, 1, 1)))
 
 
 class MyApp(MDApp):
