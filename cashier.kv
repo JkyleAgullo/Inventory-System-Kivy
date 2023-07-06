@@ -30,7 +30,6 @@
             size_hint: None, None
             pos_hint: {"x": 0.13, "y": 0.7}
 
-
         Label:
             text: "Price"
             bold: True
@@ -109,4 +108,12 @@
             on_press: root.Array_display2(root.my_array2)
             on_press: root.Array_price(root.price_array)
             on_press: root.save()
+            size_hint: None, None
+
+        MDRoundFlatButton:
+            text: 'New Customer'
+            pos_hint: {"x": 0.18, "y": 0.09}
+            width: 300
+            font_size: 35
+            color: 1,1,1,1
             size_hint: None, None

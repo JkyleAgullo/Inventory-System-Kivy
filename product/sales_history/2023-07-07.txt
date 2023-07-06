@@ -1,4 +1,12 @@
+Product Name: ARGENTINA
+Sales Quantity: 8
+Total Sales Amount: 464.0
+
 Product Name: COCA
-Sales Quantity: 6
-Total Sales Amount: 108.0
+Sales Quantity: 7
+Total Sales Amount: 126.0
+
+Product Name: PIATTOS
+Sales Quantity: 1
+Total Sales Amount: 17.0
 
