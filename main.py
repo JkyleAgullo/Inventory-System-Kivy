@@ -84,7 +84,7 @@ class Cashier(Widget):
             Cashier.my_array2.append(self.qty.text)
             Cashier.price_array.append(price)
             self.product_name = widget.text
-            self.add_widget(Label(text=str(price), font_size='20', pos=(50, 400), color=(0, 0, 0, .7)))
+            self.add_widget(Label(text=str(price), font_size='20', pos=(50, 400), color=(1, 1, 1, 1)))
             if my_inv[inventory_pos].qty == 0 or my_inv[inventory_pos].qty - receipt.get_qty() < 0:
                 if my_inv[inventory_pos].qty == 0 or my_inv[inventory_pos].qty - receipt.get_qty() < 0:
                     popup_content = Label(text="Insufficient quantity")

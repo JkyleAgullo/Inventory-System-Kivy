@@ -3,53 +3,23 @@
     name: txt
     qty: qty
 
-    #canvas:
-        #Color: # Color for product name and price
-            #rgba: 0,0,0,.5
-        #Rectangle:
-            #width, height #
-            #pos:350,540
-            #size:730,180
-        #Color:
-            #rgba: 0,0,1,.1
-        #Rectangle:
-            #pos:0,0
-            #size:350,890
-
     FloatLayout:
         size: root.width, root.height
 
         Label:
             text: "Welcome, Cashier"
+            font_size: 35
+            size_hint: None, None
+            pos_hint: {"x": 0.12, "y": 0.88}
             bold: True
-        Button: #Logout Button
-            text: "LOGOUT"
-            size_hint: None, None
-            pos_hint: {"x": 0, "y": 0.1}
-            size: 150, 50
-            background_normal: ''
-            background_down: ''
-            background_color: (0/255,0/255,0/255,.5)
 
-        Button:
-            text: 'punch'
-            pos_hint: {"x": 0.4, "y": 0.20}
-            size_hint: None, None
-            width: 300
-            font_size: 35
-            on_press: root.btn(txt)
-
-        Button:
-            text: 'Add to receipt'
-            pos_hint: {"x": 0.4, "y": 0.30}
-            width: 300
-            font_size: 35
+        Label:
+            text: "Item: "
+            bold: True
             color: 1,1,1,1
-            on_press: root.Array_display(root.my_array)
-            on_press: root.Array_display2(root.my_array2)
-            on_press: root.Array_price(root.price_array)
-            on_press: root.save()
+            font_size: 24
             size_hint: None, None
+            pos_hint: {"x": 0.05, "y": 0.7}
 
         Label:
             id: header_label
@@ -58,102 +28,85 @@
             font_size: 24
             bold: True
             size_hint: None, None
+            pos_hint: {"x": 0.13, "y": 0.7}
+
+
+        Label:
+            text: "Price: "
+            bold: True
+            color: 1,1,1,1
+            font_size: 24
+            size_hint: None, None
+            pos_hint: {"x": 0.3, "y": 0.7}
+
+        Label:
+            text: "Item: "
+            bold: True
+            color: 1,1,1,1
+            font_size: 24
+            size_hint: None, None
+            pos_hint: {"x": 0.05, "y": 0.7}
+
+
+        Button:
+            text: "LOGOUT"
+            size_hint: None, None
+            pos_hint: {"x": 0.856, "y": 0.0099}
+            size: 150, 50
+            background_normal: ''
+            background_down: ''
+            background_color: 1,1,1,1
+            color: 0,0,0,1
+
+        Label:
+            text: "Product Name"
+            pos_hint: {"x": 0.1, "y": 0.5}
+            font_size: 30
+            size_hint: None, None
+            bold: True
+
+        Label:
+            text: "Quantity"
+            pos_hint: {"x": 0.1, "y": 0.4}
+            font_size: 30
+            size_hint: None, None
+            bold: True
+
+        MDTextField:
+            id: txt
+            multiline: False
+            size_hint: None, None
+            pos_hint: {"x": 0.26, "y": 0.5}
+            font_size: 35
+            width: 325
+            icon_right: "folder-search"
 
         MDTextField:
             id: qty
             multiline: False
             on_text_validate: root.name_validate(self)
             size_hint: None, None
-            pos_hint: {"x": 0.4, "y": 0.60}
+            pos_hint: {"x": 0.26, "y": 0.4}
             font_size: 35
+            width: 325
+            icon_right: "counter"
+
+        MDRoundFlatButton:
+            text: 'Punch'
+            pos_hint: {"x": 0.10, "y": 0.2}
+            size_hint: None, None
             width: 300
-            hint_text: 'quantity'
-
-        MDTextField:
-            id: txt
-            multiline: False
-            size_hint: None, None
-            pos_hint: {"x": 0.4, "y": 0.70}
             font_size: 35
+            on_press: root.btn(txt)
+
+        MDRoundFlatButton:
+            text: 'Add to Receipt'
+            pos_hint: {"x": 0.30, "y": 0.2}
             width: 300
-            hint_text: 'product'
-
-        Label:
-            text: "product name"
-            pos_hint: {"x": 0.2, "y": 0.30}
             font_size: 35
+            color: 1,1,1,1
+            on_press: root.Array_display(root.my_array)
+            on_press: root.Array_display2(root.my_array2)
+            on_press: root.Array_price(root.price_array)
+            on_press: root.save()
             size_hint: None, None
-
-        Label:
-            text: "quantity"
-            pos_hint: {"x": 0.2, "y": 0.20}
-            font_size: 35
-            size_hint: None, None
-
-
-
-
-
-
-
-    #Button:
-        #text: 'LOGOUT'
-        #pos: 925,20
-        #size: 150,50
-        #background_normal: ''
-        #background_down: ''
-        #background_color:(0/255,0/255,0/255,.5)
-
-
-
-    #add a label where it will display the price after this on_press
-    #Button:
-        #text: 'punch'
-        #pos: 580,50
-        #size: 150,150
-        #on_press: root.btn(txt)
-    #add a label where it will display the price after this on_press
-
-    #Button:
-        #text: 'add to receipt'
-        #pos: 728,50
-        #size: 150,150
-        #on_press: root.Array_display(root.my_array)
-        #on_press: root.Array_display2(root.my_array2)
-        #on_press: root.Array_price(root.price_array)
-        #on_press: root.save()
-
-    #Label:
-        #id: header_label
-        #text: root.product_name
-        #pos: 500,600
-        #color: 1,1,1,1
-        #font_size: 24
-        #bold: True
-
-    #TextInput:
-        #id: qty
-        #text: "hi"
-       #size:200,40
-        #x,y
-        #pos: 650,300
-        #multiline: False
-        #on_text_validate: root.name_validate(self)
-    #TextInput:
-        #id: txt
-        #size:200,40
-        #x,y
-        #pos: 650,370
-        #multiline: False
-    #Label:
-        #text: 'PRODUCT NAME'
-        #pos: 520,340
-        #color: 0,0,0,1
-        #font_size: 16
-        #bold: True
-    #Label:
-        #text: 'QUANTITY'
-        #pos: 520,270
-        #color: 0,0,0,1
-        #font_size: 16
-        #bold: True
