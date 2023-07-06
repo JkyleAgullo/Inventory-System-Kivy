@@ -1,3 +1,9 @@
+Product Name: COBRA
+Quantity: 10
+
+Product Name: COCA
+Quantity: 20
+
 Product Name: ORANGE
 Quantity: 10
 
