@@ -19,7 +19,10 @@
     FloatLayout:
         size: root.width, root.height
 
-        Button:
+        Label:
+            text: "Welcome, Cashier"
+            bold: True
+        Button: #Logout Button
             text: "LOGOUT"
             size_hint: None, None
             pos_hint: {"x": 0, "y": 0.1}
@@ -41,6 +44,7 @@
             pos_hint: {"x": 0.4, "y": 0.30}
             width: 300
             font_size: 35
+            color: 1,1,1,1
             on_press: root.Array_display(root.my_array)
             on_press: root.Array_display2(root.my_array2)
             on_press: root.Array_price(root.price_array)
@@ -55,22 +59,24 @@
             bold: True
             size_hint: None, None
 
-        TextInput:
+        MDTextField:
             id: qty
             multiline: False
             on_text_validate: root.name_validate(self)
             size_hint: None, None
-            pos_hint: {"x": 0.4, "y": 0.70}
-            font_size: 35
-            width: 300
-
-        TextInput:
-            id: txt
-            multiline: False
-            size_hint: None, None
             pos_hint: {"x": 0.4, "y": 0.60}
             font_size: 35
             width: 300
+            hint_text: 'quantity'
+
+        MDTextField:
+            id: txt
+            multiline: False
+            size_hint: None, None
+            pos_hint: {"x": 0.4, "y": 0.70}
+            font_size: 35
+            width: 300
+            hint_text: 'product'
 
         Label:
             text: "product name"
