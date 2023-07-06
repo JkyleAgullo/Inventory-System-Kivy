@@ -199,7 +199,7 @@ class AdminLoginTry(Screen):
         elif acc == 1:
             pass
         else:
-            popup_content = Label(text="INVALID")
+            popup_content = Label(text="Wrong username or password")
             popup = Popup(title='Warning', content=popup_content, size_hint=(None, None), size=(400, 200))
             popup.open()
             self.ids.user.text = ""
