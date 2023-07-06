@@ -4,6 +4,9 @@ Quantity: 10
 Product Name: COCA
 Quantity: 20
 
+Product Name: MOGU
+Quantity: 5
+
 Product Name: ORANGE
 Quantity: 10
 

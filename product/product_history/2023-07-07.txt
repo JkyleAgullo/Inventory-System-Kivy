@@ -10,6 +10,10 @@ Product Name: COCA
 Expiration Date: 2024-01-07
 Quantity: 20
 
+Product Name: MOGU
+Expiration Date: 2024-01-07
+Quantity: 5
+
 Product Name: ORANGE
 Expiration Date: 2024-01-07
 Quantity: 20

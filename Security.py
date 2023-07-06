@@ -3,7 +3,7 @@ import random
 
 
 class Security:
-    __key_dir = "C:/Users/Matthew/Desktop/key/key.txt"
+    __key_dir = "C:/Users/Jkyle Agullo/Desktop/key.txt"
     __admin_fp = "adminacc"
     __cashier_fp = "cashieracc"
     previous_key = None
