@@ -279,6 +279,8 @@
             id:add
             size: root.width, root.height
 
+            BoxLayout:
+
             Label:
                 text: root.current_datetime
                 font_size: 20
@@ -368,6 +370,7 @@
                 size_hint: None, None
                 width: 300
                 font_size: 35
+                on_press: root.getInput()
 
 
 <AdminDisplay>:

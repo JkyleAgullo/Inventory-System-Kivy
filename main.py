@@ -1,6 +1,14 @@
 from kivy.config import Config
+
+import DataManager
+import DateManager
+from Inventory import Inventory
+from Receipt import Receipt
+
 Config.set('graphics', 'resizable', False)
 from datetime import datetime
+from kivy.uix.popup import Popup
+from kivy.uix.label import Label
 import kivy.utils
 from kivy.lang import Builder
 from kivy.properties import StringProperty
@@ -13,6 +21,15 @@ from kivy.uix.progressbar import ProgressBar
 from kivymd.app import MDApp
 from kivymd.uix.textfield import MDTextField
 from kivymd.icon_definitions import md_icons
+
+# GLOBAL VARIABLES
+MAX_INV = 100
+MAX_PROD_STOCK = 50
+marker = -1
+receipt_marker = -1
+my_inv = [Inventory() for _ in range(MAX_INV)]
+customer_receiptt = [Receipt() for _ in range(MAX_INV)]
+
 
 
 class AdminDB(Screen):
@@ -33,11 +50,97 @@ class SplashWindow(Screen):
 
 
 class AdminADD(Screen):
+    product = Inventory()
     # todo: add design to admin add
+
     current_datetime = StringProperty("")
+
+    def getInput(self):
+
+        productName = (self.ids.prodName.text)
+        productPrice = (self.ids.prodPrice.text)
+        productQty = (self.ids.prodQuantity.text)
+        productRetail = (self.ids.prodRetail.text)
+        productCategory = (self.ids.prodCategory.text)
+        #print(productName)
+        #print(productPrice)
+        #print(productQty)
+        #print(productRetail)
+
+        AdminADD.product.category = productCategory.upper()
+        AdminADD.product.name=productName.upper()
+        AdminADD.product.orig_price = round(float(productPrice),2)
+        AdminADD.product.qty = int(productQty)
+        AdminADD.product.retail_price = round(float(productRetail),2)
+        # Get the current date/time
+        AdminADD.product.date = DateManager.get_date()
+        # Set and get expiration date
+        AdminADD.product.exp_date = DateManager.set_get_expiration_date(AdminADD.product.category)
+        AdminADD.product.total_price = AdminADD.product.qty * AdminADD.product.orig_price
+
+        pos = main.locate_product(AdminADD.product)
+        if pos == -1:
+            AdminADD.product.sales_qty = 0
+            AdminADD.product.total_sales_amount = 0
+            AdminADD.product.profit = AdminADD.product.total_price * -1
+            status = AdminADD.add_product(AdminADD.product)
+        else:
+            # if exist update the product
+            status = AdminADD.update_product(AdminADD.product, pos)
+
+        if status == 1:
+            DataManager.record_product(AdminADD.product)
+            DataManager.save()
+            popup_content = Label(text="ADDED SUCCESSFULLY")
+            popup = Popup(title='DONE', content=popup_content, size_hint=(None, None), size=(400, 200))
+            popup.open()
+
+        else:
+            popup_content = Label(text="FAILED TO ADD")
+            popup = Popup(title='WARNING', content=popup_content, size_hint=(None, None), size=(400, 200))
+            popup.open()
+
 
     def update_datetime(self):
         self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
+
+    def add_product(product):
+        if main.is_full() == 1:
+            popup_content = Label(text="INVENTORY FULL")
+            popup = Popup(title='WARNING', content=popup_content, size_hint=(None, None), size=(400, 200))
+            popup.open()
+
+        else:
+            if product.qty <= main.MAX_PROD_STOCK:
+                main.marker += 1
+                inventory_data = Inventory(
+                    product.category, product.name, product.date,
+                    product.exp_date, product.orig_price, product.qty,
+                    product.total_price, product.retail_price, product.sales_qty,
+                    product.total_sales_amount, product.profit
+                )
+                main.my_inv[main.marker] = inventory_data
+                return 1
+            else:
+                popup_content = Label(text="QUANTITY EXCEEDED")
+                popup = Popup(title='WARNING', content=popup_content, size_hint=(None, None), size=(400, 200))
+                popup.open()
+            return -1
+        return -1
+
+    def update_product(product, index_pos):
+        if (main.my_inv[index_pos].qty + product.qty) > main.MAX_PROD_STOCK:
+            print("QUANTITY LIMIT EXCEEDED FOR: " + main.my_inv[index_pos].name)
+            return -1
+        else:
+            main.my_inv[index_pos].date = product.date
+            main.my_inv[index_pos].exp_date = product.exp_date
+            main.my_inv[index_pos].orig_price = product.orig_price
+            main.my_inv[index_pos].qty += product.qty
+            main.my_inv[index_pos].total_price = product.orig_price * main.my_inv[index_pos].qty
+            main.my_inv[index_pos].retail_price = product.retail_price
+            main.my_inv[index_pos].profit -= product.qty * product.orig_price
+            return 1
 
 
 class AdminDisplay(Screen):
@@ -68,8 +171,6 @@ class AdminLoginTry(Screen):
 
 Builder.load_file('screen.kv')
 
-
-# Builder.load_file('Mainpanel.kv')
 
 class MyApp(MDApp):
     def build(self):
@@ -102,6 +203,30 @@ class MyApp(MDApp):
         if new_value >= 100:
             # Stop the progress bar updates when the value reaches 100
             Clock.unschedule(self.update_progress_bar)
+
+
+def is_full():
+    inventory = [item for item in my_inv if item is not None]
+    if len(inventory) == MAX_INV - 1:
+        return 1
+    else:
+        return 0
+
+
+def locate_product(product):
+    inventory = [item for item in my_inv if item.name is not None]
+    for i in range(len(inventory)):
+        if inventory[i].name.lower() == product.name.lower():
+            return i
+    return -1
+
+
+def locate_product_receipt(product):
+    receipt = [item for item in customer_receiptt if item.get_product_name() is not None]
+    for i in range(len(receipt)):
+        if receipt[i].get_product_name().lower() == product.get_product_name().lower():
+            return i
+    return -1
 
 
 if __name__ == "__main__":
