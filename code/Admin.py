@@ -414,7 +414,7 @@ def display_file(file_folder, date):
                         Terminal.gotoxy(35, 10)
                         print("Expired Quantity")
                         Terminal.gotoxy(60, 10)
-                        print("Profit Loss")
+                        print("Total Amount")
 
                         last_iteration = (len(combined_data)*2) + 5
                         for i in range((len(combined_data)*2) + 5):
