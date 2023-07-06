@@ -1,11 +1,9 @@
 from kivy.config import Config
-
+Config.set('graphics', 'resizable', False)
 import DataManager
 import DateManager
 from Inventory import Inventory
 from Receipt import Receipt
-
-Config.set('graphics', 'resizable', False)
 from datetime import datetime
 from kivy.uix.popup import Popup
 from kivy.uix.label import Label
