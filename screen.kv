@@ -11,6 +11,9 @@
     DisplayInventory:
     DisplaySales:
     DisplayExpired:
+    SettingsAdmin:
+    SettingsCashier:
+    SettingsLey:
 
 <AdminDB>:
     id: adminDB
@@ -957,6 +960,591 @@
 
 <DisplayExpired>:
     name:"epired"
+    GridLayout:
+        cols:2
+        size: root.width, root.height
+
+        GridLayout:
+            cols: 1
+            size_hint: 0.2,1
+
+            Button:
+                text:""
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 130
+
+            Button:
+                id: DB
+                text:"DASHBOARD"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "first"
+
+            Button:
+                id: ADD
+                text:"ADD"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "second"
+
+            Button:
+                id: DP
+                text:"DISPLAY"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(143/255,195/255,31/255,1)
+
+                size_hint: None, None
+                size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "third"
+
+            Button:
+                id: ST
+                text:"SETTING"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+
+                size_hint: None, None
+                size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "fourth"
+
+            Button:
+                text:""
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 520
+
+            Button:
+                id: LOGOUT
+                text:"LOGOUT"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                #color: 0,0,0,1
+                size_hint: None, None
+                size: 150, 50
+
+        FloatLayout:
+            id:add
+            size: root.width, root.height
+
+            Label:
+                text: root.current_datetime
+                font_size: 20
+                size_hint: None, None
+                pos_hint: {"x": 0.88, "y": 0.88}
+
+            Label:
+                text: root.current_datetime
+                font_size: 20
+                size_hint: None, None
+                pos_hint: {"x": 0.88, "y": 0.88}
+
+            Button:
+                text: 'weh'
+                size_hint: 0.2,.05
+                pos_hint: {"x":.3,"y":.7}
+            Label:
+                text: 'Display'
+                color: 0,0,0,1
+                size_hint: 0.2,.05
+                pos: 300,200
+<DisplayExpired>:
+    name:"epired"
+    GridLayout:
+        cols:2
+        size: root.width, root.height
+
+        GridLayout:
+            cols: 1
+            size_hint: 0.2,1
+
+            Button:
+                text:""
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 130
+
+            Button:
+                id: DB
+                text:"DASHBOARD"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "first"
+
+            Button:
+                id: ADD
+                text:"ADD"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "second"
+
+            Button:
+                id: DP
+                text:"DISPLAY"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(143/255,195/255,31/255,1)
+
+                size_hint: None, None
+                size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "third"
+
+            Button:
+                id: ST
+                text:"SETTING"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+
+                size_hint: None, None
+                size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "fourth"
+
+            Button:
+                text:""
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 520
+
+            Button:
+                id: LOGOUT
+                text:"LOGOUT"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                #color: 0,0,0,1
+                size_hint: None, None
+                size: 150, 50
+
+        FloatLayout:
+            id:add
+            size: root.width, root.height
+
+            Label:
+                text: root.current_datetime
+                font_size: 20
+                size_hint: None, None
+                pos_hint: {"x": 0.88, "y": 0.88}
+
+            Label:
+                text: root.current_datetime
+                font_size: 20
+                size_hint: None, None
+                pos_hint: {"x": 0.88, "y": 0.88}
+
+            Button:
+                text: 'weh'
+                size_hint: 0.2,.05
+                pos_hint: {"x":.3,"y":.7}
+            Label:
+                text: 'Display'
+                color: 0,0,0,1
+                size_hint: 0.2,.05
+                pos: 300,200
+<DisplayExpired>:
+    name:"epired"
+    GridLayout:
+        cols:2
+        size: root.width, root.height
+
+        GridLayout:
+            cols: 1
+            size_hint: 0.2,1
+
+            Button:
+                text:""
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 130
+
+            Button:
+                id: DB
+                text:"DASHBOARD"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "first"
+
+            Button:
+                id: ADD
+                text:"ADD"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "second"
+
+            Button:
+                id: DP
+                text:"DISPLAY"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(143/255,195/255,31/255,1)
+
+                size_hint: None, None
+                size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "third"
+
+            Button:
+                id: ST
+                text:"SETTING"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+
+                size_hint: None, None
+                size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "fourth"
+
+            Button:
+                text:""
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 520
+
+            Button:
+                id: LOGOUT
+                text:"LOGOUT"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                #color: 0,0,0,1
+                size_hint: None, None
+                size: 150, 50
+
+        FloatLayout:
+            id:add
+            size: root.width, root.height
+
+            Label:
+                text: root.current_datetime
+                font_size: 20
+                size_hint: None, None
+                pos_hint: {"x": 0.88, "y": 0.88}
+
+            Label:
+                text: root.current_datetime
+                font_size: 20
+                size_hint: None, None
+                pos_hint: {"x": 0.88, "y": 0.88}
+
+            Button:
+                text: 'weh'
+                size_hint: 0.2,.05
+                pos_hint: {"x":.3,"y":.7}
+            Label:
+                text: 'Display'
+                color: 0,0,0,1
+                size_hint: 0.2,.05
+                pos: 300,200
+
+<SettingsAdmin>:
+    name:"settingsAdmin"
+    GridLayout:
+        cols:2
+        size: root.width, root.height
+
+        GridLayout:
+            cols: 1
+            size_hint: 0.2,1
+
+            Button:
+                text:""
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 130
+
+            Button:
+                id: DB
+                text:"DASHBOARD"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "first"
+
+            Button:
+                id: ADD
+                text:"ADD"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "second"
+
+            Button:
+                id: DP
+                text:"DISPLAY"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(143/255,195/255,31/255,1)
+
+                size_hint: None, None
+                size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "third"
+
+            Button:
+                id: ST
+                text:"SETTING"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+
+                size_hint: None, None
+                size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "fourth"
+
+            Button:
+                text:""
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 520
+
+            Button:
+                id: LOGOUT
+                text:"LOGOUT"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                #color: 0,0,0,1
+                size_hint: None, None
+                size: 150, 50
+
+        FloatLayout:
+            id:add
+            size: root.width, root.height
+
+            Label:
+                text: root.current_datetime
+                font_size: 20
+                size_hint: None, None
+                pos_hint: {"x": 0.88, "y": 0.88}
+
+            Label:
+                text: root.current_datetime
+                font_size: 20
+                size_hint: None, None
+                pos_hint: {"x": 0.88, "y": 0.88}
+
+            Button:
+                text: 'weh'
+                size_hint: 0.2,.05
+                pos_hint: {"x":.3,"y":.7}
+            Label:
+                text: 'Display'
+                color: 0,0,0,1
+                size_hint: 0.2,.05
+                pos: 300,200'
+
+
+<SettingsCashier>:
+    name:"settingsCashier"
+    GridLayout:
+        cols:2
+        size: root.width, root.height
+
+        GridLayout:
+            cols: 1
+            size_hint: 0.2,1
+
+            Button:
+                text:""
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 130
+
+            Button:
+                id: DB
+                text:"DASHBOARD"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "first"
+
+            Button:
+                id: ADD
+                text:"ADD"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "second"
+
+            Button:
+                id: DP
+                text:"DISPLAY"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(143/255,195/255,31/255,1)
+
+                size_hint: None, None
+                size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "third"
+
+            Button:
+                id: ST
+                text:"SETTING"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+
+                size_hint: None, None
+                size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "fourth"
+
+            Button:
+                text:""
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                size_hint: None, None
+                size: 150, 520
+
+            Button:
+                id: LOGOUT
+                text:"LOGOUT"
+                bold: True
+                background_normal: ''
+                background_down: ''
+                background_color:(0/255,0/255,0/255,.7)
+                #color: 0,0,0,1
+                size_hint: None, None
+                size: 150, 50
+
+        FloatLayout:
+            id:add
+            size: root.width, root.height
+
+            Label:
+                text: root.current_datetime
+                font_size: 20
+                size_hint: None, None
+                pos_hint: {"x": 0.88, "y": 0.88}
+
+            Label:
+                text: root.current_datetime
+                font_size: 20
+                size_hint: None, None
+                pos_hint: {"x": 0.88, "y": 0.88}
+
+            Button:
+                text: 'weh'
+                size_hint: 0.2,.05
+                pos_hint: {"x":.3,"y":.7}
+            Label:
+                text: 'Display'
+                color: 0,0,0,1
+                size_hint: 0.2,.05
+                pos: 300,200
+
+
+<SettingsKey>:
+    name:"settingsAdmin"
     GridLayout:
         cols:2
         size: root.width, root.height
