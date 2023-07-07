@@ -119,14 +119,14 @@
                 text:"Welcome, Admin"
                 font_size: 35
                 size_hint: None, None
-                pos_hint: {"x": 0.0220, "y": 0.88}
+                pos_hint: {"x": 0.1, "y": 0.88}
                 bold: True
 
             Label:
                 text: root.current_datetime
                 font_size: 20
                 size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
+                pos_hint: {"x": 0.85, "y": 0.88}
 
             # todo: largest stock, best selling, lowest stock,
 
@@ -134,63 +134,63 @@
                 text: "Largest Stock"
                 font_size: 30
                 size_hint: None, None
-                pos_hint: {"x": 0.050, "y": 0.5}
+                pos_hint: {"x": 0.1, "y": 0.5}
                 bold: True
 
             MDIcon:
                 icon: "food-apple"
                 size_hint: None, None
                 size: "150dp", "150dp"
-                pos_hint: {"x": 0.07, "y": 0.47}
+                pos_hint: {"x": 0.13, "y": 0.47}
                 font_size: 50
 
             Label:
                 text: "Vegetables"
                 font_size: 50
                 size_hint: None, None
-                pos_hint: {"x": 0.050, "y": 0.6}
+                pos_hint: {"x": 0.1, "y": 0.6}
                 bold: True
 
             Label:
                 text: "Best Selling"
                 font_size: 30
                 size_hint: None, None
-                pos_hint: {"x": 0.4, "y": 0.5}
+                pos_hint: {"x": 0.45, "y": 0.5}
                 bold: True
 
             MDIcon:
                 icon: "cash"
                 size_hint: None, None
                 size: "150dp", "150dp"
-                pos_hint: {"x": 0.425, "y": 0.47}
+                pos_hint: {"x": 0.48, "y": 0.47}
                 font_size: 50
 
             Label:
                 text: "Junk Foods"
                 font_size: 50
                 size_hint: None, None
-                pos_hint: {"x": 0.4, "y": 0.6}
+                pos_hint: {"x": 0.45, "y": 0.6}
                 bold: True
 
             Label:
                 text: "Lowest Stock"
                 font_size: 30
                 size_hint: None, None
-                pos_hint: {"x": 0.75, "y": 0.5}
+                pos_hint: {"x": 0.78, "y": 0.5}
                 bold: True
 
             MDIcon:
                 icon: "hamburger"
                 size_hint: None, None
                 size: "150dp", "150dp"
-                pos_hint: {"x": 0.770, "y": 0.47}
+                pos_hint: {"x": 0.81, "y": 0.47}
                 font_size: 50
 
             Label:
                 text: "Drinks"
                 font_size: 50
                 size_hint: None, None
-                pos_hint: {"x": 0.75, "y": 0.6}
+                pos_hint: {"x": 0.78, "y": 0.6}
                 bold: True
 
 
@@ -293,18 +293,18 @@
                 text: root.current_datetime
                 font_size: 20
                 size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
+                pos_hint: {"x": 0.85, "y": 0.88}
 
             Label:
                 text:"Add Product"
                 font_size: 45
                 size_hint: None, None
-                pos_hint: {"x": 0.0220, "y": 0.88}
+                pos_hint: {"x": 0.1, "y": 0.88}
                 bold: True
 
             Label:
                 text: "Product Category"
-                pos_hint: {"x": 0.2, "y": 0.70}
+                pos_hint: {"x": 0.15, "y": 0.70}
                 font_size: 35
                 size_hint: None, None
 
@@ -318,7 +318,7 @@
 
             Label:
                 text: "Product Name"
-                pos_hint: {"x": 0.2, "y": 0.60}
+                pos_hint: {"x": 0.15, "y": 0.60}
                 font_size: 35
                 size_hint: None, None
 
@@ -332,7 +332,7 @@
 
             Label:
                 text: "Price"
-                pos_hint: {"x": 0.2, "y": 0.50}
+                pos_hint: {"x": 0.15, "y": 0.50}
                 font_size: 35
                 size_hint: None, None
 
@@ -346,7 +346,7 @@
 
             Label:
                 text: "Quantity"
-                pos_hint: {"x": 0.2, "y": 0.40}
+                pos_hint: {"x": 0.15, "y": 0.40}
                 font_size: 35
                 size_hint: None, None
 
@@ -360,7 +360,7 @@
 
             Label:
                 text: "Retail Price"
-                pos_hint: {"x": 0.2, "y": 0.30}
+                pos_hint: {"x": 0.15, "y": 0.30}
                 font_size: 35
                 size_hint: None, None
 
@@ -377,7 +377,7 @@
                 pos_hint: {"x": 0.4, "y": 0.20}
                 size_hint: None, None
                 width: 300
-                font_size: 35
+                font_size: 30
                 on_press: root.getInput()
 
 
@@ -480,47 +480,53 @@
                 text: root.current_datetime
                 font_size: 20
                 size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
+                pos_hint: {"x": 0.85, "y": 0.88}
 
-            Label:
-                text: root.current_datetime
-                font_size: 20
-                size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
-
-            Button:
-                text: 'weh'
-                size_hint: 0.2,.05
-                pos_hint: {"x":.3,"y":.7}
-            Label:
-                text: 'Display'
-                color: 0,0,0,1
-                size_hint: 0.2,.05
-                pos: 300,200
-
-            Button:
+            MDRoundFlatButton:
                 text: "Inventory"
-                pos_hint: {"x": 0.4, "y": 0.60}
+                pos_hint: {"x": 0.05, "y": 0.4}
                 size_hint: None, None
                 width: 300
                 font_size: 35
-                on_press: root.manager.current = "inventory"
+                on_release: root.manager.current = "inventory"
 
-            Button:
+            MDIcon:
+                icon: "list-box"
+                size_hint: None, None
+                size: "150dp", "150dp"
+                pos_hint: {"x": 0.10, "y": 0.5}
+                font_size: 80
+
+            MDRoundFlatButton:
                 text: "Sales History"
-                pos_hint: {"x": 0.4, "y": 0.40}
+                pos_hint: {"x": 0.3, "y": 0.4}
                 size_hint: None, None
                 width: 300
                 font_size: 35
-                on_press: root.manager.current = "sales"
+                on_release: root.manager.current = "sales"
 
-            Button:
-                text: "Expired Product History"
-                pos_hint: {"x": 0.4, "y": 0.20}
+            MDIcon:
+                icon: "cash-clock"
+                size_hint: None, None
+                size: "150dp", "150dp"
+                pos_hint: {"x": 0.39, "y": 0.5}
+                font_size: 80
+
+            MDRoundFlatButton:
+                text: "Expired History"
+                pos_hint: {"x": 0.6, "y": 0.4}
                 size_hint: None, None
                 width: 300
                 font_size: 35
-                on_press: root.manager.current = "expired"
+                on_release: root.manager.current = "expired"
+
+            MDIcon:
+                icon: "timer-cog"
+                size_hint: None, None
+                size: "150dp", "150dp"
+                pos_hint: {"x": 0.7, "y": 0.5}
+                font_size: 80
+
 
 <DisplayInventory>: #display -> inventory
     name:"inventory"
@@ -621,31 +627,14 @@
                 text: root.current_datetime
                 font_size: 20
                 size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
-
-            Label:
-                text: root.current_datetime
-                font_size: 20
-                size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
-
-            Button:
-                text: 'weh'
-                size_hint: 0.2,.05
-                pos_hint: {"x":.3,"y":.7}
-            Label:
-                text: 'Display'
-                color: 0,0,0,1
-                size_hint: 0.2,.05
-                pos: 300,200
-
-            Button:
-                text: "to display settings"
-                pos_hint: {"x": 0.4, "y": 0.80}
+                pos_hint: {"x": 0.85, "y": 0.88}
+            MDRoundFlatButton:
+                text: "Return to Menu"
+                pos_hint: {"x": 0.3, "y": 0.2}
                 size_hint: None, None
                 width: 300
                 font_size: 35
-                on_press: root.manager.current = "third"
+                on_release: root.manager.current = "third"
 
 
 <DisplaySales>: #display -> sales history
@@ -755,23 +744,13 @@
                 size_hint: None, None
                 pos_hint: {"x": 0.88, "y": 0.88}
 
-            Button:
-                text: 'weh'
-                size_hint: 0.2,.05
-                pos_hint: {"x":.3,"y":.7}
-            Label:
-                text: 'Display'
-                color: 0,0,0,1
-                size_hint: 0.2,.05
-                pos: 300,200
-
-            Button:
-                text: "to display settings"
-                pos_hint: {"x": 0.4, "y": 0.80}
+            MDRoundFlatButton:
+                text: "Return to Menu"
+                pos_hint: {"x": 0.3, "y": 0.2}
                 size_hint: None, None
                 width: 300
                 font_size: 35
-                on_press: root.manager.current = "third"
+                on_release: root.manager.current = "third"
 
 <DisplayExpired>: #display -> expired
     name:"expired"
@@ -880,23 +859,13 @@
                 size_hint: None, None
                 pos_hint: {"x": 0.88, "y": 0.88}
 
-            Button:
-                text: 'weh'
-                size_hint: 0.2,.05
-                pos_hint: {"x":.3,"y":.7}
-            Label:
-                text: 'Display'
-                color: 0,0,0,1
-                size_hint: 0.2,.05
-                pos: 300,200
-
-            Button:
-                text: "to display settings"
-                pos_hint: {"x": 0.4, "y": 0.80}
+            MDRoundFlatButton:
+                text: "Return to Menu"
+                pos_hint: {"x": 0.3, "y": 0.2}
                 size_hint: None, None
                 width: 300
                 font_size: 35
-                on_press: root.manager.current = "third"
+                on_release: root.manager.current = "third"
 
 <AdminSettings>: #settings main panel
     name:"fourth"
