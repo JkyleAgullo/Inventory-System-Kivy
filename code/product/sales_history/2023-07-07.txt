@@ -1,0 +1,12 @@
+Product Name: ARGENTINA
+Sales Quantity: 1
+Total Sales Amount: 55.0
+
+Product Name: BITAMILK
+Sales Quantity: 1
+Total Sales Amount: 37.0
+
+Product Name: COCA COLA
+Sales Quantity: 2
+Total Sales Amount: 30.0
+
