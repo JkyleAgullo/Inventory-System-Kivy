@@ -987,28 +987,13 @@
                 size: 150, 50
 
 
-        FloatLayout:
-            id:add
-            size: root.width, root.height
+        BoxLayout:
+        orientation: "vertical"
 
-            Label:
-                text: root.current_datetime
-                font_size: 20
-                size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
+        ScrollView:
+            id: scroll_view
+            do_scroll_x: False
 
-            Label:
-                text: root.current_datetime
-                font_size: 20
-                size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
-
-            Label:
-                text: 'Display'
-                color: 0,0,0,1
-                size_hint: 0.2,.05
-                pos: 300,200
-<DisplayExpired>:
 
 
 

@@ -197,7 +197,7 @@ class SplashWindow(Screen):
         if value >= 100:
             app = App.get_running_app()
             app.root.transition = NoTransition()
-            app.root.current = "login"
+            app.root.current = "admin"
 
 
 class AdminADD(Screen):
@@ -425,6 +425,41 @@ class DisplayInventory(Screen):
 
 class DisplaySales(Screen):
     current_datetime = StringProperty("")
+
+    class DisplaySales(Screen):
+        def get_sales_history_data(self):
+            sales_history_folder_path = os.path.join(os.getcwd(), DataManager.sales_history_folder)
+            text_files = glob.glob(sales_history_folder_path + '/*.txt')
+
+            data = []
+            for i, file_path in enumerate(text_files, 1):
+                file_name = os.path.basename(file_path)
+                date = os.path.splitext(file_name)[0]
+                data.append({"file_number": i, "file_date": date})
+
+            return data
+
+        def open_text_file(self, file_path):
+            with open(file_path, 'r') as file:
+                content = file.read()
+
+            print(content)  # Modify this part to open the file in your desired way
+
+        def show_sales_history(self):
+            data = self.get_sales_history_data()
+
+            table = MDDataTable(
+                size_hint=(0.9, 0.9),
+                column_data=[
+                    ("Number", dp(20)),
+                    ("Date", dp(30))
+                ],
+                row_data=data,
+                on_row_press=lambda instance_row: self.open_text_file(text_files[instance_row["file_number"] - 1])
+            )
+
+            self.ids.scroll_view.clear_widgets()
+            self.ids.scroll_view.add_widget(table)
 
     def update_datetime(self):
         self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
