@@ -18,3 +18,7 @@ Product Name: ORANGE
 Expiration Date: 2024-01-07
 Quantity: 20
 
+Product Name: SHABU
+Expiration Date: 2024-01-07
+Quantity: 12
+

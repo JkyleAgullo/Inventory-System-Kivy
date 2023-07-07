@@ -10,3 +10,6 @@ Quantity: 10
 Product Name: ORANGE
 Quantity: 10
 
+Product Name: SHABU
+Quantity: 12
+
