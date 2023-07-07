@@ -6,7 +6,7 @@ class Security:
     __key_dir = "C:/Users/Matthew/Desktop/key/key.txt"
     __admin_fp = "adminacc"
     __cashier_fp = "cashieracc"
-    previous_key = None
+    __inventory_fp = "inventory"
 
     @staticmethod
     def get_admin_filename():
