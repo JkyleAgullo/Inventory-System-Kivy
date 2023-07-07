@@ -141,12 +141,12 @@ class Cashier(Screen):
     def Array_display(self):  # prod name
         array = self.my_array
         i = 10
-        self.cols = len(array[0])
+        #self.cols = len(array[0])
         # print(Cashier.my_array[1]) #try lang
         # for row in array:
         for element in array:
             i = i - 30
-            self.add_widget(Label(text=str(element), font_size='20', pos=(620, 340 + i), color=(1, 1, 1, 1)))
+            self.add_widget(Label(text=str(element), font_size='20', pos=(220, 340 + i), color=(1, 1, 1, 1)))
             print(element)
 
     def Array_display2(self):  # prod qty
@@ -157,7 +157,7 @@ class Cashier(Screen):
         # for row in array:
         for element in array:
             i = i - 30
-            self.add_widget(Label(text=str(element), font_size='20', pos=(750, 340 + i), color=(1, 1, 1, 1)))
+            self.add_widget(Label(text=str(element), font_size='20', pos=(350, 340 + i), color=(1, 1, 1, 1)))
 
     def Array_price(self):
         array = self.price_array
@@ -167,7 +167,8 @@ class Cashier(Screen):
         print(len(array))
         for index, element in enumerate(array):
             i = i - 30
-            label = Label(text=str(element), font_size='23', pos=(840, 340 + i), color=(1, 1, 1, 1))
+
+            label = Label(text=str(element), font_size='23', pos=(440, 340 + i), color=(1, 1, 1, 1))
             self.add_widget(label)
 
 
