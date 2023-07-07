@@ -80,6 +80,9 @@ def del_expired_product():
 
             #os.remove(exp_date_product_dir)
     except FileNotFoundError:
+        popup_content = Label(text=" PRODUCT FILE DIRECTORY DOES NOT EXIST")
+        popup = Popup(title='Warning', content=popup_content, size_hint=(None, None), size=(400, 200))
+        popup.open()
         print("PRODUCT FILE DIRECTORY DOES NOT EXIST")
 
 
@@ -99,6 +102,9 @@ def erase_content_file(file):
         with open(file, "w") as writer:
             writer.write("")
     except Exception as e:
+        popup_content = Label(text="Error occurred during erasing file content: " + str(e))
+        popup = Popup(title='Warning', content=popup_content, size_hint=(None, None), size=(400, 200))
+        popup.open()
         print("Error occurred during erasing file content: ", e)
 
 
@@ -150,6 +156,9 @@ def record_expiration_date_product(product):
                 writer.write("Quantity: " + str(item.qty) + "\n\n")
 
     except Exception as e:
+        popup_content = Label(text="ERROR OCCURRED DURING RECORDING EXPIRATION DATE: " + str(e))
+        popup = Popup(title='Warning', content=popup_content, size_hint=(None, None), size=(400, 200))
+        popup.open()
         print("ERROR OCCURRED DURING RECORDING EXPIRATION DATE: ", e)
 
 
@@ -319,9 +328,7 @@ def retrieve():
         else:
             raise FileNotFoundError
     except FileNotFoundError:
-        popup_content = Label(text="INVENTORY FILE NOT FOUND")
-        popup = Popup(title='Warning', content=popup_content, size_hint=(None, None), size=(400, 200))
-        popup.open()
+        pass
 
 
 def save():
