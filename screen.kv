@@ -1548,6 +1548,31 @@
             id:add
             size: root.width, root.height
 
+            MDRoundFlatButton:
+                text: "Submit"
+                pos_hint: {"x": 0.4, "y": 0.20}
+                size_hint: None, None
+                width: 300
+                font_size: 35
+                on_press: root.getInput()
+
+            MDTextField:
+                id: password
+                icon_right: "plus-box"
+                width: 300
+                font_size: 35
+                pos_hint: {"x": 0.3, "y": 0.60}
+                size_hint: None, None
+
+            MDTextField:
+                id: password2
+                icon_right: "plus-box"
+                width: 300
+                font_size: 35
+                pos_hint: {"x": 0.3, "y": 0.40}
+                size_hint: None, None
+
+
             Label:
                 text: root.current_datetime
                 font_size: 20
@@ -1561,12 +1586,8 @@
                 pos_hint: {"x": 0.88, "y": 0.88}
 
             Button:
-                text: 'weh'
-                size_hint: 0.2,.05
-                pos_hint: {"x":.3,"y":.7}
-            Button:
-                text: "to admin settings"
-                pos_hint: {"x": 0.4, "y": 0.50}
+                text: "BACK"
+                pos_hint: {"x": 0.65, "y": 0.02}
                 size_hint: None, None
                 width: 300
                 font_size: 35
@@ -1638,7 +1659,6 @@
                 background_normal: ''
                 background_down: ''
                 background_color:(143/255,195/255,31/255,1)
-
                 size_hint: None, None
                 size: 150, 50
                 on_press:
@@ -1668,11 +1688,28 @@
             id:add
             size: root.width, root.height
 
-            Label:
-                text: root.current_datetime
-                font_size: 20
+            MDRoundFlatButton:
+                text: "Submit"
+                pos_hint: {"x": 0.4, "y": 0.20}
                 size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
+                width: 300
+                font_size: 35
+                on_press: root.getInput()
+            MDTextField:
+                id: password
+                icon_right: "plus-box"
+                width: 300
+                font_size: 35
+                pos_hint: {"x": 0.3, "y": 0.60}
+                size_hint: None, None
+
+            MDTextField:
+                id: password2
+                icon_right: "plus-box"
+                width: 300
+                font_size: 35
+                pos_hint: {"x": 0.3, "y": 0.40}
+                size_hint: None, None
 
             Label:
                 text: root.current_datetime
@@ -1680,18 +1717,20 @@
                 size_hint: None, None
                 pos_hint: {"x": 0.88, "y": 0.88}
 
-            Button:
-                text: 'weh'
-                size_hint: 0.2,.05
-                pos_hint: {"x":.3,"y":.7}
+            Label:
+                text: root.current_datetime
+                font_size: 20
+                size_hint: None, None
+                pos_hint: {"x": 0.88, "y": 0.88}
+
             Label:
                 text: 'Display'
                 color: 0,0,0,1
                 size_hint: 0.2,.05
                 pos: 300,200
             Button:
-                text: "to admin settings"
-                pos_hint: {"x": 0.4, "y": 0.50}
+                text: "BACK"
+                pos_hint: {"x": 0.65, "y": 0.02}
                 size_hint: None, None
                 width: 300
                 font_size: 35
@@ -1793,6 +1832,28 @@
             id:add
             size: root.width, root.height
 
+            MDRoundFlatButton:
+                text: "Submit"
+                pos_hint: {"x": 0.4, "y": 0.20}
+                size_hint: None, None
+                width: 300
+                font_size: 35
+                on_press: root.getInput()
+            MDTextField:
+                id: password
+                icon_right: "plus-box"
+                width: 300
+                font_size: 35
+                pos_hint: {"x": 0.3, "y": 0.60}
+                size_hint: None, None
+
+            MDTextField:
+                id: password2
+                icon_right: "plus-box"
+                width: 300
+                font_size: 35
+                pos_hint: {"x": 0.3, "y": 0.40}
+                size_hint: None, None
             Label:
                 text: root.current_datetime
                 font_size: 20
@@ -1805,10 +1866,6 @@
                 size_hint: None, None
                 pos_hint: {"x": 0.88, "y": 0.88}
 
-            Button:
-                text: 'weh'
-                size_hint: 0.2,.05
-                pos_hint: {"x":.3,"y":.7}
             Label:
                 text: 'Display'
                 color: 0,0,0,1
@@ -1816,8 +1873,8 @@
                 pos: 300,200
 
             Button:
-                text: "go back"
-                pos_hint: {"x": 0.4, "y": 0.20}
+                text: "BACK"
+                pos_hint: {"x": 0.65, "y": 0.02}
                 size_hint: None, None
                 width: 300
                 font_size: 35
