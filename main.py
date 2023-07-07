@@ -186,7 +186,7 @@ class SplashWindow(Screen):
         if value >= 100:
             app = App.get_running_app()
             app.root.transition = NoTransition()
-            app.root.current = "cashier"
+            app.root.current = "login"
 
 
 class AdminADD(Screen):
@@ -312,6 +312,9 @@ class WindowManager(ScreenManager):
 
 class AdminLoginTry(Screen):
 
+    def on_pre_enter(self):
+        self.ids.user.text = ""
+        self.ids.password.text = ""
     def submit(self, screen):
         global admin_acc
         global cashier_acc

@@ -74,6 +74,9 @@
             background_down: ''
             background_color: 1,1,1,1
             color: 0,0,0,1
+            on_press:
+                root.manager.transition = NoTransition()
+                root.manager.current = "login"
 
         Label:
             text: "Product Name"
