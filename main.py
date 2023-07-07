@@ -2,6 +2,7 @@ from kivy.config import Config
 
 import Authen
 from Account import Account
+from Security import Security
 
 Config.set('graphics', 'resizable', False)
 import DataManager
@@ -374,6 +375,35 @@ class DisplayExpired(Screen):
 
 class SettingsCashier(Screen):
     current_datetime = StringProperty("")
+    is_change = False
+    def submit(self):
+        password = self.ids.password.text
+        re_password = self.ids.password2.text
+
+        if password == cashier_acc.get_password():
+            popup_content = Label(text="NEW PASSWORD MUST NOT BE THE SAME AS CURRENT PASSWORD")
+            popup = Popup(title='WARNING', content=popup_content, size_hint=(None, None), size=(400, 200))
+            popup.open()
+            self.ids.password.text = ""
+            self.ids.password2.text = ""
+        else:
+            if password == re_password:
+                self.is_change = True
+                cashier_acc.set_password(password)
+            else:
+                popup_content = Label(text="PASSWORD NOT MATCH")
+                popup = Popup(title='WARNING', content=popup_content, size_hint=(None, None), size=(400, 200))
+                popup.open()
+                self.ids.password.text = ""
+                self.ids.password2.text = ""
+
+        if self.is_change is True:
+            popup_content = Label(text="CHANGED SUCCESSFULLY")
+            popup = Popup(title='WARNING', content=popup_content, size_hint=(None, None), size=(400, 200))
+            popup.open()
+            Authen.save_account()
+            self.ids.password.text = ""
+            self.ids.password2.text = ""
 
     def update_datetime(self):
         self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
@@ -381,13 +411,65 @@ class SettingsCashier(Screen):
 
 class SettingsAdmin(Screen):
     current_datetime = StringProperty("")
+    is_change = False
 
+    def submit(self):
+        password = self.ids.password.text
+        re_password = self.ids.password2.text
+
+        if password == admin_acc.get_password():
+            popup_content = Label(text="NEW PASSWORD MUST NOT BE THE SAME AS CURRENT PASSWORD")
+            popup = Popup(title='WARNING', content=popup_content, size_hint=(None, None), size=(400, 200))
+            popup.open()
+            self.ids.password.text = ""
+            self.ids.password2.text = ""
+        else:
+            if password == re_password:
+                self.is_change = True
+                admin_acc.set_password(password)
+            else:
+                popup_content = Label(text="PASSWORD NOT MATCH")
+                popup = Popup(title='WARNING', content=popup_content, size_hint=(None, None), size=(400, 200))
+                popup.open()
+                self.ids.password.text = ""
+                self.ids.password2.text = ""
+
+        if self.is_change is True:
+            popup_content = Label(text="CHANGED SUCCESSFULLY")
+            popup = Popup(title='WARNING', content=popup_content, size_hint=(None, None), size=(400, 200))
+            popup.open()
+            Authen.save_account()
+            self.ids.password.text = ""
+            self.ids.password2.text = ""
     def update_datetime(self):
         self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
 
 
 class SettingsKey(Screen):
     current_datetime = StringProperty("")
+    is_change = False
+
+    def submit(self):
+        security_obj = Security()
+        new_key = self.ids.password.text
+
+        if new_key == Security.get_secret_key():
+            popup_content = Label(text="NEW KEY MUST NOT BE THE SAME AS CURRENT KEY")
+            popup = Popup(title='WARNING', content=popup_content, size_hint=(None, None), size=(400, 200))
+            popup.open()
+            self.ids.password.text = ""
+
+        else:
+            self.is_change = True
+            security_obj.change_secret_key(new_key)
+            Authen.save_account()
+
+        if self.is_change is True:
+            popup_content = Label(text="CHANGED SUCCESSFULLY")
+            popup = Popup(title='WARNING', content=popup_content, size_hint=(None, None), size=(400, 200))
+            popup.open()
+            self.ids.password.text = ""
+            Authen.save_account()
 
     def update_datetime(self):
         self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")

@@ -1554,7 +1554,7 @@
                 size_hint: None, None
                 width: 300
                 font_size: 35
-                on_press: root.getInput()
+                on_press: root.submit()
 
             MDTextField:
                 id: password
@@ -1694,7 +1694,7 @@
                 size_hint: None, None
                 width: 300
                 font_size: 35
-                on_press: root.getInput()
+                on_press: root.submit()
             MDTextField:
                 id: password
                 icon_right: "plus-box"
@@ -1838,7 +1838,7 @@
                 size_hint: None, None
                 width: 300
                 font_size: 35
-                on_press: root.getInput()
+                on_press: root.submit()
             MDTextField:
                 id: password
                 icon_right: "plus-box"
@@ -1847,13 +1847,6 @@
                 pos_hint: {"x": 0.3, "y": 0.60}
                 size_hint: None, None
 
-            MDTextField:
-                id: password2
-                icon_right: "plus-box"
-                width: 300
-                font_size: 35
-                pos_hint: {"x": 0.3, "y": 0.40}
-                size_hint: None, None
             Label:
                 text: root.current_datetime
                 font_size: 20
