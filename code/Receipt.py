@@ -28,3 +28,14 @@ class Receipt:
 
     def get_total_price(self):
         return self.__total_price
+
+    @staticmethod
+    def sort(receipt, ascending=True):
+        # bubble sort
+        for i in range(len(receipt) - 1):
+            for j in range(len(receipt) - i - 1):
+                if (ascending and receipt[j].get_product_name() > receipt[j + 1].get_product_name()) or (
+                        not ascending and receipt[j].get_product_name() < receipt[j + 1].get_product_name()):
+                    receipt[j], receipt[j + 1] = receipt[j + 1], receipt[j]
+
+        return receipt

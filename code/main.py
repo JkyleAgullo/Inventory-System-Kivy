@@ -25,6 +25,29 @@ def main():
     global admin_acc
     global cashier_acc
 
+    # my_inv = [
+    #     Inventory(category='Category 1', name='PIATTOS', date='2023-07-01', exp_date='2023-08-01', orig_price=10.0, qty=5),
+    #     Inventory(category='Category 2', name='COCA COLA', date='2023-07-02', exp_date='2023-08-02', orig_price=15.0, qty=3),
+    #     Inventory(category='Category 5', name='TORTILLOS', date='2023-07-03', exp_date='2023-08-03', orig_price=20.0, qty=7),
+    #     Inventory(category='Category 4', name='HELLO', date='2023-07-01', exp_date='2023-08-04', orig_price=10.0, qty=5),
+    #     Inventory(category='Category 3', name='VCUT', date='2023-07-02', exp_date='2023-08-05', orig_price=15.0, qty=3),
+    #     Inventory(category='Category 2', name='SHOESTRING', date='2023-07-03', exp_date='2023-08-06', orig_price=20.0, qty=7)
+    # ]
+    # my_inv = [item for item in my_inv if item.name is not None]
+    # print("\nNOT SORTED")
+    # for item in my_inv:
+    #     print(item.name)
+    #
+    # my_inv = Receipt.sort(my_inv)
+    # print("\nASCENDING ORDER")
+    # for item in my_inv:
+    #     print(item.name)
+    #
+    # my_inv = Inventory.sort(my_inv, False)
+    # print("\nDESCENDING ORDER")
+    # for item in my_inv:
+    #     print(item.name)
+
     # set up / retrieval of data
     Security.set_encryption_key()
     my_inv = DataManager.retrieve()

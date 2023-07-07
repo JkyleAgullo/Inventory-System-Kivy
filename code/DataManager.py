@@ -66,7 +66,7 @@ def del_expired_product():
                 # clear NoneType values
                 if ctr > -1:
                     expired_product = [item for item in expired_product if item.name is not None]
-                    expired_product = sorted(expired_product, key=lambda x: x.name)
+                    expired_product = Inventory.sort(expired_product)
                     with open(exp_product_dir, "a") as writer:
                         for item in expired_product:
                             writer.write("Product Name: " + item.name.upper() + "\n")
@@ -137,7 +137,7 @@ def record_expiration_date_product(product):
         # removing all None initialized
         my_product = [item for item in my_product if item.name is not None]
         if ctr > 0:
-            my_product = sorted(my_product, key=lambda x: x.name)
+            my_product = Inventory.sort(my_product)
 
         erase_content_file(record_expiration_date_dir)
 
@@ -153,7 +153,7 @@ def record_expiration_date_product(product):
 def record_product(product):
     my_product = [Inventory() for _ in range(Category.get_category_length())]
     is_exist = False
-    ctr = -1
+    ctr = -1  
 
     record_product_dir = os.path.join(os.getcwd(), product_history_folder, (DateManager.get_date() + ".txt"))
 
@@ -193,7 +193,7 @@ def record_product(product):
         # removing all None initialized
         my_product = [item for item in my_product if item.name is not None]
         if ctr > 0:
-            my_product = sorted(my_product, key=lambda x: x.name)
+            my_product = Inventory.sort(my_product)
 
         erase_content_file(record_product_dir)
 
@@ -253,7 +253,7 @@ def record_sales(product):
         # removing all None initialized
         my_product = [item for item in my_product if item.get_product_name() is not None]
         if ctr > 0:
-            my_product = sorted(my_product, key=lambda x: x.get_product_name())
+            my_product = Receipt.sort(my_product)
 
         erase_content_file(sales_product_dir)
 
@@ -318,7 +318,7 @@ def retrieve():
 
 def save():
     my_inventory = [item for item in main.my_inv if item.name is not None]
-    my_inventory = sorted(my_inventory, key=lambda x: x.name)
+    my_inventory = Inventory.sort(my_inventory)
     inventory_dir = os.path.join(os.getcwd(), inventory_folder, (Security.encrypt(Security.get_inventory_filename(), Security.get_secret_key()) + ".txt"))
 
     try:
@@ -352,3 +352,5 @@ def save():
                         writer.write(str(profit) + "\n\n")
     except Exception as e:
         print("ERROR OCCURRED DURING INVENTORY SAVING:", e)
+
+

@@ -173,7 +173,7 @@ def display_inventory():
     Terminal.clear_screen()
     i = 0
     my_inventory = [item for item in main.my_inv if item.name is not None]
-    my_inventory = sorted(my_inventory, key=lambda x: x.name)
+    my_inventory = Inventory.sort(my_inventory)
 
     # is empty
     if main.marker == -1:
@@ -359,7 +359,6 @@ def display_file(file_folder, date):
     data_line = None
     colon_index = 0
     my_product = [Inventory() for _ in range(Category.get_category_length())]
-    is_exist = False
     ctr = -1
     combined_data = {}
 
