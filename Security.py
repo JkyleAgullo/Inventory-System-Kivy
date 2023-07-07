@@ -17,11 +17,16 @@ class Security:
         return Security.__cashier_fp
 
     @staticmethod
+    def get_inventory_filename():
+        return Security.__inventory_fp
+
+    @staticmethod
     def set_encryption_key():
         file_exists = os.path.exists(Security.__key_dir)
         random_key = random.randint(1, 5)
 
         if not file_exists:
+            os.makedirs("C:/Users/Matthew/Desktop/Key")
             try:
                 with open(Security.__key_dir, "w") as file:
                     file.write(str(random_key))
@@ -31,6 +36,7 @@ class Security:
     def change_secret_key(self, my_secret_key):
         old_admin_fp = self.encrypt(Security.get_admin_filename(), self.get_secret_key())
         old_cashier_fp = self.encrypt(Security.get_cashier_filename(), self.get_secret_key())
+        old_inventory_fp = self.encrypt(Security.get_inventory_filename(), self.get_secret_key())
         try:
             with open(Security.__key_dir, "w") as file:
                 file.write(str(my_secret_key))
@@ -38,11 +44,11 @@ class Security:
             print("Exception occurred during key change: ", e)
         new_admin_fp = self.encrypt(Security.get_admin_filename(), self.get_secret_key())
         new_cashier_fp = self.encrypt(Security.get_cashier_filename(), self.get_secret_key())
+        new_inventory_fp = self.encrypt(Security.get_inventory_filename(), self.get_secret_key())
 
-        self.rename_file(os.path.join(os.getcwd(), "accounts", (old_admin_fp + ".txt")),
-                         os.path.join(os.getcwd(), "accounts", (new_admin_fp + ".txt")))
-        self.rename_file(os.path.join(os.getcwd(), "accounts", (old_cashier_fp + ".txt")),
-                         os.path.join(os.getcwd(), "accounts", (new_cashier_fp + ".txt")))
+        self.rename_file(os.path.join(os.getcwd(), "accounts", (old_admin_fp + ".txt")), os.path.join(os.getcwd(), "accounts", (new_admin_fp + ".txt")))
+        self.rename_file(os.path.join(os.getcwd(), "accounts", (old_cashier_fp + ".txt")), os.path.join(os.getcwd(), "accounts", (new_cashier_fp + ".txt")))
+        self.rename_file(os.path.join(os.getcwd(), "product", (old_inventory_fp + ".txt")), os.path.join(os.getcwd(), "product", (new_inventory_fp + ".txt")))
 
     @staticmethod
     def get_secret_key():
@@ -59,9 +65,12 @@ class Security:
     @staticmethod
     def encrypt(text, key):
         encrypted_text = ""
+
         for ch in text:
-            encrypted_ch = chr(ord(ch) + key)
-            encrypted_text += encrypted_ch
+            encrypted_ch = ord(ch) + key
+            if encrypted_ch > 127:
+                encrypted_ch -= 128
+            encrypted_text += chr(encrypted_ch)
 
         return encrypted_text
 
@@ -69,8 +78,10 @@ class Security:
     def decrypt(encrypted_text, key):
         decrypted_text = ""
         for ch in encrypted_text:
-            decrypted_ch = chr(ord(ch) - key)
-            decrypted_text += decrypted_ch
+            decrypted_ch = ord(ch) - key
+            if decrypted_ch < 0:
+                decrypted_ch += 128
+            decrypted_text += chr(decrypted_ch)
 
         return decrypted_text
 
