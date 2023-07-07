@@ -966,37 +966,53 @@
                 text: root.current_datetime
                 font_size: 20
                 size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
+                pos_hint: {"x": 0.85, "y": 0.88}
+                bold: True
 
-            Label:
-                text: 'Settings'
-                color: (1,1,1,1)
-                size_hint: 0.2,.05
-                pos: 300,200
+            MDIcon:
+                icon: "security"
+                size_hint: None, None
+                size: "150dp", "150dp"
+                pos_hint: {"x": 0.10, "y": 0.5}
+                font_size: 80
 
-            Button:
-                text: "admin settings"
-                pos_hint: {"x": 0.4, "y": 0.20}
+            MDRoundFlatButton:
+                text: "Admin"
+                pos_hint: {"x": 0.07, "y": 0.4}
                 size_hint: None, None
                 width: 300
                 font_size: 35
-                on_press: root.manager.current = "settingsAdmin"
+                on_release: root.manager.current = "settingsAdmin"
 
-            Button:
-                text: "cashier settings"
-                pos_hint: {"x": 0.4, "y": 0.40}
+            MDIcon:
+                icon: "account-heart"
+                size_hint: None, None
+                size: "150dp", "150dp"
+                pos_hint: {"x": 0.39, "y": 0.5}
+                font_size: 80
+
+            MDRoundFlatButton:
+                text: "Cashier"
+                pos_hint: {"x": 0.36, "y": 0.4}
                 size_hint: None, None
                 width: 300
                 font_size: 35
-                on_press: root.manager.current = "settingsCashier"
+                on_release: root.manager.current = "settingsCashier"
 
-            Button:
-                text: "change key"
-                pos_hint: {"x": 0.4, "y": 0.60}
+            MDIcon:
+                icon: "key"
+                size_hint: None, None
+                size: "150dp", "150dp"
+                pos_hint: {"x": 0.7, "y": 0.5}
+                font_size: 80
+
+            MDRoundFlatButton:
+                text: "Change Key"
+                pos_hint: {"x": 0.63, "y": 0.4}
                 size_hint: None, None
                 width: 300
                 font_size: 35
-                on_press: root.manager.current = "settingsKey"
+                on_release: root.manager.current = "settingsKey"
 
 
 <SettingsAdmin>: #settings -> admin
@@ -1098,26 +1114,44 @@
                 text: root.current_datetime
                 font_size: 20
                 size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
+                pos_hint: {"x": 0.85, "y": 0.88}
 
             Label:
-                text: root.current_datetime
-                font_size: 20
+                text: "Change Admin Password"
+                font_size: 35
                 size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
+                pos_hint: {"x": 0.15, "y": 0.88}
+                bold: True
 
-            Button:
-                text: 'weh'
-                size_hint: 0.2,.05
-                pos_hint: {"x":.3,"y":.7}
-            Button:
-                text: "to admin settings"
-                pos_hint: {"x": 0.4, "y": 0.50}
+            Label:
+                text: "New Password"
+                pos_hint: {"x": 0.15, "y": 0.6}
+                font_size: 35
+                size_hint: None, None
+
+            MDTextField:
+                id: adminNewPass
+                font_size: 35
+                icon_right: "lock"
+                width: 300
+                pos_hint: {"x": 0.4, "y": 0.6}
+                size_hint: None, None
+
+            MDRoundFlatButton:
+                text: "Go Back"
+                pos_hint: {"x": 0.10, "y": 0.5}
                 size_hint: None, None
                 width: 300
                 font_size: 35
                 on_press: root.manager.current = "fourth"
 
+            MDRoundFlatButton:
+                text: "Submit"
+                pos_hint: {"x": 0.60, "y": 0.5}
+                size_hint: None, None
+                width: 300
+                font_size: 35
+                on_press: root.manager.current = "fourth"
 
 <SettingsCashier>: #settings -> cashier
     name:"settingsCashier"
@@ -1221,23 +1255,37 @@
                 pos_hint: {"x": 0.88, "y": 0.88}
 
             Label:
-                text: root.current_datetime
-                font_size: 20
+                text: "Change Cashier Password"
+                font_size: 35
                 size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
+                pos_hint: {"x": 0.15, "y": 0.88}
+                bold: True
 
-            Button:
-                text: 'weh'
-                size_hint: 0.2,.05
-                pos_hint: {"x":.3,"y":.7}
             Label:
-                text: 'Display'
-                color: 0,0,0,1
-                size_hint: 0.2,.05
-                pos: 300,200
-            Button:
-                text: "to admin settings"
-                pos_hint: {"x": 0.4, "y": 0.50}
+                text: "New Password"
+                pos_hint: {"x": 0.15, "y": 0.6}
+                font_size: 35
+                size_hint: None, None
+
+            MDTextField:
+                id: cashierNewPass
+                font_size: 35
+                icon_right: "lock"
+                width: 300
+                pos_hint: {"x": 0.4, "y": 0.6}
+                size_hint: None, None
+
+            MDRoundFlatButton:
+                text: "Go Back"
+                pos_hint: {"x": 0.10, "y": 0.5}
+                size_hint: None, None
+                width: 300
+                font_size: 35
+                on_press: root.manager.current = "fourth"
+
+            MDRoundFlatButton:
+                text: "Submit"
+                pos_hint: {"x": 0.60, "y": 0.5}
                 size_hint: None, None
                 width: 300
                 font_size: 35
@@ -1346,24 +1394,38 @@
                 pos_hint: {"x": 0.88, "y": 0.88}
 
             Label:
-                text: root.current_datetime
-                font_size: 20
+                text: "Change Encryption Key"
+                font_size: 35
                 size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
+                pos_hint: {"x": 0.15, "y": 0.88}
+                bold: True
 
-            Button:
-                text: 'weh'
-                size_hint: 0.2,.05
-                pos_hint: {"x":.3,"y":.7}
             Label:
-                text: 'Display'
-                color: 0,0,0,1
-                size_hint: 0.2,.05
-                pos: 300,200
+                text: "New Key"
+                pos_hint: {"x": 0.15, "y": 0.6}
+                font_size: 35
+                size_hint: None, None
 
-            Button:
-                text: "go back"
-                pos_hint: {"x": 0.4, "y": 0.20}
+            MDTextField:
+                id: newKey
+                font_size: 35
+                icon_right: "lock"
+                width: 300
+                pos_hint: {"x": 0.4, "y": 0.6}
+                size_hint: None, None
+                password: True
+
+            MDRoundFlatButton:
+                text: "Go Back"
+                pos_hint: {"x": 0.10, "y": 0.5}
+                size_hint: None, None
+                width: 300
+                font_size: 35
+                on_press: root.manager.current = "fourth"
+
+            MDRoundFlatButton:
+                text: "Submit"
+                pos_hint: {"x": 0.60, "y": 0.5}
                 size_hint: None, None
                 width: 300
                 font_size: 35
