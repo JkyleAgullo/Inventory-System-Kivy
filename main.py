@@ -47,6 +47,7 @@ cashier_acc = Account()
 
 class Cashier(Screen):
     labels = {}
+    customer_receiptt = [Receipt() for _ in range(MAX_INV)]
     global receipt_marker
     product_name = StringProperty("try")
     name = ObjectProperty(None)
@@ -392,6 +393,7 @@ class DisplayInventory(Screen):
                     str(item.total_sales_amount),
                     str(item.profit)
                 ]
+
                 print(item.name)
                 data.append(row)
 
@@ -410,7 +412,6 @@ class DisplayInventory(Screen):
                 ("Profit", dp(20))
             ],
             row_data=data,
-            check=True,
             use_pagination=True,
             rows_num=10,
             pagination_menu_pos="auto",
