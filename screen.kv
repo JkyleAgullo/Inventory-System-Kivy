@@ -1432,7 +1432,7 @@
                 size_hint: 0.2,.05
                 pos: 300,200
 
-<SettingsAdmin>:
+<SettingsAdmin>: #settings -> admin
     name:"settingsAdmin"
     GridLayout:
         cols:2
@@ -1543,14 +1543,16 @@
                 text: 'weh'
                 size_hint: 0.2,.05
                 pos_hint: {"x":.3,"y":.7}
-            Label:
-                text: 'Display'
-                color: 0,0,0,1
-                size_hint: 0.2,.05
-                pos: 300,200
+            Button:
+                text: "to admin settings"
+                pos_hint: {"x": 0.4, "y": 0.50}
+                size_hint: None, None
+                width: 300
+                font_size: 35
+                on_press: root.manager.current = "fourth"
 
 
-<SettingsCashier>:
+<SettingsCashier>: #settings -> cashier
     name:"settingsCashier"
     GridLayout:
         cols:2
@@ -1666,10 +1668,17 @@
                 color: 0,0,0,1
                 size_hint: 0.2,.05
                 pos: 300,200
+            Button:
+                text: "to admin settings"
+                pos_hint: {"x": 0.4, "y": 0.50}
+                size_hint: None, None
+                width: 300
+                font_size: 35
+                on_press: root.manager.current = "fourth"
 
 
-<SettingsKey>:
-    name:"settingsAdmin"
+<SettingsKey>: #display -> change key
+    name:"settingsKey"
     GridLayout:
         cols:2
         size: root.width, root.height
@@ -1784,6 +1793,14 @@
                 color: 0,0,0,1
                 size_hint: 0.2,.05
                 pos: 300,200
+
+            Button:
+                text: "go back"
+                pos_hint: {"x": 0.4, "y": 0.20}
+                size_hint: None, None
+                width: 300
+                font_size: 35
+                on_press: root.manager.current = "fourth"
 
 
 <SplashWindow>:
