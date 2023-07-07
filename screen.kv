@@ -1072,14 +1072,29 @@
                 size_hint: 0.2,.05
                 pos: 300,200
 
-            button:
-                text: "to admin settings"
-                text: "Submit"
+            Button:
+                text: "admin settings"
                 pos_hint: {"x": 0.4, "y": 0.20}
                 size_hint: None, None
                 width: 300
                 font_size: 35
-                on_press: root.manager.
+                on_press: root.manager.current = "settingsAdmin"
+
+            Button:
+                text: "cashier settings"
+                pos_hint: {"x": 0.4, "y": 0.40}
+                size_hint: None, None
+                width: 300
+                font_size: 35
+                on_press: root.manager.current = "settingsCashier"
+
+            Button:
+                text: "change key"
+                pos_hint: {"x": 0.4, "y": 0.60}
+                size_hint: None, None
+                width: 300
+                font_size: 35
+                on_press: root.manager.current = "settingsKey"
 
 
 <SettingsAdmin>: #settings -> admin
@@ -1193,11 +1208,13 @@
                 text: 'weh'
                 size_hint: 0.2,.05
                 pos_hint: {"x":.3,"y":.7}
-            Label:
-                text: 'Main Screen'
-                color: 1,1,1,1
-                size_hint: 0.2,.05
-                pos: 300,200
+            Button:
+                text: "to admin settings"
+                pos_hint: {"x": 0.4, "y": 0.50}
+                size_hint: None, None
+                width: 300
+                font_size: 35
+                on_press: root.manager.current = "fourth"
 
 
 <SettingsCashier>: #settings -> cashier
@@ -1316,10 +1333,17 @@
                 color: 0,0,0,1
                 size_hint: 0.2,.05
                 pos: 300,200
+            Button:
+                text: "to admin settings"
+                pos_hint: {"x": 0.4, "y": 0.50}
+                size_hint: None, None
+                width: 300
+                font_size: 35
+                on_press: root.manager.current = "fourth"
 
 
 <SettingsKey>: #display -> change key
-    name:"settingsAdmin"
+    name:"settingsKey"
     GridLayout:
         cols:2
         size: root.width, root.height
@@ -1434,6 +1458,14 @@
                 color: 0,0,0,1
                 size_hint: 0.2,.05
                 pos: 300,200
+
+            Button:
+                text: "go back"
+                pos_hint: {"x": 0.4, "y": 0.20}
+                size_hint: None, None
+                width: 300
+                font_size: 35
+                on_press: root.manager.current = "fourth"
 
 
 <SplashWindow>:
