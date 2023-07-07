@@ -1492,6 +1492,7 @@
             halign: 'center'
             size_hint_y: None
             height: self.texture_size[1]
+            bold: True
             #padding_y: 15
 
         MDTextField:
@@ -1518,13 +1519,13 @@
 
         MDRoundFlatButton:
             text: "Login"
-            font_size: 12
+            font_size: 20
             pos_hint: {"center_x": 0.5}
             on_press: root.submit(root)
 
         MDRoundFlatButton:
             text: "Clear"
-            font_size: 12
+            font_size: 20
             pos_hint: {"center_x": 0.5}
             on_press: root.clear()
 

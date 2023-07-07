@@ -286,7 +286,7 @@ class MyApp(MDApp):
     def update_progress_bar(self, dt):
         # Increment the progress bar value
         current_value = self.root.get_screen('splash').ids.progress_bar.value
-        new_value = current_value + 50
+        new_value = current_value + 1
         self.root.get_screen('splash').update_progress(new_value)
         if new_value >= 100:
             # Stop the progress bar updates when the value reaches 100
