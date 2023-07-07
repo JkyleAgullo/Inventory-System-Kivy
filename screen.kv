@@ -623,7 +623,7 @@
                 size_hint: 0.2,.05
                 pos: 300,200
 
-<AdminSettings>:
+<AdminSettings>: #settings main panel
     name:"fourth"
     GridLayout:
         cols:2
@@ -653,8 +653,6 @@
                 on_press:
                     root.manager.transition = NoTransition()
                     root.manager.current = "first"
-
-
 
             Button:
                 id: ADD
@@ -726,12 +724,35 @@
                 size_hint: None, None
                 pos_hint: {"x": 0.88, "y": 0.88}
 
-
             Label:
                 text: 'Settings'
-                color: 0,0,0,1
+                color: (1,1,1,1)
                 size_hint: 0.2,.05
                 pos: 300,200
+
+            Button:
+                text: "admin settings"
+                pos_hint: {"x": 0.4, "y": 0.20}
+                size_hint: None, None
+                width: 300
+                font_size: 35
+                on_press: root.manager.current = "settingsAdmin"
+
+            Button:
+                text: "cashier settings"
+                pos_hint: {"x": 0.4, "y": 0.40}
+                size_hint: None, None
+                width: 300
+                font_size: 35
+                on_press: root.manager.current = "settingsCashier"
+
+            Button:
+                text: "change key"
+                pos_hint: {"x": 0.4, "y": 0.60}
+                size_hint: None, None
+                width: 300
+                font_size: 35
+                on_press: root.manager.current = "settingsKey"
 
 
 <DisplayInventory>:
@@ -1365,7 +1386,7 @@
                 bold: True
                 background_normal: ''
                 background_down: ''
-                background_color:(143/255,195/255,31/255,1)
+                background_color:(0/255,0/255,0/255,.7)
 
                 size_hint: None, None
                 size: 150, 50
@@ -1379,7 +1400,7 @@
                 bold: True
                 background_normal: ''
                 background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
+                background_color:(143/255,195/255,31/255,1)
 
                 size_hint: None, None
                 size: 150, 50
@@ -1482,7 +1503,7 @@
                 bold: True
                 background_normal: ''
                 background_down: ''
-                background_color:(143/255,195/255,31/255,1)
+                background_color:(0/255,0/255,0/255,.7)
 
                 size_hint: None, None
                 size: 150, 50
@@ -1496,7 +1517,7 @@
                 bold: True
                 background_normal: ''
                 background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
+                background_color:(143/255,195/255,31/255,1)
 
                 size_hint: None, None
                 size: 150, 50
@@ -1602,7 +1623,7 @@
                 bold: True
                 background_normal: ''
                 background_down: ''
-                background_color:(143/255,195/255,31/255,1)
+                background_color:(0/255,0/255,0/255,.7)
 
                 size_hint: None, None
                 size: 150, 50
@@ -1616,7 +1637,7 @@
                 bold: True
                 background_normal: ''
                 background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
+                background_color:(143/255,195/255,31/255,1)
 
                 size_hint: None, None
                 size: 150, 50
