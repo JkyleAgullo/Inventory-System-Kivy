@@ -605,23 +605,52 @@
                 text: root.current_datetime
                 font_size: 20
                 size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
+                pos_hint: {"x": 0.85, "y": 0.88}
 
-            Label:
-                text: root.current_datetime
-                font_size: 20
+            MDRoundFlatButton:
+                text: "Inventory"
+                pos_hint: {"x": 0.05, "y": 0.4}
                 size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
+                width: 300
+                font_size: 35
+                on_release: root.manager.current = "inventory"
 
-            Button:
-                text: 'weh'
-                size_hint: 0.2,.05
-                pos_hint: {"x":.3,"y":.7}
-            Label:
-                text: 'Display'
-                color: 0,0,0,1
-                size_hint: 0.2,.05
-                pos: 300,200
+            MDIcon:
+                icon: "list-box"
+                size_hint: None, None
+                size: "150dp", "150dp"
+                pos_hint: {"x": 0.10, "y": 0.5}
+                font_size: 80
+
+            MDRoundFlatButton:
+                text: "Sales History"
+                pos_hint: {"x": 0.3, "y": 0.4}
+                size_hint: None, None
+                width: 300
+                font_size: 35
+                on_release: root.manager.current = "sales"
+
+            MDIcon:
+                icon: "cash-clock"
+                size_hint: None, None
+                size: "150dp", "150dp"
+                pos_hint: {"x": 0.39, "y": 0.5}
+                font_size: 80
+
+            MDRoundFlatButton:
+                text: "Expired History"
+                pos_hint: {"x": 0.6, "y": 0.4}
+                size_hint: None, None
+                width: 300
+                font_size: 35
+                on_release: root.manager.current = "expired"
+
+            MDIcon:
+                icon: "timer-cog"
+                size_hint: None, None
+                size: "150dp", "150dp"
+                pos_hint: {"x": 0.7, "y": 0.5}
+                font_size: 80
 
 <AdminSettings>: #settings main panel
     name:"fourth"
@@ -846,145 +875,10 @@
                 size_hint: None, None
                 size: 150, 50
 
-        FloatLayout:
-            id:add
-            size: root.width, root.height
+        BoxLayout:
+            id: inventory
+            orientation: "vertical"
 
-            Label:
-                text: root.current_datetime
-                font_size: 20
-                size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
-
-            Label:
-                text: root.current_datetime
-                font_size: 20
-                size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
-
-            Button:
-                text: 'weh'
-                size_hint: 0.2,.05
-                pos_hint: {"x":.3,"y":.7}
-            Label:
-                text: 'Display'
-                color: 0,0,0,1
-                size_hint: 0.2,.05
-                pos: 300,200
-    GridLayout:
-        cols:2
-        size: root.width, root.height
-
-        GridLayout:
-            cols: 1
-            size_hint: 0.2,1
-
-            Button:
-                text:""
-                background_normal: ''
-                background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-                size_hint: None, None
-                size: 150, 130
-
-            Button:
-                id: DB
-                text:"DASHBOARD"
-                bold: True
-                background_normal: ''
-                background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-                size_hint: None, None
-                size: 150, 50
-                on_press:
-                    root.manager.transition = NoTransition()
-                    root.manager.current = "first"
-
-            Button:
-                id: ADD
-                text:"ADD"
-                bold: True
-                background_normal: ''
-                background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-                size_hint: None, None
-                size: 150, 50
-                on_press:
-                    root.manager.transition = NoTransition()
-                    root.manager.current = "second"
-
-            Button:
-                id: DP
-                text:"DISPLAY"
-                bold: True
-                background_normal: ''
-                background_down: ''
-                background_color:(143/255,195/255,31/255,1)
-
-                size_hint: None, None
-                size: 150, 50
-                on_press:
-                    root.manager.transition = NoTransition()
-                    root.manager.current = "third"
-
-            Button:
-                id: ST
-                text:"SETTING"
-                bold: True
-                background_normal: ''
-                background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-
-                size_hint: None, None
-                size: 150, 50
-                on_press:
-                    root.manager.transition = NoTransition()
-                    root.manager.current = "fourth"
-
-            Button:
-                text:""
-                background_normal: ''
-                background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-                size_hint: None, None
-                size: 150, 520
-
-            Button:
-                id: LOGOUT
-                text:"LOGOUT"
-                bold: True
-                background_normal: ''
-                background_down: ''
-                background_color:(0/255,0/255,0/255,.7)
-                #color: 0,0,0,1
-                size_hint: None, None
-                size: 150, 50
-
-        FloatLayout:
-            id:add
-            size: root.width, root.height
-
-            Label:
-                text: root.current_datetime
-                font_size: 20
-                size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
-
-            Label:
-                text: root.current_datetime
-                font_size: 20
-                size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
-
-            Button:
-                text: 'weh'
-                size_hint: 0.2,.05
-                pos_hint: {"x":.3,"y":.7}
-            Label:
-                text: 'Display'
-                color: 0,0,0,1
-                size_hint: 0.2,.05
-                pos: 300,200
 
 
 <DisplaySales>:

@@ -189,7 +189,7 @@ class SplashWindow(Screen):
         if value >= 100:
             app = App.get_running_app()
             app.root.transition = NoTransition()
-            app.root.current = "first"
+            app.root.current = "cashier"
 
 
 class AdminADD(Screen):
@@ -358,11 +358,18 @@ class DisplayInventory(Screen):
     current_datetime = StringProperty("")
 
     def on_pre_enter(self):
-        self.display_table()
+        global my_inv
+        if my_inv:
+            self.display_table(my_inv)
+            print(my_inv[0].name)
+        else:
+            print("my_inv is empty")
 
-    def display_table(self):
+
+    def display_table(self, invent):
+        global my_inv
         data = []
-        for item in my_inv:
+        for item in invent:
             row = [
                 item.category,
                 item.name,
@@ -376,6 +383,7 @@ class DisplayInventory(Screen):
                 str(item.total_sales_amount),
                 str(item.profit)
             ]
+            print(item.name)
             data.append(row)
 
         table = MDDataTable(
@@ -398,7 +406,8 @@ class DisplayInventory(Screen):
             rows_num=10,
             pagination_menu_pos="auto",
         )
-        self.ids.table_container.add_widget(table)
+        self.ids.inventory.add_widget(table)
+
 
     def update_datetime(self):
         self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
