@@ -196,7 +196,7 @@ class SplashWindow(Screen):
         if value >= 100:
             app = App.get_running_app()
             app.root.transition = NoTransition()
-            app.root.current = "first"
+            app.root.current = "login"
 
 
 class AdminADD(Screen):
