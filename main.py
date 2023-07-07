@@ -1,4 +1,6 @@
 from kivy.config import Config
+from kivymd.material_resources import dp
+from kivymd.uix.datatables import MDDataTable
 
 import Authen
 from Account import Account
@@ -354,6 +356,49 @@ class AdminLoginTry(Screen):
 
 class DisplayInventory(Screen):
     current_datetime = StringProperty("")
+
+    def on_pre_enter(self):
+        self.display_table()
+
+    def display_table(self):
+        data = []
+        for item in my_inv:
+            row = [
+                item.category,
+                item.name,
+                item.date,
+                item.exp_date,
+                str(item.orig_price),
+                str(item.qty),
+                str(item.total_price),
+                str(item.retail_price),
+                str(item.sales_qty),
+                str(item.total_sales_amount),
+                str(item.profit)
+            ]
+            data.append(row)
+
+        table = MDDataTable(
+            column_data=[
+                ("Category", dp(20)),
+                ("Name", dp(20)),
+                ("Date", dp(20)),
+                ("Expiration Date", dp(20)),
+                ("Original Price", dp(20)),
+                ("Quantity", dp(20)),
+                ("Total Price", dp(20)),
+                ("Retail Price", dp(20)),
+                ("Sales Quantity", dp(20)),
+                ("Total Sales Amount", dp(20)),
+                ("Profit", dp(20))
+            ],
+            row_data=data,
+            check=True,
+            use_pagination=True,
+            rows_num=10,
+            pagination_menu_pos="auto",
+        )
+        self.ids.table_container.add_widget(table)
 
     def update_datetime(self):
         self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
