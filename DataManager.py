@@ -83,6 +83,7 @@ def del_expired_product():
         popup_content = Label(text=" PRODUCT FILE DIRECTORY DOES NOT EXIST")
         popup = Popup(title='Warning', content=popup_content, size_hint=(None, None), size=(400, 200))
         popup.open()
+
         print("PRODUCT FILE DIRECTORY DOES NOT EXIST")
 
 
@@ -320,16 +321,13 @@ def retrieve():
 
                             Admin.add_product(my_product)
                         except ValueError as e:
-                            popup_content = Label(text="Insufficient quantity"+str(e))
-                            popup = Popup(title='Warning', content=popup_content, size_hint=(None, None),size=(400, 200))
-                            popup.open()
                             print("INVALID NUMERIC VALUE IN INVENTORY FILE: ", e)
             return main.my_inv
         else:
             raise FileNotFoundError
     except FileNotFoundError:
-        pass
-
+        print("Inventory file not found:", inventory_dir)
+        return []
 
 def save():
     my_inventory = [item for item in main.my_inv if item.name is not None]

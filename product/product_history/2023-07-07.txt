@@ -8,7 +8,11 @@ Quantity: 10
 
 Product Name: COCA
 Expiration Date: 2024-01-07
-Quantity: 20
+Quantity: 62
+
+Product Name: MILK
+Expiration Date: 2024-01-07
+Quantity: 10
 
 Product Name: ORANGE
 Expiration Date: 2024-01-07

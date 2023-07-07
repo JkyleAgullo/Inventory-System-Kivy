@@ -1,12 +1,19 @@
+import webbrowser
+
 from kivy.config import Config
+from kivy.uix.boxlayout import BoxLayout
+from kivy.uix.button import Button
+
+Config.set('graphics', 'resizable', False)
 from kivymd.material_resources import dp
 from kivymd.uix.datatables import MDDataTable
 
 import Authen
 from Account import Account
 from Security import Security
+import os
+import glob
 
-Config.set('graphics', 'resizable', False)
 import DataManager
 import DateManager
 from Inventory import Inventory
@@ -189,7 +196,7 @@ class SplashWindow(Screen):
         if value >= 100:
             app = App.get_running_app()
             app.root.transition = NoTransition()
-            app.root.current = "cashier"
+            app.root.current = "first"
 
 
 class AdminADD(Screen):
@@ -370,28 +377,29 @@ class DisplayInventory(Screen):
         global my_inv
         data = []
         for item in invent:
-            row = [
-                item.category,
-                item.name,
-                item.date,
-                item.exp_date,
-                str(item.orig_price),
-                str(item.qty),
-                str(item.total_price),
-                str(item.retail_price),
-                str(item.sales_qty),
-                str(item.total_sales_amount),
-                str(item.profit)
-            ]
-            print(item.name)
-            data.append(row)
+            if item is not None:
+                row = [
+                    item.category,
+                    item.name,
+                    item.date,
+                    item.exp_date,
+                    str(item.orig_price),
+                    str(item.qty),
+                    str(item.total_price),
+                    str(item.retail_price),
+                    str(item.sales_qty),
+                    str(item.total_sales_amount),
+                    str(item.profit)
+                ]
+                print(item.name)
+                data.append(row)
 
         table = MDDataTable(
             column_data=[
-                ("Category", dp(20)),
-                ("Name", dp(20)),
-                ("Date", dp(20)),
-                ("Expiration Date", dp(20)),
+                ("Category", dp(40)),
+                ("Name", dp(30)),
+                ("Date", dp(30)),
+                ("Expiration Date", dp(30)),
                 ("Original Price", dp(20)),
                 ("Quantity", dp(20)),
                 ("Total Price", dp(20)),
@@ -406,19 +414,18 @@ class DisplayInventory(Screen):
             rows_num=10,
             pagination_menu_pos="auto",
         )
+        self.ids.inventory.clear_widgets()
         self.ids.inventory.add_widget(table)
 
 
     def update_datetime(self):
         self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
 
-
 class DisplaySales(Screen):
     current_datetime = StringProperty("")
 
     def update_datetime(self):
         self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
-
 
 class DisplayExpired(Screen):
     current_datetime = StringProperty("")

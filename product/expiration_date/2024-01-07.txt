@@ -2,7 +2,10 @@ Product Name: COBRA
 Quantity: 10
 
 Product Name: COCA
-Quantity: 20
+Quantity: 62
+
+Product Name: MILK
+Quantity: 10
 
 Product Name: ORANGE
 Quantity: 10
