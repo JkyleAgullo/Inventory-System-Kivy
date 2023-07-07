@@ -1,4 +1,8 @@
 Product Name: COCA
-Sales Quantity: 12
-Total Sales Amount: 183.0
+Sales Quantity: 23
+Total Sales Amount: 348.0
+
+Product Name: ORANGE
+Sales Quantity: 1
+Total Sales Amount: 200.0
 

@@ -70,12 +70,12 @@ class Cashier(Screen):
         else:
             price = my_inv[inventory_pos].retail_price * int(self.ids.qty.text)
 
-            Cashier.my_array.append(self.ids.txt.text)
-            Cashier.my_array2.append(self.ids.qty.text)
-            Cashier.price_array.append(price)
+            self.my_array.append(self.ids.txt.text)
+            self.my_array2.append(self.ids.qty.text)
+            self.price_array.append(price)
+
             self.product_name = widget.text
-            self.add_widget(
-                Label(text=str(price), font_size='20', pos=(400, 502), color=(1, 1, 1, 1)))
+            self.add_widget(Label(text=str(price), font_size='20', pos=(400, 502), color=(1, 1, 1, 1)))
             if my_inv[inventory_pos].qty == 0 or my_inv[inventory_pos].qty - receipt.get_qty() < 0:
                 if my_inv[inventory_pos].qty == 0 or my_inv[inventory_pos].qty - receipt.get_qty() < 0:
                     popup_content = Label(text="Insufficient quantity")
@@ -91,19 +91,17 @@ class Cashier(Screen):
                 receipt.set_qty(product_qty)
                 if customer_receiptt[0].get_product_name() is None:
                     print("pasok")
-                    Cashier.add_to_receipt(receipt)
+                    self.add_to_receipt(receipt)
                     # print(receipt.get_product_name())
 
                 else:
                     receipt_pos = locate_product_receipt(receipt)
                     if receipt_pos == -1:
-                        Cashier.add_to_receipt(receipt)
+                        self.add_to_receipt(receipt)
                     else:
                         # print(receipt_pos)
-                        customer_receiptt[receipt_pos].set_qty(
-                            customer_receiptt[receipt_pos].get_qty() + receipt.get_qty())
-                        customer_receiptt[receipt_pos].set_total_price(
-                            customer_receiptt[receipt_pos].get_total_price() + round(receipt.get_total_price(), 2))
+                        customer_receiptt[receipt_pos].set_qty(customer_receiptt[receipt_pos].get_qty() + receipt.get_qty())
+                        customer_receiptt[receipt_pos].set_total_price(customer_receiptt[receipt_pos].get_total_price() + round(receipt.get_total_price(), 2))
 
         self.ids.qty.text = ""
         self.ids.txt.text = ""
@@ -128,7 +126,7 @@ class Cashier(Screen):
                     print("recorded")
         DataManager.save()
 
-    def add_to_receipt(receipt):
+    def add_to_receipt(self,receipt):
         global receipt_marker
         print("DITO PUMASOK")
         receipt_marker += 1
@@ -140,7 +138,8 @@ class Cashier(Screen):
         )
 
     # displaying to receipt
-    def Array_display(self, array):  # prod name
+    def Array_display(self):  # prod name
+        array = self.my_array
         i = 10
         self.cols = len(array[0])
         # print(Cashier.my_array[1]) #try lang
@@ -148,9 +147,10 @@ class Cashier(Screen):
         for element in array:
             i = i - 30
             self.add_widget(Label(text=str(element), font_size='20', pos=(620, 340 + i), color=(1, 1, 1, 1)))
+            print(element)
 
-
-    def Array_display2(self, array):  # prod qty
+    def Array_display2(self):  # prod qty
+        array = self.my_array2
         i = 10
         self.cols = len(array[0])
          #try lang
@@ -158,14 +158,17 @@ class Cashier(Screen):
         for element in array:
             i = i - 30
             self.add_widget(Label(text=str(element), font_size='20', pos=(750, 340 + i), color=(1, 1, 1, 1)))
-            print(element)
-    def Array_price(self, array):
+
+    def Array_price(self):
+        array = self.price_array
         i = 10
         self.cols = len(array[0])
         # for row in array:
+        print(len(array))
         for index, element in enumerate(array):
             i = i - 30
-            self.add_widget(Label(text=str(element), font_size='20', pos=(840, 340 + i), color=(1, 1, 1, 1)))
+            label = Label(text=str(element), font_size='23', pos=(840, 340 + i), color=(1, 1, 1, 1))
+            self.add_widget(label)
 
 
 class AdminDB(Screen):
@@ -182,7 +185,7 @@ class SplashWindow(Screen):
         if value >= 100:
             app = App.get_running_app()
             app.root.transition = NoTransition()
-            app.root.current = "login"
+            app.root.current = "cashier"
 
 
 class AdminADD(Screen):
