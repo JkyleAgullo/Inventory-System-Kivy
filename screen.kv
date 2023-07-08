@@ -91,19 +91,12 @@
             size_hint: None, None
             pos_hint: {"x": 0.05, "y": 0.7}
 
-
-        Button:
-            text: "LOGOUT"
+        MDRoundFlatButton:
+            text: "Logout"
             size_hint: None, None
-            pos_hint: {"x": 0.856, "y": 0.0099}
-            size: 150, 50
-            background_normal: ''
-            background_down: ''
-            background_color: 1,1,1,1
-            color: 0,0,0,1
-            on_press:
-                root.manager.transition = NoTransition()
-                root.manager.current = "login"
+            pos_hint: {"x": 0.856, "y": 0.1}
+            font_size: 20
+            on_press: root.manager.current = "login"
 
         Label:
             text: "Product Name"
@@ -271,14 +264,15 @@
                 text:"Welcome, Admin"
                 font_size: 35
                 size_hint: None, None
-                pos_hint: {"x": 0.0220, "y": 0.88}
+                pos_hint: {"x": 0.1, "y": 0.88}
                 bold: True
 
             Label:
                 text: root.current_datetime
                 font_size: 20
                 size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
+                pos_hint: {"x": 0.85, "y": 0.88}
+                bold: True
 
             # todo: largest stock, best selling, lowest stock,
 
@@ -286,63 +280,63 @@
                 text: "Largest Stock"
                 font_size: 30
                 size_hint: None, None
-                pos_hint: {"x": 0.050, "y": 0.5}
+                pos_hint: {"x": 0.1, "y": 0.5}
                 bold: True
 
             MDIcon:
                 icon: "food-apple"
                 size_hint: None, None
                 size: "150dp", "150dp"
-                pos_hint: {"x": 0.07, "y": 0.47}
+                pos_hint: {"x": 0.13, "y": 0.47}
                 font_size: 50
 
             Label:
                 text: "Vegetables"
                 font_size: 50
                 size_hint: None, None
-                pos_hint: {"x": 0.050, "y": 0.6}
+                pos_hint: {"x": 0.1, "y": 0.6}
                 bold: True
 
             Label:
                 text: "Best Selling"
                 font_size: 30
                 size_hint: None, None
-                pos_hint: {"x": 0.4, "y": 0.5}
+                pos_hint: {"x": 0.45, "y": 0.5}
                 bold: True
 
             MDIcon:
                 icon: "cash"
                 size_hint: None, None
                 size: "150dp", "150dp"
-                pos_hint: {"x": 0.425, "y": 0.47}
+                pos_hint: {"x": 0.48, "y": 0.47}
                 font_size: 50
 
             Label:
                 text: "Junk Foods"
                 font_size: 50
                 size_hint: None, None
-                pos_hint: {"x": 0.4, "y": 0.6}
+                pos_hint: {"x": 0.45, "y": 0.6}
                 bold: True
 
             Label:
                 text: "Lowest Stock"
                 font_size: 30
                 size_hint: None, None
-                pos_hint: {"x": 0.75, "y": 0.5}
+                pos_hint: {"x": 0.78, "y": 0.5}
                 bold: True
 
             MDIcon:
                 icon: "hamburger"
                 size_hint: None, None
                 size: "150dp", "150dp"
-                pos_hint: {"x": 0.770, "y": 0.47}
+                pos_hint: {"x": 0.81, "y": 0.47}
                 font_size: 50
 
             Label:
                 text: "Drinks"
                 font_size: 50
                 size_hint: None, None
-                pos_hint: {"x": 0.75, "y": 0.6}
+                pos_hint: {"x": 0.78, "y": 0.6}
                 bold: True
 
 
@@ -445,18 +439,19 @@
                 text: root.current_datetime
                 font_size: 20
                 size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
+                pos_hint: {"x": 0.85, "y": 0.88}
+                bold: True
 
             Label:
                 text:"Add Product"
                 font_size: 45
                 size_hint: None, None
-                pos_hint: {"x": 0.0220, "y": 0.88}
+                pos_hint: {"x": 0.1, "y": 0.88}
                 bold: True
 
             Label:
                 text: "Product Category"
-                pos_hint: {"x": 0.2, "y": 0.70}
+                pos_hint: {"x": 0.15, "y": 0.70}
                 font_size: 35
                 size_hint: None, None
 
@@ -470,7 +465,7 @@
 
             Label:
                 text: "Product Name"
-                pos_hint: {"x": 0.2, "y": 0.60}
+                pos_hint: {"x": 0.15, "y": 0.60}
                 font_size: 35
                 size_hint: None, None
 
@@ -484,7 +479,7 @@
 
             Label:
                 text: "Price"
-                pos_hint: {"x": 0.2, "y": 0.50}
+                pos_hint: {"x": 0.15, "y": 0.50}
                 font_size: 35
                 size_hint: None, None
 
@@ -498,7 +493,7 @@
 
             Label:
                 text: "Quantity"
-                pos_hint: {"x": 0.2, "y": 0.40}
+                pos_hint: {"x": 0.15, "y": 0.40}
                 font_size: 35
                 size_hint: None, None
 
@@ -512,7 +507,7 @@
 
             Label:
                 text: "Retail Price"
-                pos_hint: {"x": 0.2, "y": 0.30}
+                pos_hint: {"x": 0.15, "y": 0.30}
                 font_size: 35
                 size_hint: None, None
 
@@ -633,6 +628,7 @@
                 font_size: 20
                 size_hint: None, None
                 pos_hint: {"x": 0.85, "y": 0.88}
+                bold: True
 
             MDRoundFlatButton:
                 text: "Inventory"

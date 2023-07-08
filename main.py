@@ -1,11 +1,12 @@
 import webbrowser
 
 from kivy.config import Config
+
 Config.set('graphics', 'resizable', False)
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 
-#from kivymd.
+# from kivymd.
 from kivymd.material_resources import dp
 from kivymd.uix.datatables import MDDataTable
 
@@ -70,9 +71,10 @@ class Cashier(Screen):
         product_name = productName.upper()
 
         product.name = product_name
-        #print("position: "+ str(product_qty))
+        # print("position: "+ str(product_qty))
 
-        inventory_pos = locate_product(product)  # product dapat ung ipapasa, if nme palitn mo ung nsa locate function to name
+        inventory_pos = locate_product(
+            product)  # product dapat ung ipapasa, if nme palitn mo ung nsa locate function to name
         print(inventory_pos)
 
         if inventory_pos == -1:
@@ -117,8 +119,10 @@ class Cashier(Screen):
                         self.add_to_receipt(receipt)
                     else:
                         # print(receipt_pos)
-                        customer_receiptt[receipt_pos].set_qty(customer_receiptt[receipt_pos].get_qty() + receipt.get_qty())
-                        customer_receiptt[receipt_pos].set_total_price(customer_receiptt[receipt_pos].get_total_price() + round(receipt.get_total_price(), 2))
+                        customer_receiptt[receipt_pos].set_qty(
+                            customer_receiptt[receipt_pos].get_qty() + receipt.get_qty())
+                        customer_receiptt[receipt_pos].set_total_price(
+                            customer_receiptt[receipt_pos].get_total_price() + round(receipt.get_total_price(), 2))
 
         self.ids.qty.text = ""
         self.ids.txt.text = ""
@@ -133,7 +137,8 @@ class Cashier(Screen):
         self.price_array = ['Price']  # Reset the price_array list
 
         for child in self.children[:]:
-            if isinstance(child,Label) and child.text != 'Product Name' and child.text != 'Quantity' and child.text != 'Price':
+            if isinstance(child,
+                          Label) and child.text != 'Product Name' and child.text != 'Quantity' and child.text != 'Price':
                 self.remove_widget(child)
 
     def save(self):
@@ -153,7 +158,7 @@ class Cashier(Screen):
                     print("recorded")
         DataManager.save()
 
-    def add_to_receipt(self,receipt):
+    def add_to_receipt(self, receipt):
         global receipt_marker
         print("DITO PUMASOK")
         receipt_marker += 1
@@ -168,7 +173,7 @@ class Cashier(Screen):
     def Array_display(self):  # prod name
         array = self.my_array
         i = 10
-        #self.cols = len(array[0])
+        # self.cols = len(array[0])
         # print(Cashier.my_array[1]) #try lang
         # for row in array:
         for element in array:
@@ -180,7 +185,7 @@ class Cashier(Screen):
         array = self.my_array2
         i = 10
         self.cols = len(array[0])
-         #try lang
+        # try lang
         # for row in array:
         for element in array:
             i = i - 30
@@ -230,16 +235,16 @@ class AdminADD(Screen):
         productQty = (self.ids.prodQuantity.text)
         productRetail = (self.ids.prodRetail.text)
         productCategory = (self.ids.prodCategory.text)
-        #print(productName)
-        #print(productPrice)
-        #print(productQty)
-        #print(productRetail)
+        # print(productName)
+        # print(productPrice)
+        # print(productQty)
+        # print(productRetail)
 
         AdminADD.product.category = productCategory.upper()
-        AdminADD.product.name=productName.upper()
-        AdminADD.product.orig_price = round(float(productPrice),2)
+        AdminADD.product.name = productName.upper()
+        AdminADD.product.orig_price = round(float(productPrice), 2)
         AdminADD.product.qty = int(productQty)
-        AdminADD.product.retail_price = round(float(productRetail),2)
+        AdminADD.product.retail_price = round(float(productRetail), 2)
         # Get the current date/time
         AdminADD.product.date = DateManager.get_date()
         # Set and get expiration date
@@ -272,7 +277,6 @@ class AdminADD(Screen):
         self.ids.prodQuantity.text = ""
         self.ids.prodRetail.text = ""
         self.ids.prodCategory.text = ""
-
 
     def update_datetime(self):
         self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
@@ -342,6 +346,7 @@ class AdminLoginTry(Screen):
     def on_pre_enter(self):
         self.ids.user.text = ""
         self.ids.password.text = ""
+
     def submit(self, screen):
         global admin_acc
         global cashier_acc
@@ -349,7 +354,6 @@ class AdminLoginTry(Screen):
 
         username = (self.ids.user.text)
         password = (self.ids.password.text)
-
 
         if username == cashier_acc.get_username():
             if password == cashier_acc.get_password():
@@ -376,6 +380,7 @@ class AdminLoginTry(Screen):
         self.ids.user.text = ""
         self.ids.password.text = ""
 
+
 class FileInfoButton(Button):
     file_name = StringProperty('')
     file_folder = StringProperty('')
@@ -401,7 +406,6 @@ class DisplayInventory(Screen):
             print(my_inv[0].name)
         else:
             print("my_inv is empty")
-
 
     def display_table(self, invent):
         global my_inv
@@ -448,36 +452,37 @@ class DisplayInventory(Screen):
         self.ids.inventory.clear_widgets()
         self.ids.inventory.add_widget(table)
 
-
     def update_datetime(self):
         self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
+
 
 class DisplaySales(Screen):
     current_datetime = StringProperty("")
 
-
     def on_enter(self, *args):
         self.display_sales_history()
-    def display_sales_history(self):
-            sales_history_folder_path = os.path.join(os.getcwd(), DataManager.sales_history_folder)
-            self.text_files = glob.glob(sales_history_folder_path + '\*.txt')
-            self.ids.files_grid.clear_widgets()
-            print(self.text_files)
-            if len(self.text_files) == 0:
-                label = Label(text='| SALES HISTORY IS EMPTY |')
-                self.ids.files_grid.add_widget(label)
-                print(sales_history_folder_path)
-            else:
-                for i, file_path in enumerate(self.text_files, 1):
-                    file_name = os.path.basename(file_path)
-                    date = os.path.splitext(file_name)[0]
-                    directory = os.path.dirname(file_path)
 
-                    button = FileInfoButton(file_name=file_name, file_folder=DataManager.sales_history_folder,date=date, directory=directory)
-                    button.bind(on_release=lambda instance, path=file_path: self.open_file_content_popup(path))
-                    #button.bind(on_release=lambda instance: self.open_file_content_popup(file_path))
-                    #button.bind(on_release=lambda instance: self.open_file_content_popup(file_path))
-                    self.ids.files_grid.add_widget(button)
+    def display_sales_history(self):
+        sales_history_folder_path = os.path.join(os.getcwd(), DataManager.sales_history_folder)
+        self.text_files = glob.glob(sales_history_folder_path + '\*.txt')
+        self.ids.files_grid.clear_widgets()
+        print(self.text_files)
+        if len(self.text_files) == 0:
+            label = Label(text='| SALES HISTORY IS EMPTY |')
+            self.ids.files_grid.add_widget(label)
+            print(sales_history_folder_path)
+        else:
+            for i, file_path in enumerate(self.text_files, 1):
+                file_name = os.path.basename(file_path)
+                date = os.path.splitext(file_name)[0]
+                directory = os.path.dirname(file_path)
+
+                button = FileInfoButton(file_name=file_name, file_folder=DataManager.sales_history_folder, date=date,
+                                        directory=directory)
+                button.bind(on_release=lambda instance, path=file_path: self.open_file_content_popup(path))
+                # button.bind(on_release=lambda instance: self.open_file_content_popup(file_path))
+                # button.bind(on_release=lambda instance: self.open_file_content_popup(file_path))
+                self.ids.files_grid.add_widget(button)
 
     def open_file_content_popup(self, file_path):
         popup = FileContentPopup(file_path=file_path)
@@ -501,37 +506,36 @@ class FileContentPopup(Popup):
 class DisplayExpired(Screen):
     current_datetime = StringProperty("")
 
-
     def on_enter(self, *args):
         self.display_sales_history()
-    def display_sales_history(self):
-            sales_history_folder_path = os.path.join(os.getcwd(), DataManager.exp_product_history_folder)
-            self.text_files = glob.glob(sales_history_folder_path+ '/*.txt')
-            self.ids.files_grid.clear_widgets()
-            print(self.text_files)
-            if len(self.text_files) == 0:
-                label = Label(text='| SALES HISTORY IS EMPTY |')
-                self.ids.files_grid.add_widget(label)
-                print(sales_history_folder_path)
-            else:
-                for i, file_path in enumerate(self.text_files, 1):
-                    file_name = os.path.basename(file_path)
-                    date = os.path.splitext(file_name)[0]
-                    directory = os.path.dirname(file_path)
 
-                    button = FileInfoButton(file_name=file_name, file_folder=DataManager.sales_history_folder,date=date, directory=directory)
-                    button.bind(on_release=lambda instance, path=file_path: self.open_file_content_popup(path))
-                    #button.bind(on_release=lambda instance: self.open_file_content_popup(file_path))
-                    #button.bind(on_release=lambda instance: self.open_file_content_popup(file_path))
-                    self.ids.files_grid.add_widget(button)
+    def display_sales_history(self):
+        sales_history_folder_path = os.path.join(os.getcwd(), DataManager.exp_product_history_folder)
+        self.text_files = glob.glob(sales_history_folder_path + '/*.txt')
+        self.ids.files_grid.clear_widgets()
+        print(self.text_files)
+        if len(self.text_files) == 0:
+            label = Label(text='| SALES HISTORY IS EMPTY |')
+            self.ids.files_grid.add_widget(label)
+            print(sales_history_folder_path)
+        else:
+            for i, file_path in enumerate(self.text_files, 1):
+                file_name = os.path.basename(file_path)
+                date = os.path.splitext(file_name)[0]
+                directory = os.path.dirname(file_path)
+
+                button = FileInfoButton(file_name=file_name, file_folder=DataManager.sales_history_folder, date=date,
+                                        directory=directory)
+                button.bind(on_release=lambda instance, path=file_path: self.open_file_content_popup(path))
+                # button.bind(on_release=lambda instance: self.open_file_content_popup(file_path))
+                # button.bind(on_release=lambda instance: self.open_file_content_popup(file_path))
+                self.ids.files_grid.add_widget(button)
 
     def open_file_content_popup(self, file_path):
         popup = FileContentPopup(file_path=file_path)
         popup.size_hint = (0.8, 0.8)  # Set the size hint to occupy 80% of the parent's size
         popup.size = (400, 300)  # Set the size explicitly to (400, 300) pixels
         popup.open()
-
-
 
     def update_datetime(self):
         self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
@@ -540,6 +544,7 @@ class DisplayExpired(Screen):
 class SettingsCashier(Screen):
     current_datetime = StringProperty("")
     is_change = False
+
     def submit(self):
         password = self.ids.password.text
         re_password = self.ids.password2.text
@@ -605,6 +610,7 @@ class SettingsAdmin(Screen):
             Authen.save_account()
             self.ids.password.text = ""
             self.ids.password2.text = ""
+
     def update_datetime(self):
         self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
 
@@ -637,10 +643,6 @@ class SettingsKey(Screen):
 
     def update_datetime(self):
         self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
-
-
-
-
 
 
 Builder.load_file('screen.kv')
@@ -702,6 +704,7 @@ def locate_product_receipt(product):
             return i
     return -1
 
+
 def main():
     global my_inv
     global admin_acc
@@ -712,10 +715,7 @@ def main():
     my_inv = DataManager.retrieve()
     DataManager.del_expired_product()
 
-
-    #print("done main")
-
-
+    # print("done main")
 
 
 if __name__ == "__main__":
