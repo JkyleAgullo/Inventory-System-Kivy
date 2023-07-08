@@ -1,10 +1,11 @@
 import webbrowser
 
 from kivy.config import Config
+Config.set('graphics', 'resizable', False)
 from kivy.uix.boxlayout import BoxLayout
 from kivy.uix.button import Button
 
-Config.set('graphics', 'resizable', False)
+#from kivymd.
 from kivymd.material_resources import dp
 from kivymd.uix.datatables import MDDataTable
 
@@ -360,6 +361,19 @@ class AdminLoginTry(Screen):
         self.ids.user.text = ""
         self.ids.password.text = ""
 
+class FileInfoButton(Button):
+    file_name = StringProperty('')
+    file_folder = StringProperty('')
+    date = StringProperty('')
+    directory = ""
+
+    def __init__(self, **kwargs):
+        self.directory = kwargs.pop("directory", "")
+        super(FileInfoButton, self).__init__(**kwargs)
+
+
+class FileStatsScreen(Screen):
+    pass
 
 
 class DisplayInventory(Screen):
@@ -426,43 +440,50 @@ class DisplayInventory(Screen):
 class DisplaySales(Screen):
     current_datetime = StringProperty("")
 
-    class DisplaySales(Screen):
-        def get_sales_history_data(self):
+    sales_history_folder_path = os.path.join(os.getcwd(), DataManager.sales_history_folder)
+    print(sales_history_folder_path)
+
+    def on_enter(self, *args):
+        self.display_sales_history()
+    def display_sales_history(self):
             sales_history_folder_path = os.path.join(os.getcwd(), DataManager.sales_history_folder)
-            text_files = glob.glob(sales_history_folder_path + '/*.txt')
+            self.text_files = glob.glob(sales_history_folder_path + '\*.txt')
+            self.ids.files_grid.clear_widgets()
+            print(self.text_files)
+            if len(self.text_files) == 0:
+                label = Label(text='| SALES HISTORY IS EMPTY |')
+                self.ids.files_grid.add_widget(label)
+                print(sales_history_folder_path)
+            else:
+                for i, file_path in enumerate(self.text_files, 1):
+                    file_name = os.path.basename(file_path)
+                    date = os.path.splitext(file_name)[0]
+                    directory = os.path.dirname(file_path)
 
-            data = []
-            for i, file_path in enumerate(text_files, 1):
-                file_name = os.path.basename(file_path)
-                date = os.path.splitext(file_name)[0]
-                data.append({"file_number": i, "file_date": date})
+                    button = FileInfoButton(file_name=file_name, file_folder=DataManager.sales_history_folder,date=date, directory=directory)
+                    button.bind(on_release=lambda instance, path=file_path: self.open_file_content_popup(path))
+                    #button.bind(on_release=lambda instance: self.open_file_content_popup(file_path))
+                    #button.bind(on_release=lambda instance: self.open_file_content_popup(file_path))
+                    self.ids.files_grid.add_widget(button)
 
-            return data
-
-        def open_text_file(self, file_path):
-            with open(file_path, 'r') as file:
-                content = file.read()
-
-            print(content)  # Modify this part to open the file in your desired way
-
-        def show_sales_history(self, text_files):
-            data = self.get_sales_history_data(text_files)
-
-            table = MDDataTable(
-                size_hint=(0.9, 0.9),
-                column_data=[
-                    ("Number", dp(20)),
-                    ("Date", dp(30))
-                ],
-                row_data=data,
-                on_row_press=lambda instance_row: self.open_text_file(text_files[instance_row["file_number"] - 1])
-            )
-
-            self.ids.scroll_view.clear_widgets()
-            self.ids.scroll_view.add_widget(table)
+    def open_file_content_popup(self, file_path):
+        popup = FileContentPopup(file_path=file_path)
+        popup.size_hint = (0.8, 0.8)  # Set the size hint to occupy 80% of the parent's size
+        popup.size = (400, 300)  # Set the size explicitly to (400, 300) pixels
+        popup.open()
 
     def update_datetime(self):
         self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")
+
+
+class FileContentPopup(Popup):
+    def __init__(self, file_path, **kwargs):
+        super().__init__(**kwargs)
+        self.title = "File Contents"
+        with open(file_path, "r") as file:
+            content = file.read()
+        self.content = Label(text=content)
+
 
 class DisplayExpired(Screen):
     current_datetime = StringProperty("")
@@ -643,6 +664,8 @@ def main():
 
     admin_acc, cashier_acc = Authen.retrieve_account()
     my_inv = DataManager.retrieve()
+
+
     #print("done main")
 
 

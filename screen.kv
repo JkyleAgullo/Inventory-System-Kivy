@@ -16,6 +16,24 @@
     SettingsKey:
     Cashier:
         name: 'cashier'
+    FileStatsScreen:
+
+<FileStatsScreen>:
+    BoxLayout:
+        orientation: 'vertical'
+
+        ScrollView:
+            GridLayout:
+                id: product_layout
+                cols: 3
+                size_hint_y: None
+                height: self.minimum_height
+<FileInfoButton@Button>:
+    text: root.file_name
+    height: 50
+    size_hint: 0.3, 0.1
+    #on_release: root.parent.parent.parent.display_file(root.file_folder, root.date)
+    #on_release: root.open_file_content_popup(root.text)
 
 <Cashier>:
     name: txt
@@ -643,7 +661,9 @@
                 size_hint: None, None
                 width: 300
                 font_size: 35
-                on_release: root.manager.current = "expired"
+                on_release:
+                    root.manager.current = "expired"
+
 
             MDIcon:
                 icon: "timer-cog"
@@ -987,13 +1007,25 @@
                 size: 150, 50
 
 
-        BoxLayout:
-            orientation: "vertical"
+        FloatLayout:
+            #orientation: 'vertical'
 
             ScrollView:
-                id: scroll_view
-                do_scroll_x: False
+                size_hint: (0.6, 0.6)
+                #pos_hint:None, None #{'center_x': 0.5, 'center_y': 0.8}
+                pos: 350,50
+                GridLayout:
+                    id: files_grid
+                    cols: 1
+                    size_hint: (1, None)
+                    height: 100
+                    spacing: dp(20)
 
+            Button:
+                text: 'Back'
+                size_hint: (0.2, 0.1)
+                pos_hint: {'x': 0, 'y': 0}
+                on_release: app.root.current = 'third'
 
 
 
