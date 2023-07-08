@@ -197,7 +197,7 @@ class SplashWindow(Screen):
         if value >= 100:
             app = App.get_running_app()
             app.root.transition = NoTransition()
-            app.root.current = "admin"
+            app.root.current = "first"
 
 
 class AdminADD(Screen):
@@ -445,8 +445,8 @@ class DisplaySales(Screen):
 
             print(content)  # Modify this part to open the file in your desired way
 
-        def show_sales_history(self):
-            data = self.get_sales_history_data()
+        def show_sales_history(self, text_files):
+            data = self.get_sales_history_data(text_files)
 
             table = MDDataTable(
                 size_hint=(0.9, 0.9),
