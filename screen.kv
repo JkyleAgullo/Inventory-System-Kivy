@@ -776,33 +776,49 @@
                 text: root.current_datetime
                 font_size: 20
                 size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
+                pos_hint: {"x": 0.85, "y": 0.88}
+                bold: True
 
-            Label:
-                text: 'Settings'
-                color: (1,1,1,1)
-                size_hint: 0.2,.05
-                pos: 300,200
+            MDIcon:
+                icon: "security"
+                size_hint: None, None
+                size: "150dp", "150dp"
+                pos_hint: {"x": 0.10, "y": 0.5}
+                font_size: 80
 
-            Button:
-                text: "admin settings"
-                pos_hint: {"x": 0.4, "y": 0.20}
+            MDRoundFlatButton:
+                text: "Admin"
+                pos_hint: {"x": 0.07, "y": 0.4}
                 size_hint: None, None
                 width: 300
                 font_size: 35
                 on_press: root.manager.current = "settingsAdmin"
 
-            Button:
-                text: "cashier settings"
-                pos_hint: {"x": 0.4, "y": 0.40}
+            MDIcon:
+                icon: "account-heart"
+                size_hint: None, None
+                size: "150dp", "150dp"
+                pos_hint: {"x": 0.39, "y": 0.5}
+                font_size: 80
+
+            MDRoundFlatButton:
+                text: "Cashier"
+                pos_hint: {"x": 0.36, "y": 0.4}
                 size_hint: None, None
                 width: 300
                 font_size: 35
                 on_press: root.manager.current = "settingsCashier"
 
-            Button:
-                text: "change key"
-                pos_hint: {"x": 0.4, "y": 0.60}
+            MDIcon:
+                icon: "key"
+                size_hint: None, None
+                size: "150dp", "150dp"
+                pos_hint: {"x": 0.7, "y": 0.5}
+                font_size: 80
+
+            MDRoundFlatButton:
+                text: "Change Key"
+                pos_hint: {"x": 0.63, "y": 0.4}
                 size_hint: None, None
                 width: 300
                 font_size: 35
@@ -1026,10 +1042,11 @@
                     height: 100
                     spacing: dp(20)
 
-            Button:
+            MDRoundFlatButton:
                 text: 'Back'
-                size_hint: (0.15, 0.09)
-                pos_hint: {'x': 0, 'y': 0}
+                size_hint: (0.15, 0.010)
+                pos_hint: {'x': 0, 'y': 0.1}
+                font_size: 24
                 on_release: app.root.current = 'third'
 
 
@@ -1138,10 +1155,11 @@
                 height: 100
                 spacing: dp(20)
 
-        Button:
+        MDRoundFlatButton:
             text: 'Back'
-            size_hint: (0.13, 0.09)
-            pos_hint: {'x': 0.15, 'y': 0}
+            size_hint: (0.15, 0.010)
+            pos_hint: {'x': 0.2, 'y': 0.1}
+            font_size: 24
             on_release: app.root.current = 'third'
 
 <SettingsAdmin>: #settings -> admin
@@ -1239,6 +1257,63 @@
             id:add
             size: root.width, root.height
 
+            Label:
+                text: "Change Admin Password"
+                font_size: 35
+                size_hint: None, None
+                pos_hint: {"x": 0.15, "y": 0.88}
+                bold: True
+
+            Label:
+                text: "New Password"
+                pos_hint: {"x": 0.15, "y": 0.6}
+                font_size: 35
+                size_hint: None, None
+
+            MDTextField:
+                id: password
+                icon_right: "shield-crown"
+                width: 300
+                font_size: 35
+                pos_hint: {"x": 0.4, "y": 0.6}
+                size_hint: None, None
+                password: True
+
+            Label:
+                text: "Verify New Password"
+                pos_hint: {"x": 0.1, "y": 0.4}
+                font_size: 35
+                size_hint: None, None
+
+            MDTextField:
+                id: password2
+                icon_right: "check-circle"
+                width: 300
+                font_size: 35
+                pos_hint: {"x": 0.4, "y": 0.4}
+                size_hint: None, None
+                password: True
+
+            Label:
+                text: root.current_datetime
+                font_size: 20
+                size_hint: None, None
+                pos_hint: {"x": 0.88, "y": 0.88}
+
+            Label:
+                text: root.current_datetime
+                font_size: 20
+                size_hint: None, None
+                pos_hint: {"x": 0.88, "y": 0.88}
+
+            MDRoundFlatButton:
+                text: "Back"
+                pos_hint: {"x": 0.08, "y": 0.1}
+                size_hint: None, None
+                width: 300
+                font_size: 35
+                on_press: root.manager.current = "fourth"
+
             MDRoundFlatButton:
                 text: "Submit"
                 pos_hint: {"x": 0.4, "y": 0.20}
@@ -1247,42 +1322,6 @@
                 font_size: 35
                 on_press: root.submit()
 
-            MDTextField:
-                id: password
-                icon_right: "plus-box"
-                width: 300
-                font_size: 35
-                pos_hint: {"x": 0.3, "y": 0.60}
-                size_hint: None, None
-
-            MDTextField:
-                id: password2
-                icon_right: "plus-box"
-                width: 300
-                font_size: 35
-                pos_hint: {"x": 0.3, "y": 0.40}
-                size_hint: None, None
-
-
-            Label:
-                text: root.current_datetime
-                font_size: 20
-                size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
-
-            Label:
-                text: root.current_datetime
-                font_size: 20
-                size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
-
-            Button:
-                text: "BACK"
-                pos_hint: {"x": 0.65, "y": 0.02}
-                size_hint: None, None
-                width: 300
-                font_size: 35
-                on_press: root.manager.current = "fourth"
 
 
 <SettingsCashier>: #settings -> cashier
@@ -1386,20 +1425,40 @@
                 width: 300
                 font_size: 35
                 on_press: root.submit()
+
+            Label:
+                text: "Change Cashier Password"
+                font_size: 35
+                size_hint: None, None
+                pos_hint: {"x": 0.15, "y": 0.88}
+                bold: True
+
+            Label:
+                text: "New Password"
+                pos_hint: {"x": 0.15, "y": 0.6}
+                font_size: 35
+                size_hint: None, None
+
             MDTextField:
                 id: password
-                icon_right: "plus-box"
+                icon_right: "shield-crown"
                 width: 300
                 font_size: 35
-                pos_hint: {"x": 0.3, "y": 0.60}
+                pos_hint: {"x": 0.4, "y": 0.6}
+                size_hint: None, None
+
+            Label:
+                text: "Verify New Password"
+                pos_hint: {"x": 0.1, "y": 0.4}
+                font_size: 35
                 size_hint: None, None
 
             MDTextField:
                 id: password2
-                icon_right: "plus-box"
+                icon_right: "check-circle"
                 width: 300
                 font_size: 35
-                pos_hint: {"x": 0.3, "y": 0.40}
+                pos_hint: {"x": 0.4, "y": 0.4}
                 size_hint: None, None
 
             Label:
@@ -1414,14 +1473,9 @@
                 size_hint: None, None
                 pos_hint: {"x": 0.88, "y": 0.88}
 
-            Label:
-                text: 'Display'
-                color: 0,0,0,1
-                size_hint: 0.2,.05
-                pos: 300,200
-            Button:
-                text: "BACK"
-                pos_hint: {"x": 0.65, "y": 0.02}
+            MDRoundFlatButton:
+                text: "Back"
+                pos_hint: {"x": 0.08, "y": 0.1}
                 size_hint: None, None
                 width: 300
                 font_size: 35
@@ -1530,13 +1584,33 @@
                 width: 300
                 font_size: 35
                 on_press: root.submit()
+
+            Label:
+                text: "Change Encryption Key"
+                font_size: 35
+                size_hint: None, None
+                pos_hint: {"x": 0.15, "y": 0.88}
+                bold: True
+
+            Label:
+                text: "New Key"
+                pos_hint: {"x": 0.15, "y": 0.6}
+                font_size: 35
+                size_hint: None, None
+
             MDTextField:
                 id: password
-                icon_right: "plus-box"
+                icon_right: "security"
                 width: 300
                 font_size: 35
-                pos_hint: {"x": 0.3, "y": 0.60}
+                pos_hint: {"x": 0.4, "y": 0.6}
                 size_hint: None, None
+
+            Label:
+                text: root.current_datetime
+                font_size: 20
+                size_hint: None, None
+                pos_hint: {"x": 0.10, "y": 0.5}
 
             Label:
                 text: root.current_datetime
@@ -1544,21 +1618,9 @@
                 size_hint: None, None
                 pos_hint: {"x": 0.88, "y": 0.88}
 
-            Label:
-                text: root.current_datetime
-                font_size: 20
-                size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
-
-            Label:
-                text: 'Display'
-                color: 0,0,0,1
-                size_hint: 0.2,.05
-                pos: 300,200
-
-            Button:
-                text: "BACK"
-                pos_hint: {"x": 0.65, "y": 0.02}
+            MDRoundFlatButton:
+                text: "Back"
+                pos_hint: {"x": 0.08, "y": 0.1}
                 size_hint: None, None
                 width: 300
                 font_size: 35
@@ -1621,6 +1683,7 @@
         MDLabel:
             id: login_label
             text: "Log into your account"
+            bold: True
             font_size: 25
             halign: 'center'
             size_hint_y: None
@@ -1650,15 +1713,16 @@
 
         MDRoundFlatButton:
             text: "Login"
-            font_size: 12
+            font_size: 20
             pos_hint: {"center_x": 0.5}
             on_press: root.submit(root)
 
         MDRoundFlatButton:
             text: "Clear"
-            font_size: 12
+            font_size: 20
             pos_hint: {"center_x": 0.5}
             on_press: root.clear()
+
 
         Widget:
             size_hint_y: None
