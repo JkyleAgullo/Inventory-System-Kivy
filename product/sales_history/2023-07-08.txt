@@ -1,0 +1,4 @@
+Product Name: SHABU
+Sales Quantity: 1
+Total Sales Amount: 12.0
+

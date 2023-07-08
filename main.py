@@ -68,10 +68,10 @@ class Cashier(Screen):
         productName = self.ids.txt.text
         product_name = productName.upper()
         product.name = product_name
-        print(product_qty)
+        print("position: "+ str(product_qty))
 
         inventory_pos = locate_product(product)  # product dapat ung ipapasa, if nme palitn mo ung nsa locate function to name
-        # print(inventory_pos)
+        print(inventory_pos)
 
         if inventory_pos == -1:
             popup_content = Label(text="PRODUCT DOES NOT EXIST")
@@ -198,7 +198,7 @@ class SplashWindow(Screen):
         if value >= 100:
             app = App.get_running_app()
             app.root.transition = NoTransition()
-            app.root.current = "first"
+            app.root.current = "cashier"
 
 
 class AdminADD(Screen):
@@ -692,8 +692,10 @@ def main():
     global admin_acc
     global cashier_acc
 
+    Security.set_encryption_key()
     admin_acc, cashier_acc = Authen.retrieve_account()
     my_inv = DataManager.retrieve()
+    DataManager.del_expired_product()
 
 
     #print("done main")
