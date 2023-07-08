@@ -440,8 +440,6 @@ class DisplayInventory(Screen):
 class DisplaySales(Screen):
     current_datetime = StringProperty("")
 
-    sales_history_folder_path = os.path.join(os.getcwd(), DataManager.sales_history_folder)
-    print(sales_history_folder_path)
 
     def on_enter(self, *args):
         self.display_sales_history()
@@ -487,6 +485,38 @@ class FileContentPopup(Popup):
 
 class DisplayExpired(Screen):
     current_datetime = StringProperty("")
+
+
+    def on_enter(self, *args):
+        self.display_sales_history()
+    def display_sales_history(self):
+            sales_history_folder_path = os.path.join(os.getcwd(), DataManager.exp_product_history_folder)
+            self.text_files = glob.glob(sales_history_folder_path+ '/*.txt')
+            self.ids.files_grid.clear_widgets()
+            print(self.text_files)
+            if len(self.text_files) == 0:
+                label = Label(text='| SALES HISTORY IS EMPTY |')
+                self.ids.files_grid.add_widget(label)
+                print(sales_history_folder_path)
+            else:
+                for i, file_path in enumerate(self.text_files, 1):
+                    file_name = os.path.basename(file_path)
+                    date = os.path.splitext(file_name)[0]
+                    directory = os.path.dirname(file_path)
+
+                    button = FileInfoButton(file_name=file_name, file_folder=DataManager.sales_history_folder,date=date, directory=directory)
+                    button.bind(on_release=lambda instance, path=file_path: self.open_file_content_popup(path))
+                    #button.bind(on_release=lambda instance: self.open_file_content_popup(file_path))
+                    #button.bind(on_release=lambda instance: self.open_file_content_popup(file_path))
+                    self.ids.files_grid.add_widget(button)
+
+    def open_file_content_popup(self, file_path):
+        popup = FileContentPopup(file_path=file_path)
+        popup.size_hint = (0.8, 0.8)  # Set the size hint to occupy 80% of the parent's size
+        popup.size = (400, 300)  # Set the size explicitly to (400, 300) pixels
+        popup.open()
+
+
 
     def update_datetime(self):
         self.current_datetime = datetime.now().strftime("%m/%d/%Y\n%I:%M:%S %p")

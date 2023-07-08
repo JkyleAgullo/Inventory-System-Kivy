@@ -1120,31 +1120,24 @@
                 size_hint: None, None
                 size: 150, 50
 
-        FloatLayout:
-            id:add
-            size: root.width, root.height
+    FloatLayout:
+        #orientation: 'vertical'
 
-            Label:
-                text: root.current_datetime
-                font_size: 20
-                size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
+        ScrollView:
+            size_hint: (0.6, 0.6)
+            pos: 300,50
+            GridLayout:
+                id: files_grid
+                cols: 1
+                size_hint: (1, None)
+                height: 100
+                spacing: dp(20)
 
-            Label:
-                text: root.current_datetime
-                font_size: 20
-                size_hint: None, None
-                pos_hint: {"x": 0.88, "y": 0.88}
-
-            Button:
-                text: 'weh'
-                size_hint: 0.2,.05
-                pos_hint: {"x":.3,"y":.7}
-            Label:
-                text: 'Display'
-                color: 0,0,0,1
-                size_hint: 0.2,.05
-                pos: 300,200
+        Button:
+            text: 'Back'
+            size_hint: (0.13, 0.09)
+            pos_hint: {'x': 0.15, 'y': 0}
+            on_release: app.root.current = 'third'
 
 <SettingsAdmin>: #settings -> admin
     name:"settingsAdmin"
