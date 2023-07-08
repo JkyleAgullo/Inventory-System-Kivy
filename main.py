@@ -26,7 +26,7 @@ from kivy.uix.popup import Popup
 from kivy.uix.label import Label
 import kivy.utils
 from kivy.lang import Builder
-from kivy.properties import StringProperty, ObjectProperty
+from kivy.properties import StringProperty, ObjectProperty, BooleanProperty
 from kivy.uix.widget import Widget
 from kivy.app import App
 from kivy.core.window import Window
@@ -548,33 +548,40 @@ class DisplayExpired(Screen):
 class SettingsCashier(Screen):
     current_datetime = StringProperty("")
     is_change = False
+    password_verified = BooleanProperty(False)
 
-    def open_input_popup(self):
+    def open_input_popup(self, password):
         content = BoxLayout(orientation='vertical')
 
         password_input = TextInput(multiline=False, password=True)
         content.add_widget(Label(text='Enter Admin Password:'))
         content.add_widget(password_input)
-
         popup = Popup(title='Password Input', content=content, size_hint=(None, None), size=(400, 200))
 
         def submit_password(instance):
             entered_password = password_input.text
-            # Use the entered password here
             if entered_password == admin_acc.get_password():
-                cashier_acc.set_password(entered_password)
+                self.password_verified = True
+                popup.dismiss()
+                self.is_change = True
+                cashier_acc.set_password(password)
+                Authen.save_account()
+                self.ids.password.text = ""
+                self.ids.password2.text = ""
+                popup_content = Label(text="CHANGED SUCCESSFULLY")
+                success_popup = Popup(title='SUCCESS', content=popup_content, size_hint=(None, None), size=(400, 200))
+                success_popup.open()
             else:
+                self.password_verified = False
                 popup.dismiss()
                 popup_content = Label(text="Incorrect admin password")
                 error_popup = Popup(title='Error', content=popup_content, size_hint=(None, None), size=(400, 200))
                 error_popup.open()
-                return False
 
         submit_button = Button(text='Submit')
         submit_button.bind(on_release=submit_password)
         content.add_widget(submit_button)
         popup.open()
-
 
     def submit(self):
         password = self.ids.password.text
@@ -588,17 +595,7 @@ class SettingsCashier(Screen):
             self.ids.password2.text = ""
         else:
             if password == re_password:
-                if self.open_input_popup() is True:
-                    self.is_change = True
-                    cashier_acc.set_password(password)
-                    self.ids.password.text = ""
-                    self.ids.password2.text = ""
-                else:
-                    popup_content = Label(text="ERROR CHANGING PASSWORD")
-                    popup = Popup(title='ERROR', content=popup_content, size_hint=(None, None), size=(400, 200))
-                    popup.open()
-                    self.ids.password.text = ""
-                    self.ids.password2.text = ""
+                self.open_input_popup(password)
             else:
                 popup_content = Label(text="PASSWORD NOT MATCH")
                 popup = Popup(title='WARNING', content=popup_content, size_hint=(None, None), size=(400, 200))
@@ -608,9 +605,8 @@ class SettingsCashier(Screen):
 
         if self.is_change is True:
             popup_content = Label(text="CHANGED SUCCESSFULLY")
-            popup = Popup(title='WARNING', content=popup_content, size_hint=(None, None), size=(400, 200))
+            popup = Popup(title='SUCCESS', content=popup_content, size_hint=(None, None), size=(400, 200))
             popup.open()
-            Authen.save_account()
             self.ids.password.text = ""
             self.ids.password2.text = ""
 
@@ -621,6 +617,39 @@ class SettingsCashier(Screen):
 class SettingsAdmin(Screen):
     current_datetime = StringProperty("")
     is_change = False
+    password_verified = BooleanProperty(False)
+    def open_input_popup(self, password):
+        content = BoxLayout(orientation='vertical')
+
+        password_input = TextInput(multiline=False, password=True)
+        content.add_widget(Label(text='Enter Admin Password:'))
+        content.add_widget(password_input)
+        popup = Popup(title='Password Input', content=content, size_hint=(None, None), size=(400, 200))
+
+        def submit_password(instance):
+            entered_password = password_input.text
+            if entered_password == admin_acc.get_password():
+                self.password_verified = True
+                popup.dismiss()
+                self.is_change = True
+                admin_acc.set_password(password)
+                Authen.save_account()
+                self.ids.password.text = ""
+                self.ids.password2.text = ""
+                popup_content = Label(text="CHANGED SUCCESSFULLY")
+                success_popup = Popup(title='SUCCESS', content=popup_content, size_hint=(None, None), size=(400, 200))
+                success_popup.open()
+            else:
+                self.password_verified = False
+                popup.dismiss()
+                popup_content = Label(text="Incorrect admin password")
+                error_popup = Popup(title='Error', content=popup_content, size_hint=(None, None), size=(400, 200))
+                error_popup.open()
+
+        submit_button = Button(text='Submit')
+        submit_button.bind(on_release=submit_password)
+        content.add_widget(submit_button)
+        popup.open()
 
     def submit(self):
         password = self.ids.password.text
@@ -634,8 +663,7 @@ class SettingsAdmin(Screen):
             self.ids.password2.text = ""
         else:
             if password == re_password:
-                self.is_change = True
-                admin_acc.set_password(password)
+                self.open_input_popup(password)
             else:
                 popup_content = Label(text="PASSWORD NOT MATCH")
                 popup = Popup(title='WARNING', content=popup_content, size_hint=(None, None), size=(400, 200))
@@ -647,7 +675,6 @@ class SettingsAdmin(Screen):
             popup_content = Label(text="CHANGED SUCCESSFULLY")
             popup = Popup(title='WARNING', content=popup_content, size_hint=(None, None), size=(400, 200))
             popup.open()
-            Authen.save_account()
             self.ids.password.text = ""
             self.ids.password2.text = ""
 
@@ -658,9 +685,41 @@ class SettingsAdmin(Screen):
 class SettingsKey(Screen):
     current_datetime = StringProperty("")
     is_change = False
+    password_verified = BooleanProperty(False)
+
+    def open_input_popup(self, new_key):
+        content = BoxLayout(orientation='vertical')
+        security_obj = Security()
+        password_input = TextInput(multiline=False, password=True)
+        content.add_widget(Label(text='Enter Admin Password:'))
+        content.add_widget(password_input)
+        popup = Popup(title='Password Input', content=content, size_hint=(None, None), size=(400, 200))
+
+        def submit_password(instance):
+            entered_password = password_input.text
+            if entered_password == admin_acc.get_password():
+                self.password_verified = True
+                popup.dismiss()
+                self.is_change = True
+                security_obj.change_secret_key(new_key)
+                DataManager.save()
+                Authen.save_account()
+                popup_content = Label(text="CHANGED SUCCESSFULLY")
+                success_popup = Popup(title='SUCCESS', content=popup_content, size_hint=(None, None), size=(400, 200))
+                success_popup.open()
+            else:
+                self.password_verified = False
+                popup.dismiss()
+                popup_content = Label(text="Incorrect admin password")
+                error_popup = Popup(title='Error', content=popup_content, size_hint=(None, None), size=(400, 200))
+                error_popup.open()
+
+        submit_button = Button(text='Submit')
+        submit_button.bind(on_release=submit_password)
+        content.add_widget(submit_button)
+        popup.open()
 
     def submit(self):
-        security_obj = Security()
         new_key = self.ids.password.text
 
         if new_key == Security.get_secret_key():
@@ -668,11 +727,9 @@ class SettingsKey(Screen):
             popup = Popup(title='WARNING', content=popup_content, size_hint=(None, None), size=(400, 200))
             popup.open()
             self.ids.password.text = ""
-
         else:
-            self.is_change = True
-            security_obj.change_secret_key(new_key)
-            Authen.save_account()
+            self.open_input_popup(new_key)
+
 
         if self.is_change is True:
             popup_content = Label(text="CHANGED SUCCESSFULLY")
