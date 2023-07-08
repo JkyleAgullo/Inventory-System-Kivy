@@ -50,7 +50,8 @@ class Cashier(Screen):
     labels = {}
     customer_receiptt = [Receipt() for _ in range(MAX_INV)]
     global receipt_marker
-    product_name = StringProperty("try")
+    productName = StringProperty("")
+    productPrice = StringProperty("0.00")
     name = ObjectProperty(None)
     qty = ObjectProperty(None)
 
@@ -67,8 +68,9 @@ class Cashier(Screen):
 
         productName = self.ids.txt.text
         product_name = productName.upper()
+
         product.name = product_name
-        print("position: "+ str(product_qty))
+        #print("position: "+ str(product_qty))
 
         inventory_pos = locate_product(product)  # product dapat ung ipapasa, if nme palitn mo ung nsa locate function to name
         print(inventory_pos)
@@ -81,12 +83,15 @@ class Cashier(Screen):
             self.ids.txt.text = ""
         else:
             price = my_inv[inventory_pos].retail_price * int(self.ids.qty.text)
+            self.productName = my_inv[inventory_pos].name
+            self.productPrice = str(price)
 
             self.my_array.append(self.ids.txt.text)
             self.my_array2.append(self.ids.qty.text)
             self.price_array.append(price)
 
             self.product_name = widget.text
+            self.price = widget.text
             self.add_widget(Label(text=str(price), font_size='20', pos=(400, 502), color=(1, 1, 1, 1)))
             if my_inv[inventory_pos].qty == 0 or my_inv[inventory_pos].qty - receipt.get_qty() < 0:
                 if my_inv[inventory_pos].qty == 0 or my_inv[inventory_pos].qty - receipt.get_qty() < 0:
@@ -119,7 +124,17 @@ class Cashier(Screen):
         self.ids.txt.text = ""
 
     def reset(self):
-        Cashier()
+        self.productName = ""  # Reset the productName property
+        self.productPrice = "0.00"  # Reset the productPrice property
+        self.ids.txt.text = ""  # Clear the input field with id 'txt'
+        self.ids.qty.text = ""  # Clear the input field with id 'qty'
+        self.my_array = ['Product Name']  # Reset the my_array list
+        self.my_array2 = ['Quantity']  # Reset the my_array2 list
+        self.price_array = ['Price']  # Reset the price_array list
+
+        for child in self.children[:]:
+            if isinstance(child,Label) and child.text != 'Product Name' and child.text != 'Quantity' and child.text != 'Price':
+                self.remove_widget(child)
 
     def save(self):
         customer_receipt = [item for item in customer_receiptt if item.get_product_name() is not None]
