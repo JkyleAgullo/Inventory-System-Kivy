@@ -1,6 +1,7 @@
 import webbrowser
 
 from kivy.config import Config
+from kivy.uix.textinput import TextInput
 
 Config.set('graphics', 'resizable', False)
 from kivy.uix.boxlayout import BoxLayout
@@ -73,8 +74,7 @@ class Cashier(Screen):
         product.name = product_name
         # print("position: "+ str(product_qty))
 
-        inventory_pos = locate_product(
-            product)  # product dapat ung ipapasa, if nme palitn mo ung nsa locate function to name
+        inventory_pos = locate_product(product)
         print(inventory_pos)
 
         if inventory_pos == -1:
@@ -218,7 +218,7 @@ class SplashWindow(Screen):
         if value >= 100:
             app = App.get_running_app()
             app.root.transition = NoTransition()
-            app.root.current = "cashier"
+            app.root.current = "login"
 
 
 class AdminADD(Screen):
@@ -227,6 +227,10 @@ class AdminADD(Screen):
     # todo: add design to admin add
 
     current_datetime = StringProperty("")
+
+    def getInput(self):
+
+        current_id = self.focus.current
 
     def getInput(self):
 
@@ -545,6 +549,33 @@ class SettingsCashier(Screen):
     current_datetime = StringProperty("")
     is_change = False
 
+    def open_input_popup(self):
+        content = BoxLayout(orientation='vertical')
+
+        password_input = TextInput(multiline=False, password=True)
+        content.add_widget(Label(text='Enter Admin Password:'))
+        content.add_widget(password_input)
+
+        popup = Popup(title='Password Input', content=content, size_hint=(None, None), size=(400, 200))
+
+        def submit_password(instance):
+            entered_password = password_input.text
+            # Use the entered password here
+            if entered_password == admin_acc.get_password():
+                cashier_acc.set_password(entered_password)
+            else:
+                popup.dismiss()
+                popup_content = Label(text="Incorrect admin password")
+                error_popup = Popup(title='Error', content=popup_content, size_hint=(None, None), size=(400, 200))
+                error_popup.open()
+                return False
+
+        submit_button = Button(text='Submit')
+        submit_button.bind(on_release=submit_password)
+        content.add_widget(submit_button)
+        popup.open()
+
+
     def submit(self):
         password = self.ids.password.text
         re_password = self.ids.password2.text
@@ -557,8 +588,17 @@ class SettingsCashier(Screen):
             self.ids.password2.text = ""
         else:
             if password == re_password:
-                self.is_change = True
-                cashier_acc.set_password(password)
+                if self.open_input_popup() is True:
+                    self.is_change = True
+                    cashier_acc.set_password(password)
+                    self.ids.password.text = ""
+                    self.ids.password2.text = ""
+                else:
+                    popup_content = Label(text="ERROR CHANGING PASSWORD")
+                    popup = Popup(title='ERROR', content=popup_content, size_hint=(None, None), size=(400, 200))
+                    popup.open()
+                    self.ids.password.text = ""
+                    self.ids.password2.text = ""
             else:
                 popup_content = Label(text="PASSWORD NOT MATCH")
                 popup = Popup(title='WARNING', content=popup_content, size_hint=(None, None), size=(400, 200))
