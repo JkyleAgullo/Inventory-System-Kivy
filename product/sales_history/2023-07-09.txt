@@ -1,0 +1,4 @@
+Product Name: BITAMILK
+Sales Quantity: 2
+Total Sales Amount: 70.0
+

@@ -31,6 +31,7 @@ class Receipt:
 
     @staticmethod
     def sort(receipt, ascending=True):
+        receipt = [item for item in receipt if item.get_product_name() is not None]
         # bubble sort
         for i in range(len(receipt) - 1):
             for j in range(len(receipt) - i - 1):
