@@ -14,6 +14,7 @@ class Inventory:
 
     @staticmethod
     def sort(inventory, ascending=True):
+        inventory = [item for item in inventory if item.name is not None]
         # bubble sort
         for i in range(len(inventory) - 1):
             for j in range(len(inventory) - i - 1):

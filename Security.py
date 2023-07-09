@@ -3,7 +3,7 @@ import random
 
 
 class Security:
-    __key_dir = "C:/Users/Matthew/Desktop/key/key.txt"
+    __key_dir = "C:/Users/Matthew/Desktop/Key/key.txt"
     __admin_fp = "adminacc"
     __cashier_fp = "cashieracc"
     __inventory_fp = "inventory"
@@ -26,7 +26,7 @@ class Security:
         random_key = random.randint(1, 5)
 
         if not file_exists:
-            os.makedirs("C:/Users/Matthew/Desktop/Key")
+            os.makedirs("C:/Users/ASUS/Desktop/Key")
             try:
                 with open(Security.__key_dir, "w") as file:
                     file.write(str(random_key))

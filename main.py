@@ -160,7 +160,7 @@ class Cashier(Screen):
 
     def add_to_receipt(self, receipt):
         global receipt_marker
-        print("DITO PUMASOK")
+
         receipt_marker += 1
         customer_receiptt[receipt_marker] = Receipt(
             receipt.get_product_name(),
@@ -788,7 +788,8 @@ def is_full():
 
 
 def locate_product(product):
-    inventory = [item for item in my_inv if item.name is not None]
+    inventory = [item for item in my_inv if item is not None]
+    inventory = [item for item in inventory if item.name is not None]
     for i in range(len(inventory)):
         if inventory[i].name.lower() == product.name.lower():
             return i

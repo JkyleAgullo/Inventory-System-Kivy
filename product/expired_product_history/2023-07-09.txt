@@ -1,0 +1,8 @@
+Product Name: CHIPPY
+Quantity: 3
+Profit Loss: 30.0
+
+Product Name: CHIPPY
+Quantity: 3
+Profit Loss: 30.0
+

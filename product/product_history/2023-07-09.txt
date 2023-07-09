@@ -1,0 +1,16 @@
+Product Name: ARGENTINA
+Expiration Date: 2024-01-09
+Quantity: 5
+
+Product Name: BITAMILK
+Expiration Date: 2024-01-09
+Quantity: 9
+
+Product Name: CHIPPY
+Expiration Date: 2024-07-09
+Quantity: 5
+
+Product Name: PUREFOODS
+Expiration Date: 2024-01-09
+Quantity: 5
+

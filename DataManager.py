@@ -62,7 +62,7 @@ def del_expired_product():
                             main.my_inv[i].total_price = main.my_inv[i].qty * main.my_inv[i].orig_price
                             main.my_inv[i].profit -= expired_product[ctr].qty * main.my_inv[i].orig_price
                             expired_product[ctr].profit_loss = expired_product[ctr].qty * main.my_inv[i].orig_price
-                            if main.my_inv[i].qty == 0:
+                            if main.my_inv[i].qty <= 0:
                                 del_product(i)
                                 break
 
@@ -330,7 +330,7 @@ def retrieve():
         return []
 
 def save():
-    my_inventory = [item for item in main.my_inv if item.name is not None]
+    my_inventory = [item for item in main.my_inv if item is not None]
     my_inventory = Inventory.sort(my_inventory)
     inventory_dir = os.path.join(os.getcwd(), inventory_folder, (Security.encrypt(Security.get_inventory_filename(), Security.get_secret_key()) + ".txt"))
 

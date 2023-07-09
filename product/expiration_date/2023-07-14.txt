@@ -1,6 +1,0 @@
-Product Name: BANANA
-Quantity: 10
-
-Product Name: ORANGE
-Quantity: 10
-
