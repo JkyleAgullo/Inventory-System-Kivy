@@ -242,7 +242,7 @@
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
                 size_hint: None, None
-                size: 150, 520
+                size: 150, 340
 
             Button:
                 id: LOGOUT
@@ -255,6 +255,9 @@
                 background_color: 0,0,0,1
                 size_hint: None, None
                 size: 150, 50
+                on_press:
+                    root.manager.transition = NoTransition()
+                    root.manager.current = "login"
 
         FloatLayout:
             id: adminDashboard
@@ -416,7 +419,7 @@
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
                 size_hint: None, None
-                size: 150, 520
+                size: 150, 340
 
             Button:
                 id: LOGOUT
@@ -606,7 +609,7 @@
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
                 size_hint: None, None
-                size: 150, 520
+                size: 150, 340
 
             Button:
                 id: LOGOUT
@@ -755,7 +758,7 @@
                 background_down: ''
                 background_color:(0/255,0/255,0/255,.7)
                 size_hint: None, None
-                size: 150, 520
+                size: 150, 340
 
             Button:
                 id: LOGOUT
