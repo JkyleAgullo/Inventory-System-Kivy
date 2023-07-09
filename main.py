@@ -413,6 +413,7 @@ class DisplayInventory(Screen):
 
     def display_table(self, invent):
         global my_inv
+        my_inv = Inventory.sort(my_inv)
         data = []
         invent = [item for item in my_inv if item.name is not None]
         for item in invent:

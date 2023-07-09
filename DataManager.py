@@ -78,7 +78,7 @@ def del_expired_product():
                     # save
                     save()
 
-            #os.remove(exp_date_product_dir)
+            os.remove(exp_date_product_dir)
     except FileNotFoundError:
         popup_content = Label(text=" PRODUCT FILE DIRECTORY DOES NOT EXIST")
         popup = Popup(title='Warning', content=popup_content, size_hint=(None, None), size=(400, 200))

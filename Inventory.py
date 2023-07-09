@@ -17,8 +17,9 @@ class Inventory:
         # bubble sort
         for i in range(len(inventory) - 1):
             for j in range(len(inventory) - i - 1):
-                if (ascending and inventory[j].name > inventory[j + 1].name) or (
-                        not ascending and inventory[j].name < inventory[j + 1].name):
-                    inventory[j], inventory[j + 1] = inventory[j + 1], inventory[j]
+                if inventory[j].name is not None and inventory[j + 1].name is not None:
+                    if (ascending and inventory[j].name > inventory[j + 1].name) or (
+                            not ascending and inventory[j].name < inventory[j + 1].name):
+                        inventory[j], inventory[j + 1] = inventory[j + 1], inventory[j]
 
         return inventory
